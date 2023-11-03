@@ -155,27 +155,6 @@ const ShopListData = () => {
                                     )
                                 })}
                             </div>
-
-                            {/* <h2 className="mt-2" style={{ color: '#374151' }}>Categories</h2>
-                            <hr className="border borderColor border-1 opacity-50" style={{ backgroundColor: '#374151' }}></hr>
-                            <div className="row g-0 d-flex justify-content-center">
-                                {categoriesData && categoriesData.slice(0, 12).map((categoryName) => {
-                                    return (
-                                        <div key={categoryName.id} className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2 text-center">
-                                            <div className="bg-white productShadow mx-1 border rounded">
-                                                <div className="card" style={{ height: '100px' }}>
-                                                    <div className="card-body">
-                                                        <NavLink to={`/item/?category_name=${categoryName.name}`} className='text-dark' >
-                                                            <img src={categoryName.image_url ? categoryName.image_url : getRandomCategoryImage()} alt='' height={50} width={80} className="" />
-                                                            <p className="mt-1 text-wrap">{categoryName?.name}.</p>
-                                                        </NavLink>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )
-                                })}
-                            </div> */}
                         </div>
                     </div>
                     <div>

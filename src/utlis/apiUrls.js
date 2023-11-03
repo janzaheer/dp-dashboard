@@ -1,12 +1,5 @@
 
 export const BASE_URL = process.env.NODE_ENV == 'development' ? `http://ec2-43-206-254-199.ap-northeast-1.compute.amazonaws.com/` : `https://api.cosmedicos.com/`;
-// export const ORDER_ENDPOINT = 'api/v1/orders/';
-// export const ORDER_PLACED_ENDPOINT = 'api/v1/orders/place_order/';
-// export const ADDRESS_REMOVE_ENDPOINT = 'api/v1/user/remove_address/';
-// export const ADDRESS_ADD_ENDPOINT = `api/v1/user/add_address/`;
-// export const USER_LIST_ENDPOINT = 'api/v1/user/';
-// export const ADD_PRODUCT_ENDPOINT = `create_item/`;
-// export const SELLER_ENDPOINT = 'api/v1/seller/request/';
 
 export const API_VERSION = () => {
     return `api/v1/`
