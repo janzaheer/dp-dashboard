@@ -98,7 +98,7 @@ const ProductDetail = () => {
 
     const handleCompany = (seller) => {
         if (seller == null) {
-            return <span> cosmedicos<img src='https://img.alicdn.com/imgextra/i1/O1CN01cLS4Rj1vgZ8xaij1e_!!6000000006202-2-tps-64-32.png' alt='' height={25} /></span>
+            return <span> djangopets<img src='https://img.alicdn.com/imgextra/i1/O1CN01cLS4Rj1vgZ8xaij1e_!!6000000006202-2-tps-64-32.png' alt='' height={25} /></span>
         } else {
             return `${seller.company}`
         }
@@ -164,7 +164,7 @@ const ProductDetail = () => {
                                                 </button>
                                             </div>
                                             <div className='mt-5'>
-                                                <button type="button" className="btn btn-success me-1" onClick={() => addToCartHandler(product)}>Add to Cart</button>
+                                                <button type="button" className="btn btn-secondary me-1" onClick={() => addToCartHandler(product)}>Add to Cart</button>
                                             </div>
                                         </div>
                                     </div>
@@ -174,7 +174,7 @@ const ProductDetail = () => {
                                                 <p className="card-header">
                                                     Sold By
                                                 </p>
-                                                <span className='text-success text-center my-1'>{handleCompany(product.seller)}.</span>
+                                                <span className='text-secondary text-center my-1'>{handleCompany(product.seller)}.</span>
                                                 <div className='d-flex justify-content-between text-center'>
                                                     <div className='border w-100'>
                                                         <span className='fs-6 text-muted fontWeight'>
@@ -209,7 +209,7 @@ const ProductDetail = () => {
                         </div>
                     </div>
                     <div className="row row-underline">
-                        <div className="col-md-6"> <span className=" deal-text text-success">Specifications</span> </div>
+                        <div className="col-md-6"> <span className=" deal-text" style={{ color: '#374151'}}>Specifications</span> </div>
                     </div>
                     <div className="row">
                         <div className="col-md-12">

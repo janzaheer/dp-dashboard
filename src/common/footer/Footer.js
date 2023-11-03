@@ -94,8 +94,8 @@ const Footer = () => {
           <div className="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-4 d-flex justify-content-evenly">
             <div className="col mb-3">
               <div className='box'>
-                <h1 className="mb-3">Cosmedicos</h1>
-                <p>Welcome to Cosmedicos, your trusted source for high-end medical products. Discover top-quality instruments, machines, and surgical equipment from reputable sellers. Elevate your medical practice with Cosmedicos.</p>
+                <h1 className="mb-3">DjangoPets</h1>
+                <p>Welcome to DjangoPets, Beloved animal companions that bring joy and comfort to our lives. From loyal dogs to affectionate cats, these furry friends become cherished members of the family, offering unconditional love and companionship.</p>
                 <div className='d-flex justify-content-start'>
                   <div>
                     <button className="btn btn-outline-light btn-sm me-1" ><i className='fa-brands fa-google-play'></i> Google Play</button>
@@ -112,7 +112,7 @@ const Footer = () => {
                 <h3 className="mb-3" >Make Money With Us</h3>
                 <ul className="">
                   <li><Button variant="danger" size="lg" onClick={handleShow}>
-                    Sell on Cosmedicos
+                    Sell on DjangoPets
                   </Button></li>
                 </ul>
               </div>
@@ -134,9 +134,9 @@ const Footer = () => {
                 <h3 className="mb-3">Contact Us</h3>
                 <ul>
                   {/* <li><NavLink className='text-white' to='#'>Contact us</NavLink></li> */}
-                  <li><ImLocation2 /> Plot 5-A, Near HBL Bank, F-6 Markaz, Islamabad </li>
-                  <li><MdAttachEmail /> cosmedicosofficial@gmail.com</li>
-                  <li><BsTelephonePlusFill /> +92 317 8012324</li>
+                  <li><ImLocation2 /> Co-Llision M-1 Gate-3 Lake City Lahore </li>
+                  <li><MdAttachEmail /> support@djangopets.com</li>
+                  <li><BsTelephonePlusFill /> +92 314 0014939</li>
                 </ul>
               </div>
             </div>

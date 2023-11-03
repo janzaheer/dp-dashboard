@@ -36,7 +36,7 @@ const Wrapper = () => {
             {data.map((val) => {
               return (
                 <div key={val.id} className=" col-6 col-md-6 col-lg-3 ">
-                  <div className="card border border-success shadow-sm m-1 d-flex align-items-center justify-content-center"
+                  <div className="card border border-secondary shadow-sm m-1 d-flex align-items-center justify-content-center"
                   >
                     <div className='img mt-4'>
                       <i>{val.cover} </i>

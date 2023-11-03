@@ -23,13 +23,14 @@ const SlideCard = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
+    arrows: false,
     appendDots: (dots) => {
       return <ul style={{ margin: "0px" }}>{dots}</ul>
     },
   }
   return (
     <>
-      <div className="mx-2">
+      <div className="">
         <Slider {...settings}>
           {sd.map((value) => {
             return (

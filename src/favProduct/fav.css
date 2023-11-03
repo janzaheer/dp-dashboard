@@ -1,6 +1,7 @@
 .fav{
     margin-top: 50px !important;
     margin-bottom: 50px !important;
+    min-height: 100vh !important;
 }
 
 .productShadow:hover{

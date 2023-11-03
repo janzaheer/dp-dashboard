@@ -166,7 +166,7 @@ const ItemPage = () => {
 
     const handleBadge = (seller) =>{
         if (seller == null) {
-            return <span className="badge text-bg-success notify-badge">cosmedicos mall</span>
+            return <span className="badge text-bg-success notify-badge">DjangoPets mall</span>
         } else {
             return ''
         }

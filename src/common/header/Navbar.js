@@ -33,8 +33,9 @@ const Navbar = () => {
           <div className="container-fluid">
             <div className="row p-2 pt-3 pb-3 d-flex align-items-center">
               <div className="col-md-2">
-                <NavLink to='/'>
-                  <img className="d-md-flex" src={logo} alt='' width={110} />
+                <NavLink to='/' className="text-decoration-none">
+                  {/* <img className="d-md-flex" src={logo} alt='' width={110} /> */}
+                  <h4 className="text-decoration-none" style={{ width: '110px', color: '#374151'}}>DjangoPets</h4>
                 </NavLink>
               </div>
               <div className="col-md-8">

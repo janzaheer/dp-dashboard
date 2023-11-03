@@ -19,11 +19,11 @@ const Head = () => {
   }
   return (
     <>
-      <nav className="navbar navbar-dark navbar-expand p-0 bg-success">
+      <nav className="navbar navbar-dark navbar-expand p-0">
         <div className="container-fluid">
           <ul className="navbar-nav d-none d-md-flex mr-auto">
-            <li className="nav-item"><a className="nav-link text-white" href="#" data-abc="true"><i className='fa fa-phone'></i> +92 317 801 2324</a> </li>
-            <li className="nav-item"><a className="nav-link text-white" href="#" data-abc="true"><i className='fa fa-envelope'></i>  cosmedicosofficial@gmail.com</a></li>
+            <li className="nav-item"><a className="nav-link text-white" href="#" data-abc="true"><i className='fa fa-phone'></i> +92 314 0014939</a> </li>
+            <li className="nav-item"><a className="nav-link text-white" href="#" data-abc="true"><i className='fa fa-envelope'></i>  support@djangopets.com</a></li>
           </ul>
 
           <ul className="navbar-nav d-flex align-items-center">

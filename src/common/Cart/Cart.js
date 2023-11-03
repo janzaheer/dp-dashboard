@@ -98,9 +98,9 @@ const Cart = () => {
       <div className="px-4 px-lg-0">
         <div className="container text-dark py-5 text-center mt-1">
           <h1 className="display-4">Shopping Cart</h1>
-          <p className="lead mb-0">Build a fully structred shopping cart page using Cosmedicos. </p>
+          <p className="lead mb-0">Build a fully structred shopping cart page using DjangoPets. </p>
           <p className="lead">Snippet by <a href="#" className="text-success font-italic">
-            <u>Cosmedicos</u></a>
+            <u>DjangoPets</u></a>
           </p>
         </div>
         {/* End */}
@@ -197,14 +197,14 @@ const Cart = () => {
                 <div className="p-4">
                   <p className="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
                   <ul className="list-unstyled mb-4">
-                    <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Selected {totalItems} items(s) Quantity Price</strong><strong>$ {total(totalAmount)}</strong></li>
-                    <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Delivery Cost</strong><strong>$ {deliveryPrice(deliveryCharge)}</strong></li>
-                    <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Discount</strong><strong>$ -</strong></li>
+                    <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Selected {totalItems} items(s) Quantity Price</strong><strong>Rs {total(totalAmount)}</strong></li>
+                    <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Delivery Cost</strong><strong>Rs {deliveryPrice(deliveryCharge)}</strong></li>
+                    <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Discount</strong><strong>Rs -</strong></li>
                     <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Total</strong>
-                      <h5 className="font-weight-bold">$ {total(totalAmount) + deliveryPrice(deliveryCharge)} </h5>
+                      <h5 className="font-weight-bold">Rs {total(totalAmount) + deliveryPrice(deliveryCharge)} </h5>
                     </li>
                   </ul>
-                  <Link to='/checkout' className="btn btn-success">Proceed to Checkout</Link>
+                  <Link to='/checkout' className="btn btn-secondary">Proceed to Checkout</Link>
                 </div>
               </div>
             </div>

@@ -73,7 +73,7 @@ const FavProduct = () => {
 
     const handleBadge = (seller) => {
         if (seller == null) {
-            return <span className="badge text-bg-success notify-badge">cosmedicos mall</span>
+            return <span className="badge text-bg-danger notify-badge">django mall</span>
         } else {
             return ''
         }
@@ -85,7 +85,7 @@ const FavProduct = () => {
             <div className='container fav'>
                 <ToastContainer />
                 <div className='row g-2 mx-md-5'>
-                    <h1 className='text-center text-success'>Favorite list</h1>
+                    <h1 className='text-center text-danger'>Favorite list</h1>
                     {products.map((product) => {
                         return (
                             <div key={product.id} className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
@@ -101,7 +101,7 @@ const FavProduct = () => {
                                             <div className="about">
                                                 <h6 className="text-muted text-wrap">{product.title.substring(0, 11)}</h6>
                                                 <div className="px-2 d-flex justify-content-between align-items-center">
-                                                    <span className="">Rs {product.price}</span>
+                                                    <span className="text-secondary">Rs {product.price}</span>
                                                     <div style={{ width: "20px" }}>
                                                         <Heart isActive={itemFavourite && product.id in itemFavourite ? itemFavourite[product.id] : product.is_favourite} onClick={() => handleFav(product.id)} />
                                                     </div>

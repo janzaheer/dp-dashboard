@@ -182,7 +182,7 @@ const ManageProfile = () => {
                             <Form.Label>Address</Form.Label>
                             <Form.Control type='text' placeholder="1234 Main St" name='address' value={address} onChange={(e) => setAddress(e.target.value)} />
                         </Form.Group>
-                        <Button variant="success"
+                        <Button variant="secondary"
                             // onClick={handleCloseAdd} 
                             type="submit">
                             Save Address
@@ -204,7 +204,7 @@ const ManageProfile = () => {
                         <div className='col-md-4'>
                             <div className='card shadow'>
                                 <div className="card-body mb-5">
-                                    <h5 className="card-title"><CgProfile /> Personal Profile | <Link to='#' className='text-success' >Edit</Link> </h5>
+                                    <h5 className="card-title"><CgProfile /> Personal Profile | <Link to='#' className='text-secondary' >Edit</Link> </h5>
                                     <hr className='mt-0' />
                                     <h6 className="card-subtitle mb-2 text-muted"><FaUserCircle /> Name: {user.user.username}</h6>
                                     <p className="card-subtitle mb-2"><MdMarkEmailUnread /> Email: {userData?.email}</p>
@@ -227,7 +227,7 @@ const ManageProfile = () => {
                             <div className="card controlCard shadow">
                                 <div className='d-flex justify-content-between mx-3 my-2'>
                                     <h5 className='card-title mt-2'><FaAddressBook /> Address Book</h5>
-                                    <Button variant="outline-success" size="sm" onClick={handleShowAdd}>
+                                    <Button variant="outline-secondary" size="sm" onClick={handleShowAdd}>
                                         Add Address <MdAddLocationAlt />
                                     </Button>
                                 </div>
@@ -261,7 +261,7 @@ const ManageProfile = () => {
                         <div className='col-12'>
                             <div className='rounded bg-white shadow my-3'>
                                 <div className='d-flex align-items-center justify-content-start mx-3'>
-                                    <h5 className='text-success mt-4'>My Orders <RiShoppingBag3Fill /></h5>
+                                    <h5 className='text-danger mt-4'>My Orders <RiShoppingBag3Fill /></h5>
                                 </div>
                                 <hr />
                                 {/* Shopping cart table */}

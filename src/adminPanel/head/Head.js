@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import logo from '../../logo/logo_new.png';
 import { SlLogout } from 'react-icons/sl';
@@ -8,12 +8,36 @@ import { FaUserTie } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../store/authSlice';
+import axios from 'axios';
+import moment from 'moment';
+
 
 const Head = () => {
-
   const user = useSelector(state => state.user)
+  const userToken = useSelector(state => state.user.token);
   const navigation = useNavigate();
   const dispatch = useDispatch();
+  const [notification, setNotification] = useState('')
+
+  useEffect(() => {
+    functionNotification()
+  }, [])
+
+  const functionNotification = async () => {
+    // let BASE_URL = `http://ec2-43-206-254-199.ap-northeast-1.compute.amazonaws.com/`
+    //  let Api = `api/v1/notification/`
+    let finalURL = `http://ec2-43-206-254-199.ap-northeast-1.compute.amazonaws.com/` + `api/v1/notification/`
+    await axios.get(finalURL, {
+      headers: {
+        'Content-Type': "application/json",
+        Authorization: `Token ${userToken}`
+      }
+    }).then((res) => {
+      console.log('notification', res)
+    }).catch(error => {
+      console.log(error)
+    })
+  }
 
   const handleLogout = () => {
     console.log('click')
@@ -23,6 +47,7 @@ const Head = () => {
 
   return (
     <div>
+      {/* // {moment(orderDataList?.created_at).format("MM-DD-YYYY")} */}
       <nav className="navbar sticky-top navbar-expand-lg bg-light shadow">
         <div className="container-fluid">
           <Link className="navbar-brand" to='/dashboard'> <img className="d-none d-md-flex" src={logo} alt='' width={110} /></Link>

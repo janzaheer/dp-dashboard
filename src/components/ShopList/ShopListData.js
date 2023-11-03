@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import "./style.css"
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import { BASE_URL, END_POINT, CATEGORY_ENDPOINT, CATEGORY_ITEMS_LIST_ENDPOINT, FAV_ENDPOINT ,API_VERSION } from "../../utlis/apiUrls";
+import { BASE_URL, END_POINT, CATEGORY_ENDPOINT, CATEGORY_ITEMS_LIST_ENDPOINT, FAV_ENDPOINT, API_VERSION } from "../../utlis/apiUrls";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify'
 import axios from "axios";
@@ -69,10 +69,10 @@ const ShopListData = () => {
             navigate("/login")
         }
     }
-   
-    const handleBadge = (seller) =>{
+
+    const handleBadge = (seller) => {
         if (seller == null) {
-            return <span className="badge text-bg-success notify-badge">cosmedicos mall</span>
+            return <span className="badge text-bg-danger notify-badge">djangopets mall</span>
         } else {
             return ''
         }
@@ -81,28 +81,28 @@ const ShopListData = () => {
     const ProductListingWithCategory = async () => {
         let category_endpoint = BASE_URL + API_VERSION() + CATEGORY_ENDPOINT()
         await axios.get(category_endpoint, {
-          headers: headers
+            headers: headers
         }).then(async (res) => {
-          let categories = res.data.results
-          setCategoriesData(categories)
-          let promises = categories.map(category => {
-            let items_endpoint = BASE_URL + API_VERSION() + END_POINT() + CATEGORY_ITEMS_LIST_ENDPOINT() + category.name
-            return axios.get(items_endpoint, {
-              headers: headers
-            }).then((response) => {
-              return {
-                name: category.name,
-                items: response.data.results
-              }
+            let categories = res.data.results
+            setCategoriesData(categories)
+            let promises = categories.map(category => {
+                let items_endpoint = BASE_URL + API_VERSION() + END_POINT() + CATEGORY_ITEMS_LIST_ENDPOINT() + category.name
+                return axios.get(items_endpoint, {
+                    headers: headers
+                }).then((response) => {
+                    return {
+                        name: category.name,
+                        items: response.data.results
+                    }
+                })
+            });
+            Promise.all(promises).then((results) => {
+                let data = {}
+                results.forEach(resultA => {
+                    data[resultA.name] = resultA.items
+                })
+                setLandingData(data)
             })
-          });
-          Promise.all(promises).then((results) => {
-            let data = {}
-            results.forEach(resultA => {
-              data[resultA.name] = resultA.items
-            })
-            setLandingData(data)
-          })
         })
     }
 
@@ -111,7 +111,7 @@ const ShopListData = () => {
         if (p == 0) {
             return ''
         } else {
-            return `$ ${p}`
+            return `Rs ${p}`
         }
     }
 
@@ -134,8 +134,30 @@ const ShopListData = () => {
                     <ToastContainer />
                     <div className="col-md-12 col-lg-12 mb-2">
                         <div className="container">
-                            <h2 className="text-success mt-2">Categories</h2>
-                            <hr className="border border-success border-1 opacity-50"></hr>
+                            <div className="row">
+                                <div className="col-12 mb-6">
+                                    <h3 className="mt-2" style={{ color: '#374151' }}>Featured Categories</h3>
+                                </div>
+                            </div>
+                            <div className="row g-0 d-flex justify-content-center">
+                                {categoriesData && categoriesData.slice(0, 12).map((categoryName) => {
+                                    return (
+                                        <div key={categoryName.id} className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                                            <div className="card card-product productShadow mx-1 mb-lg-4">
+                                                <NavLink to={`/item/?category_name=${categoryName.name}`}>
+                                                    <div className="card-body text-center py-8">
+                                                        <img src="https://freshcart.codescandy.com/assets/images/category/category-instant-food.jpg" alt="Grocery Ecommerce Template" className="mb-3" />
+                                                        <div className="text-truncate" style={{ color: 'black'}}>{categoryName?.name}</div>
+                                                    </div>
+                                                </NavLink>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+
+                            {/* <h2 className="mt-2" style={{ color: '#374151' }}>Categories</h2>
+                            <hr className="border borderColor border-1 opacity-50" style={{ backgroundColor: '#374151' }}></hr>
                             <div className="row g-0 d-flex justify-content-center">
                                 {categoriesData && categoriesData.slice(0, 12).map((categoryName) => {
                                     return (
@@ -153,7 +175,7 @@ const ShopListData = () => {
                                         </div>
                                     )
                                 })}
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <div>
@@ -161,8 +183,8 @@ const ShopListData = () => {
                             return (
                                 <div key={key} className="col-lg-12 mb-2">
                                     <div className="container">
-                                        <h2 className="text-success mt-2">{key}</h2>
-                                        <hr className="border border-success border-1 opacity-50"></hr>
+                                        <h2 className="mt-2" style={{ color: '#374151' }}>{key}</h2>
+                                        <hr className="border borderColor border-1 opacity-50"></hr>
                                         <div className="row g-2 mx-md-5" >
                                             {landingData[key] && landingData[key].slice(0, 6).map((item) => {
                                                 return (
@@ -179,7 +201,7 @@ const ShopListData = () => {
                                                                     <div className="about">
                                                                         <h6 className="text-muted text-wrap">{item.title.substring(0, 11)}</h6>
                                                                         <div className="d-flex justify-content-between align-items-center px-2">
-                                                                            <span className=""> {price(item?.price)}</span>
+                                                                            <span className="" style={{ color: '#374151' }}> {price(item?.price)}</span>
                                                                             <div style={{ width: "20px" }}>
                                                                                 <Heart isActive={itemFavourite && item.id in itemFavourite ? itemFavourite[item.id] : item.is_favourite} onClick={() => handleFav(item.id)} />
                                                                             </div>
@@ -193,7 +215,7 @@ const ShopListData = () => {
                                             })}
                                         </div>
                                         <div className="d-flex justify-content-center mt-2">
-                                            <NavLink to={`/item/?category_name=${key}`} className="btn btn-outline-success" >View More</NavLink>
+                                            <NavLink to={`/item/?category_name=${key}`} className="btn btn-outline-secondary" >View More</NavLink>
                                         </div>
                                     </div>
                                 </div>

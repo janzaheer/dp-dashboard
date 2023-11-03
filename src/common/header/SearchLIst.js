@@ -77,7 +77,7 @@ const SearchLIst = () => {
 
   const handleBadge = (seller) =>{
     if (seller == null) {
-        return <span className="badge text-bg-success notify-badge">cosmedicos mall</span>
+        return <span className="badge text-bg-secondary notify-badge">djangopets mall</span>
     } else {
         return ''
     }
@@ -93,7 +93,7 @@ const SearchLIst = () => {
             <div className='container'>
               <div className='py-5'>
                 <div className='title-md text-center'>
-                  <h3 className='text-success'>Search results</h3>
+                  <h3 className='text-danger'>Search results</h3>
                 </div>
                 <br />
                 <div className="row g-2 mx-md-5">
@@ -112,7 +112,7 @@ const SearchLIst = () => {
                               <div className="about">
                                 <h6 className="text-muted text-wrap">{product.title.substring(0, 11)}</h6>
                                 <div className="px-2 d-flex justify-content-between align-items-center">
-                                  <span className="">Rs {product.price}</span>
+                                  <span className="text-secondary">Rs {product.price}</span>
                                   <div style={{ width: "20px" }}>
                                     <Heart isActive={itemFavourite && product.id in itemFavourite ? itemFavourite[product.id] : product.is_favourite} onClick={() => handleFav(product.id)} />
                                   </div>

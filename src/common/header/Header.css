@@ -1,4 +1,6 @@
-
+.navbar{
+  background-color: #374151 !important;
+}
 header {
   height: 8vh;
   box-shadow: -1px 15px 17px -8px rgba(0, 0, 0, 0.1); 

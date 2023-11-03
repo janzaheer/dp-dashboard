@@ -189,7 +189,7 @@ const Checkout = () => {
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title className='text-success' >Select New Address</Modal.Title>
+                    <Modal.Title className='text-secondary' >Select New Address</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className='row'>
@@ -229,7 +229,7 @@ const Checkout = () => {
                     {/* Add Address Modal Start */}
                     <Modal show={show} onHide={handleCloseAdd}>
                         <Modal.Header closeButton>
-                            <Modal.Title className='text-success'>Add Product</Modal.Title>
+                            <Modal.Title className='text-secondary'>Add Product</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <Form onSubmit={addAddress} >
@@ -272,7 +272,7 @@ const Checkout = () => {
                                             <h5 className="card-title"><ImLocation2 /> Address</h5>
                                         </div>
                                         <div className='mb-2'>
-                                            <Button variant="outline-success" onClick={handleShowShowAddressListModel}>
+                                            <Button variant="outline-secondary" onClick={handleShowShowAddressListModel}>
                                                 <MdAddLocationAlt /> Changes Address
                                             </Button>
                                         </div>
@@ -345,16 +345,16 @@ const Checkout = () => {
                                         <p>Quantity</p>
                                         <p>Delivery</p>
                                         <p>Amount</p>
-                                        <p className='text-success fw-bolder'>Total:</p>
+                                        <p className='text-secondary fw-bolder'>Total:</p>
                                     </div>
                                     <div className='mt-1 ms-1'>
                                         <p> {totalItems}</p>
                                         <p className='text-muted text-wrap'>Calculate by support after placing order </p>
-                                        <p>$ {total(totalAmount)}</p>
-                                        <p className='text-success fw-bolder'>$ {total(totalAmount)}</p>
+                                        <p>Rs {total(totalAmount)}</p>
+                                        <p className='text-secondary fw-bolder'>Rs {total(totalAmount)}</p>
                                     </div>
                                 </div>
-                                <button onClick={() => handlePlaceOrder()} className='btn btn-outline-success w-100 my-3'>Place Order</button>
+                                <button onClick={() => handlePlaceOrder()} className='btn btn-outline-secondary w-100 my-3'>Place Order</button>
                             </div>
                         </div>
                     </div>

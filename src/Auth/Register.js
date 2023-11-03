@@ -67,7 +67,7 @@ const Register = () => {
                         <div className="card-body p-5 text-center" >
                             <div className="mb-5">
                                 <img className="mb-1" src={logo} alt='' width={110} />
-                                <h3>Welcome to Cosmedicos! Please Register Now.</h3>
+                                <h3>Welcome to DjangoPets! Please Register Now.</h3>
                             </div>
                             <form className="row g-3 " onSubmit={handleRegister}>
                                 <div className="col-md-6 form-floating">
@@ -106,7 +106,7 @@ const Register = () => {
                                     <label htmlFor="floatingInputConfirmPassword" className='ms-3'>Confirm Password</label>
                                 </div>
                                 <div className="col-12">
-                                    <button className="btn btn-success mt-2" type="submit">Register Now</button>
+                                    <button className="btn btn-secondary mt-2" type="submit">Register Now</button>
                                 </div>
                             </form>
                         </div>

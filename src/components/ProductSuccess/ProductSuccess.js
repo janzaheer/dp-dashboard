@@ -92,7 +92,7 @@ const ProductSuccess = () => {
         if (p == 0) {
             return `-`
         } else {
-            return `$ ${p}`
+            return `Rs ${p}`
         }
     }
 
@@ -100,7 +100,7 @@ const ProductSuccess = () => {
         if (p == 0) {
             return `-`
         } else {
-            return `$ ${p}`
+            return `Rs ${p}`
         }
     }
 
@@ -121,7 +121,8 @@ const ProductSuccess = () => {
                     <div className="d-flex justify-content-center row">
                         <div className="col-md-10">
                             <div className="receipt bg-white p-3 rounded shadow">
-                                <img src={logo} alt='logo' width={120} />
+                                {/* <img src={logo} alt='logo' width={120} /> */}
+                                <h4 className='' style={{ colo: '#374151' }}>DjangoPets</h4>
                                 <h4 className="mt-2 mb-3">Your order is {orderStatusHeadings(orderDataList.status)}
                                 </h4>
                                 <h6 className="name">Hello {user.user.username},</h6><span className="fs-12 text-black-50">your order has been {orderStatusHeadings(orderDataList.status)} and our support team will contact you shortly. Thank You!</span>
@@ -142,7 +143,7 @@ const ProductSuccess = () => {
                                     </div>
                                     <div className='col-6 col-md-3'>
                                         <div><span className="d-block fs-12">Shipping Address</span>
-                                            <a type="button" className="text-success" data-bs-toggle="popover" title={orderDataList?.address?.address} data-bs-content=""><span className="font-weight-bold text-success">
+                                            <a type="button" className="text-secondary" data-bs-toggle="popover" title={orderDataList?.address?.address} data-bs-content=""><span className="font-weight-bold text-danger">
                                                 {orderDataList?.address?.address.substring(0, 17)}</span> ...</a></div>
                                     </div>
                                 </div>
@@ -156,7 +157,7 @@ const ProductSuccess = () => {
                                                     <div>
                                                         <span className="d-block font-weight-bold p-name">{ite?.item.title}</span>
                                                     </div>
-                                                    <span className="fs-12 text-success">Qty: {ite?.quantity} pcs</span>
+                                                    <span className="fs-12 text-danger">Qty: {ite?.quantity} pcs</span>
                                                 </div>
                                             </div>
                                             <div className="product-price">
@@ -175,12 +176,12 @@ const ProductSuccess = () => {
                                                  {subTotal(orderDataList?.total_amount)}
                                             </span></div>
                                             <div className="d-flex justify-content-between mt-2"><span>Shipping fee</span><span className="font-weight-bold">
-                                                $ {ShippingPrice(orderDataList?.shipping_amount)}
+                                                Rs {ShippingPrice(orderDataList?.shipping_amount)}
                                             </span></div>
-                                            <div className="d-flex justify-content-between mt-2"><span className="text-success">Discount</span><span className="font-weight-bold text-success">$ -</span></div>
+                                            <div className="d-flex justify-content-between mt-2"><span className="text-secondary">Discount</span><span className="font-weight-bold text-secondary">Rs -</span></div>
                                             <hr />
-                                            <div className="d-flex justify-content-between mt-1"><span className="font-weight-bold">Total</span><span className="font-weight-bold text-success">
-                                                $ {subTotal(orderDataList?.total_amount) + ShippingPrice(orderDataList?.shipping_amount)}
+                                            <div className="d-flex justify-content-between mt-1"><span className="font-weight-bold">Total</span><span className="font-weight-bold text-secondary">
+                                                 {subTotal(orderDataList?.total_amount) + ShippingPrice(orderDataList?.shipping_amount)}
                                             </span></div>
                                         </div>
                                     </div>
@@ -189,11 +190,11 @@ const ProductSuccess = () => {
                                 <span className="d-block mt-3 text-black-50 fs-15"><BsEnvelopeFill />  We will be sending a shipping confirmation email when the item is shipped!</span>
                                 <hr />
                                 <div className="d-flex justify-content-between align-items-center footer mx-5">
-                                    <div className="thanks"><span className="d-block font-weight-bold">Thanks for shopping</span><span>Cosmedicos Team</span></div>
+                                    <div className="thanks"><span className="d-block font-weight-bold">Thanks for shopping</span><span>DjangoPets Team</span></div>
                                     <div className="d-flex flex-column justify-content-end align-items-end"><span className="d-block font-weight-bold">Need Help?</span><span>Call - 93333333333</span></div>
                                 </div>
                                 <div className='my-3'>
-                                    <Link to='/' className='btn btn-outline-success w-100' >Continue Shopping</Link>
+                                    <Link to='/' className='btn btn-outline-secondary w-100' >Continue Shopping</Link>
                                 </div>
                             </div>
                         </div>

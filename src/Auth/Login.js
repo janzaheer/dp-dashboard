@@ -10,6 +10,7 @@ import { ToastContainer, toast } from 'react-toastify'
 import Header from '../common/header/Header';
 import Footer from '../common/footer/Footer';
 // import FacebookLogin from 'react-facebook-login';
+import MyGoogleLogin from './MyGoogleLogin'
 
 const Login = () => {
     const [username, setUsername] = useState('')
@@ -66,8 +67,9 @@ const Login = () => {
                                         <form onSubmit={handleLogin} autoComplete="on" >
                                             <div className="mb-5 mt-2">
                                                 {user.user?.is_seller == true ? 'seller' : user.user?.is_seller == false ? 'user' : ''}
-                                                <img className="mb-1" src={logo} alt='' width={110} />
-                                                <h3>Welcome to Cosmedicos! Please login.</h3>
+                                                {/* <img className="mb-1" src={logo} alt='' width={110} /> */}
+                                                <h4 className='mb-1' style={{ color: '#374151'}}>DjangoPets</h4>
+                                                <h3>Welcome to DjangoPets! Please login.</h3>
                                             </div>
                                             <div className="form-floating mb-3">
                                                 <input type="username" className="form-control" id="floatingInput" placeholder="username"
@@ -80,9 +82,10 @@ const Login = () => {
                                                 />
                                                 <label htmlFor="floatingPassword">Password</label>
                                             </div>
-                                            <button className="btn btn-success w-50" type="submit">Login</button>
+                                            <button className="btn btn-secondary w-50" type="submit">Login</button>
                                             <hr className="my-3" />
-                                            <Link to='/register' className='btn btn-success w-100'>Register Now</Link>
+                                            <Link to='/register' className='btn btn-secondary w-100'>Register Now</Link>
+                                            <MyGoogleLogin />
                                         </form>
                                     </div>
                                 </div>
