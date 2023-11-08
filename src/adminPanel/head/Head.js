@@ -50,7 +50,7 @@ const Head = () => {
       {/* // {moment(orderDataList?.created_at).format("MM-DD-YYYY")} */}
       <nav className="navbar sticky-top navbar-expand-lg bg-light shadow">
         <div className="container-fluid">
-          <Link className="navbar-brand" to='/dashboard'> <img className="d-none d-md-flex" src={logo} alt='' width={110} /></Link>
+          <Link className="navbar-brand" to='/dashboard'> <div className='text-white'>DjangoPets</div></Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon" />
           </button>
@@ -68,7 +68,7 @@ const Head = () => {
             </ul>
             <div className="dropdown me-5">
               <button className="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Cosmedicos {user?.user?.username}
+                DjangoPets {user?.user?.username}
               </button>
               <ul className="dropdown-menu text-small shadow me-5">
                 <li><a className="dropdown-item" href="#"><FaUserTie /> {user?.user?.first_name} {user?.user?.last_name}</a></li>

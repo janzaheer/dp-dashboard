@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import Head from '../head/Head'
-import { BASE_URL, END_POINT, CATEGORY_ENDPOINT, ADD_PRODUCT_ENDPOINT,API_VERSION, SELLER_ITEMS_ENDPOINT } from '../../utlis/apiUrls';
+import { BASE_URL, END_POINT, CATEGORY_ENDPOINT, ADD_PRODUCT_ENDPOINT, API_VERSION, SELLER_ITEMS_ENDPOINT } from '../../utlis/apiUrls';
 import { useSelector } from 'react-redux';
 import { RiShoppingBag3Fill } from 'react-icons/ri';
 import { BsThreeDotsVertical } from 'react-icons/bs';
@@ -16,13 +16,14 @@ import { Button, Col, Form, Row, Modal } from 'react-bootstrap';
 import { uploadFile } from 'react-s3';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+import { SellerProductsList } from "../../utlis/services/product_category_services";
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
-  const BN = process.env.NODE_ENV == 'development' ? `meditech-products` : `cosemedicos-prod`;
+const BN = process.env.NODE_ENV == 'development' ? `meditech-products` : `cosemedicos-prod`;
 const config = {
   // bucketName: 'meditech-products',
-   bucketName:  BN,
+  bucketName: BN,
   // dirName: 'media', /* optional */
   region: 'ap-northeast-1',
   accessKeyId: 'AKIA2GGOXYXVJBADABN5',
@@ -33,7 +34,7 @@ const config = {
 const Products = () => {
 
   const [products, setProducts] = useState([])
-  
+
   const [title, setTitle] = useState('');
   const [price, setPrice] = useState('');
   const [description, setDescription] = useState('');
@@ -47,7 +48,7 @@ const Products = () => {
   const [selectImage4, setSelectImage4] = useState('')
   const [showAdd, setShowAdd] = useState(false);
   const [show, setShow] = useState(false);
-  const [stock_quantity, setStock_quantity] = useState ('');
+  const [stock_quantity, setStock_quantity] = useState('');
   // const [field_error, setField_error] = useState ([])
   // const user = useSelector(state => state.user.user.id);
   const userToken = useSelector(state => state.user.token);
@@ -62,6 +63,7 @@ const Products = () => {
 
   useEffect(() => {
     productList()
+    test()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -72,10 +74,10 @@ const Products = () => {
 
   let headers = {}
   if (userToken) {
-      headers = {
-          'Content-Type': "application/json",
-          Authorization: `Token ${userToken}`
-      }
+    headers = {
+      'Content-Type': "application/json",
+      Authorization: `Token ${userToken}`
+    }
   }
   const productList = async () => {
     // let final = `http://ec2-43-206-254-199.ap-northeast-1.compute.amazonaws.com/api/v1/items/seller_items/`
@@ -88,6 +90,17 @@ const Products = () => {
         setProducts(res.data)
       })
       .catch((err) => console.log(err))
+
+
+  }
+
+  const test = async () => {
+    try {
+      let res = await SellerProductsList()
+      console.log('new-product', res)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const deleteProduct = async (id) => {
@@ -123,7 +136,7 @@ const Products = () => {
       })
       .catch(err => console.error(err))
   }
-  console.log('here', selectImage)
+  // console.log('here', selectImage)
 
   // 2nd image function
   const uploadImage2 = async (e) => {
@@ -136,7 +149,7 @@ const Products = () => {
       })
       .catch(err => console.error(err))
   }
-  console.log('here-2', selectImage2)
+  // console.log('here-2', selectImage2)
 
   // 3rd image function
   const uploadImage3 = async (e) => {
@@ -149,7 +162,7 @@ const Products = () => {
       })
       .catch(err => console.error(err))
   }
-  console.log('here-3', selectImage3)
+  // console.log('here-3', selectImage3)
 
   // 4th image function
   const uploadImage4 = async (e) => {
@@ -162,7 +175,7 @@ const Products = () => {
       })
       .catch(err => console.error(err))
   }
-  console.log('here-4', selectImage4)
+  // console.log('here-4', selectImage4)
 
 
   const addProducts = async (e) => {
@@ -333,10 +346,10 @@ const Products = () => {
                 </Form.Group>
               </Row>
               <Row className='mb-3'>
-                    <Form.Group as={Col} controlId="formGridStock_quantity">
-                      <Form.Label>Quantity</Form.Label>
-                      <Form.Control type="number" name='stock_quantity' placeholder="Stock_quantity 5" value={stock_quantity} onChange={(e) => setStock_quantity(e.target.value)} />
-                    </Form.Group>
+                <Form.Group as={Col} controlId="formGridStock_quantity">
+                  <Form.Label>Quantity</Form.Label>
+                  <Form.Control type="number" name='stock_quantity' placeholder="Stock_quantity 5" value={stock_quantity} onChange={(e) => setStock_quantity(e.target.value)} />
+                </Form.Group>
               </Row>
 
               <Button variant="success"
@@ -476,7 +489,7 @@ const Products = () => {
                                 <img src={ite.images[0].image_url} alt='' width={30} className="img-fluid rounded shadow-sm" />
                               </div>
                             </th>
-                            <td className="border-0 text-muted align-middle">{ite?.title.substring(0,20)}</td>
+                            <td className="border-0 text-muted align-middle">{ite?.title.substring(0, 20)}</td>
                             <td className="border-0 text-muted align-middle">{ite?.available_quantity}</td>
                             <td className="border-0 text-muted align-middle">{moment(ite?.created_at).format("MM-DD-YYYY")}</td>
                             <td className="border-0 text-success align-middle">{ite?.category}</td>

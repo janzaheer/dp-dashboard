@@ -15,6 +15,7 @@ import {  NavLink } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import Badge from 'react-bootstrap/Badge';
+import { SellerOrderList } from '../../utlis/services/order_services';
 
 const Order = () => {
     const [orderDataList, setOrderDataList] = useState([])
@@ -25,6 +26,7 @@ const Order = () => {
     useEffect(() => {
         userList()
         myOrderList()
+        test()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -59,6 +61,15 @@ const Order = () => {
          }).catch(error => {
              console.log(error)
          })
+    }
+
+    const test = async () => {
+        try {
+            let res = await SellerOrderList()
+            console.log('new-order',res)
+        } catch (error) {
+            console.log('orders',error)
+        }
     }
 
     const handleBadge = (state) => {

@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react"
 import "./style.css"
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import { BASE_URL, END_POINT, CATEGORY_ENDPOINT, CATEGORY_ITEMS_LIST_ENDPOINT, FAV_ENDPOINT, API_VERSION } from "../../utlis/apiUrls";
+import { BASE_URL, FAV_ENDPOINT, API_VERSION } from "../../utlis/apiUrls";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify'
 import axios from "axios";
 import Heart from "react-heart";
 import ScrollToTop from "react-scroll-to-top";
+import { ProductCategory, ProductsCategoryList } from "../../utlis/services/product_category_services";
+import { FaStar, FaStarHalfAlt } from "react-icons/fa";
+import { AiOutlineStar } from "react-icons/ai";
 
 const ShopListData = () => {
 
@@ -25,12 +28,28 @@ const ShopListData = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    let headers = {}
-    if (userToken) {
-        headers = {
-            'Content-Type': "application/json",
-            Authorization: `Token ${userToken}`
-        }
+    const ProductListingWithCategory = async () => {
+        let res = await ProductCategory()
+        let categories = res.results
+        setCategoriesData(categories)
+        let promises = categories.map(category => {
+            let name = category.name
+            return ProductsCategoryList(name)
+                .then((response) => {
+                    return {
+                        name: category.name,
+                        items: response.data.results
+                    }
+                })
+        });
+        Promise.all(promises).then((results) => {
+            let data = {}
+            results.forEach(resultA => {
+                data[resultA.name] = resultA.items
+            })
+            console.log('data',data)
+            setLandingData(data)
+        })
     }
 
     const handleFav = async (id) => {
@@ -65,7 +84,7 @@ const ShopListData = () => {
         }).catch(error => {
             console.log(error)
         })
-        if (isAuthenticated == false) {
+        if (!isAuthenticated) {
             navigate("/login")
         }
     }
@@ -78,33 +97,7 @@ const ShopListData = () => {
         }
     }
 
-    const ProductListingWithCategory = async () => {
-        let category_endpoint = BASE_URL + API_VERSION() + CATEGORY_ENDPOINT()
-        await axios.get(category_endpoint, {
-            headers: headers
-        }).then(async (res) => {
-            let categories = res.data.results
-            setCategoriesData(categories)
-            let promises = categories.map(category => {
-                let items_endpoint = BASE_URL + API_VERSION() + END_POINT() + CATEGORY_ITEMS_LIST_ENDPOINT() + category.name
-                return axios.get(items_endpoint, {
-                    headers: headers
-                }).then((response) => {
-                    return {
-                        name: category.name,
-                        items: response.data.results
-                    }
-                })
-            });
-            Promise.all(promises).then((results) => {
-                let data = {}
-                results.forEach(resultA => {
-                    data[resultA.name] = resultA.items
-                })
-                setLandingData(data)
-            })
-        })
-    }
+   
 
     const price = (p) => {
         /* eslint eqeqeq: 0 */
@@ -115,17 +108,17 @@ const ShopListData = () => {
         }
     }
 
-    const getRandomCategoryImage = () => {
-        const CategoryImagesList = [
-            "./images/categoryList/1.jpg",
-            "./images/categoryList/2.jpg",
-            "./images/categoryList/3.jpg",
-            "./images/categoryList/4.jpg",
-            './images/categoryList/5.jpg'
-        ]
-        const random = Math.floor(Math.random() * CategoryImagesList.length);
-        return CategoryImagesList[random]
-    }
+    // const getRandomCategoryImage = () => {
+    //     const CategoryImagesList = [
+    //         "./images/categoryList/1.jpg",
+    //         "./images/categoryList/2.jpg",
+    //         "./images/categoryList/3.jpg",
+    //         "./images/categoryList/4.jpg",
+    //         './images/categoryList/5.jpg'
+    //     ]
+    //     const random = Math.floor(Math.random() * CategoryImagesList.length);
+    //     return CategoryImagesList[random]
+    // }
 
     return (
         <div>
@@ -147,7 +140,7 @@ const ShopListData = () => {
                                                 <NavLink to={`/item/?category_name=${categoryName.name}`}>
                                                     <div className="card-body text-center py-8">
                                                         <img src="https://freshcart.codescandy.com/assets/images/category/category-instant-food.jpg" alt="Grocery Ecommerce Template" className="mb-3" />
-                                                        <div className="text-truncate" style={{ color: 'black'}}>{categoryName?.name}</div>
+                                                        <div className="text-truncate" style={{ color: 'black' }}>{categoryName?.name}</div>
                                                     </div>
                                                 </NavLink>
                                             </div>
@@ -185,7 +178,10 @@ const ShopListData = () => {
                                                                                 <Heart isActive={itemFavourite && item.id in itemFavourite ? itemFavourite[item.id] : item.is_favourite} onClick={() => handleFav(item.id)} />
                                                                             </div>
                                                                         </div>
+                                                                        <div> <span className="text-decoration-line-through text-muted">Rs 200</span> </div>
+                                                                        <div> <p><FaStar className="icon" /><FaStar className="icon" /><FaStar className="icon" /><FaStarHalfAlt className="icon" /><AiOutlineStar className="icon" /> (101)</p> </div>
                                                                     </div>
+                                                                    {item?.is_favourite.toString()}
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -197,8 +193,7 @@ const ShopListData = () => {
                                             <NavLink to={`/item/?category_name=${key}`} className="btn btn-outline-secondary" >View More</NavLink>
                                         </div>
                                     </div>
-                                </div>
-                            )
+                                </div>)
                         })}
                     </div>
                 </div>
