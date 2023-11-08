@@ -11,6 +11,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import Header from '../../common/header/Header';
 import Footer from '../../common/footer/Footer';
+import ReviewTemplate from './ReviewTemplate';
+import Comments from './Comments';
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 import ScrollToTop from "react-scroll-to-top";
@@ -209,7 +211,7 @@ const ProductDetail = () => {
                         </div>
                     </div>
                     <div className="row row-underline">
-                        <div className="col-md-6"> <span className=" deal-text" style={{ color: '#374151'}}>Specifications</span> </div>
+                        <div className="col-md-6"> <span className=" deal-text" style={{ color: '#374151' }}>Specifications</span> </div>
                     </div>
                     <div className="row">
                         <div className="col-md-12">
@@ -237,6 +239,12 @@ const ProductDetail = () => {
                             </table>
                         </div>
                     </div>
+                </div>
+                <div className='my-3'>
+                    <ReviewTemplate />
+                </div>
+                <div className='my-3'>
+                    <Comments />
                 </div>
                 <ScrollToTop smooth />
             </div>
