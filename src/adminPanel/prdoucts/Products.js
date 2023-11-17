@@ -49,8 +49,7 @@ const Products = () => {
   const [showAdd, setShowAdd] = useState(false);
   const [show, setShow] = useState(false);
   const [stock_quantity, setStock_quantity] = useState('');
-  // const [field_error, setField_error] = useState ([])
-  // const user = useSelector(state => state.user.user.id);
+  
   const userToken = useSelector(state => state.user.token);
   // Edit Model functions
   const handleClose = () => setShow(false);
@@ -63,7 +62,6 @@ const Products = () => {
 
   useEffect(() => {
     productList()
-    test()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -74,33 +72,20 @@ const Products = () => {
 
   let headers = {}
   if (userToken) {
-    headers = {
-      'Content-Type': "application/json",
-      Authorization: `Token ${userToken}`
-    }
+      headers = {
+          'Content-Type': "application/json",
+          Authorization: `Token ${userToken}`
+      }
   }
   const productList = async () => {
     // let final = `http://ec2-43-206-254-199.ap-northeast-1.compute.amazonaws.com/api/v1/items/seller_items/`
     let final = BASE_URL + API_VERSION() + END_POINT() + SELLER_ITEMS_ENDPOINT()
-    return await axios.get(final, {
-      headers: headers
-    })
+    return await axios.get(final, { headers: headers })
       .then((res) => {
         console.log(res.data)
         setProducts(res.data)
       })
       .catch((err) => console.log(err))
-
-
-  }
-
-  const test = async () => {
-    try {
-      let res = await SellerProductsList()
-      console.log('new-product', res)
-    } catch (error) {
-      console.log(error)
-    }
   }
 
   const deleteProduct = async (id) => {

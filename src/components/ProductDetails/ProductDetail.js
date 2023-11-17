@@ -12,7 +12,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import Header from '../../common/header/Header';
 import Footer from '../../common/footer/Footer';
 import ReviewTemplate from './ReviewTemplate';
-import Comments from './Comments';
+// import Comments from './Comments';
 import Zoom from 'react-medium-image-zoom';
 import 'react-medium-image-zoom/dist/styles.css';
 import ScrollToTop from "react-scroll-to-top";
@@ -94,7 +94,7 @@ const ProductDetail = () => {
         if (p == 0) {
             return <h6 className='text-danger'> Please place a order for quotation, Once order is placed our support team will call you </h6>
         } else {
-            return <h6 className='text-success'>$ {p}</h6>
+            return <h6 className='text-success'>Rs {p}</h6>
         }
     }
 
@@ -243,9 +243,9 @@ const ProductDetail = () => {
                 <div className='my-3'>
                     <ReviewTemplate />
                 </div>
-                <div className='my-3'>
+                {/* <div className='my-3'>
                     <Comments />
-                </div>
+                </div> */}
                 <ScrollToTop smooth />
             </div>
             <Footer />

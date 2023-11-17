@@ -48,7 +48,7 @@ const navigate = useNavigate();
                 theme: "colored",
             });
         }
-        ProductsCategoryList()
+        // ProductsCategoryList()
     }).catch(error => {
         console.log(error)
     })
@@ -71,7 +71,6 @@ const navigate = useNavigate();
       return ''
     }
   }
-
 
   return (
     <div>

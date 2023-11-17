@@ -64,27 +64,19 @@ const ItemPage = () => {
         if (val == 'all-categories') {
             val = ''
         }
-        // let finalURL = BASE_URL + API_VERSION() + END_POINT() + CATEGORY_ITEMS_LIST_ENDPOINT() + val
-        let name = val
-        // axios.get(finalURL, {
-        //     headers: headers
-        // }).then((res) => {
-        //     console.log('cateeee', res.data)
-        //     setProducts(res.data.results)
-        //     setNextUrlPage(res?.data?.next)
-        //     setPrevUrlPage(res?.data?.previous)
-        // }).catch(error => {
-        //     console.log(error)
-        // })
-        try {
-            let res = await ProductsCategoryList(name)
+        let finalURL = BASE_URL + API_VERSION() + END_POINT() + CATEGORY_ITEMS_LIST_ENDPOINT() + val
+
+        axios.get(finalURL, {
+            headers: headers
+        }).then((res) => {
             console.log('cateeee', res.data)
             setProducts(res.data.results)
             setNextUrlPage(res?.data?.next)
             setPrevUrlPage(res?.data?.previous)
-        } catch (error) {
+        }).catch(error => {
             console.log(error)
-        }
+        })
+        
     }
 
     const categoryData = async () => {
@@ -159,7 +151,7 @@ const ItemPage = () => {
                             <div>
                                 <CardData products={products} />
                             </div>
-                            <div className="row g-2 mx-md-5">
+                            <div className="row g-2 mx-md-5 mt-2">
                                 <div className="d-flex justify-content-center">
                                     <button className='btn btn-success bt-sm me-2' disabled={prevUrlPage === null} onClick={() => handleNextPage(prevUrlPage)} > &larr; Previous</button>
                                     <button className='btn btn-success bt-sm' disabled={nextUrlPage === null} onClick={() => handleNextPage(nextUrlPage)}>Next &rarr; </button>

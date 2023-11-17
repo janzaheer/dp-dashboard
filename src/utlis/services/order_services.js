@@ -1,5 +1,5 @@
 import axios from "axios";
-import useHeaders from "./header_serviecs";
+import {useHeaders} from "./header_serviecs";
 import { BASE_URL,API_VERSION,ORDER_ENDPOINT } from "../apiUrls";
 
 export async function SellerOrderList(){

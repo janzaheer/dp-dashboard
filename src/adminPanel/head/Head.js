@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
-import logo from '../../logo/logo_new.png';
+// import logo from '../../logo/logo_new.png';
 import { SlLogout } from 'react-icons/sl';
 import { AiOutlineHome } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
@@ -8,8 +8,8 @@ import { FaUserTie } from 'react-icons/fa'
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../../store/authSlice';
-import axios from 'axios';
-import moment from 'moment';
+// import axios from 'axios';
+// import moment from 'moment';
 
 
 const Head = () => {
@@ -17,27 +17,27 @@ const Head = () => {
   const userToken = useSelector(state => state.user.token);
   const navigation = useNavigate();
   const dispatch = useDispatch();
-  const [notification, setNotification] = useState('')
+  // const [notification, setNotification] = useState('')
 
-  useEffect(() => {
-    functionNotification()
-  }, [])
+  // useEffect(() => {
+  //   functionNotification()
+  // }, [])
 
-  const functionNotification = async () => {
-    // let BASE_URL = `http://ec2-43-206-254-199.ap-northeast-1.compute.amazonaws.com/`
-    //  let Api = `api/v1/notification/`
-    let finalURL = `http://ec2-43-206-254-199.ap-northeast-1.compute.amazonaws.com/` + `api/v1/notification/`
-    await axios.get(finalURL, {
-      headers: {
-        'Content-Type': "application/json",
-        Authorization: `Token ${userToken}`
-      }
-    }).then((res) => {
-      console.log('notification', res)
-    }).catch(error => {
-      console.log(error)
-    })
-  }
+  // const functionNotification = async () => {
+  //   // let BASE_URL = `http://ec2-43-206-254-199.ap-northeast-1.compute.amazonaws.com/`
+  //   //  let Api = `api/v1/notification/`
+  //   let finalURL = `http://ec2-43-206-254-199.ap-northeast-1.compute.amazonaws.com/` + `api/v1/notification/`
+  //   await axios.get(finalURL, {
+  //     headers: {
+  //       'Content-Type': "application/json",
+  //       Authorization: `Token ${userToken}`
+  //     }
+  //   }).then((res) => {
+  //     console.log('notification', res)
+  //   }).catch(error => {
+  //     console.log(error)
+  //   })
+  // }
 
   const handleLogout = () => {
     console.log('click')

@@ -26,7 +26,6 @@ const Order = () => {
     useEffect(() => {
         userList()
         myOrderList()
-        test()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -61,15 +60,6 @@ const Order = () => {
          }).catch(error => {
              console.log(error)
          })
-    }
-
-    const test = async () => {
-        try {
-            let res = await SellerOrderList()
-            console.log('new-order',res)
-        } catch (error) {
-            console.log('orders',error)
-        }
     }
 
     const handleBadge = (state) => {
