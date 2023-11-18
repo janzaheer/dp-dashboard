@@ -1,7 +1,5 @@
 import React, { useState } from 'react'
 import { NavLink,useNavigate } from "react-router-dom";
-import { FaStar, FaStarHalfAlt } from "react-icons/fa";
-import { AiOutlineStar } from "react-icons/ai";
 import { useSelector } from 'react-redux';
 import axios from "axios";
 import Heart from "react-heart";
@@ -9,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify'
 import { BASE_URL, FAV_ENDPOINT, API_VERSION } from '../../utlis/apiUrls';
 import { ProductsCategoryList } from '../../utlis/services/product_category_services';
+import Star from '../ProductDetails/Star';
 
 const CardData = ({ products }) => {
   const [itemFavourite, setItemFavourite] = useState({})
@@ -71,6 +70,13 @@ const navigate = useNavigate();
       return ''
     }
   }
+  const discountPrice =(d) =>{
+    if (d == undefined) {
+      return 'Rs 0'
+    } else {
+      return `Rs ${d}`
+    }
+  }
 
   return (
     <div>
@@ -90,15 +96,14 @@ const navigate = useNavigate();
                   <div className="p-1">
                     <div className="about">
                       <h6 className="text-muted text-wrap">{product?.title.substring(0, 11)}</h6>
-
                       <div className="px-2 d-flex justify-content-between align-items-center">
                         <span className=""> {price(product?.price)}</span>
                         <div style={{ width: "20px" }}>
                         <Heart isActive={itemFavourite && product.id in itemFavourite ? itemFavourite[product.id] : product.is_favourite} onClick={() => handleFav(product.id)} />
                       </div>
                       </div>
-                      <div> <span className="text-decoration-line-through text-muted">Rs 200</span> </div>
-                      <div> <p><FaStar className="icon" /><FaStar className="icon" /><FaStar className="icon" /><FaStarHalfAlt className="icon" /><AiOutlineStar className="icon" /> (101)</p> </div>
+                      <div> <span className="text-decoration-line-through text-muted">{discountPrice(product?.stock[0]?.discount_price)}</span> </div>
+                      <div className='d-flex justify-content-start align-items-center'><h6><Star stars={product?.average_rating} /></h6> <h6 className='ms-1'>(101)</h6></div>
                     </div>
                   </div>
                 </div>
@@ -107,9 +112,7 @@ const navigate = useNavigate();
           )
         })
         }
-        
       </div>
-
     </div>
   )
 }

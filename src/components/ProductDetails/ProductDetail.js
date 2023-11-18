@@ -21,6 +21,7 @@ const ProductDetail = () => {
     const { id } = useParams();
     console.log(`id is ${id}`)
     const [product, setProduct] = useState([]);
+    const [comments, setComments] = useState([]);
     const [mainImage, setMainImage] = useState(product?.images && product?.images[0].image_url)
     const [qty, setQty] = useState(1);
     const navigate = useNavigate();
@@ -31,12 +32,13 @@ const ProductDetail = () => {
             // eslint-disable-next-line         
             try {
                 axios({
-                    url: `${BASE_URL}${API_VERSION()}${END_POINT()}/${id}/`,
+                    url: `${BASE_URL}${API_VERSION()}${END_POINT()}/${id}/detail_item/`,
                     method: 'get',
                 })
                     .then((res) => {
                         console.log(res.data)
-                        setProduct(res.data)
+                        setProduct(res.data.item)
+                        setComments(res.data.comments)
                     })
             } catch (error) {
                 console.log(error)
@@ -221,7 +223,7 @@ const ProductDetail = () => {
                                         <td className="col-md-3"><span className="p_specification">Product Title :</span> </td>
                                         <td className="col-md-9">
                                             <ul>
-                                                <li>{product.title}</li>
+                                                <li>{product.title} {product.id}</li>
                                             </ul>
                                         </td>
                                     </tr>
@@ -241,7 +243,7 @@ const ProductDetail = () => {
                     </div>
                 </div>
                 <div className='my-3'>
-                    <ReviewTemplate />
+                    <ReviewTemplate comments={comments} id={product.id} avg_rating={product.average_rating}/>
                 </div>
                 {/* <div className='my-3'>
                     <Comments />

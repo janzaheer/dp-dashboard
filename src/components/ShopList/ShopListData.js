@@ -46,12 +46,15 @@ const ShopListData = () => {
                     items: response.data.results
                 }
             })
+            
         });
+        
         Promise.all(promises).then((results) => {
             let data = {}
             results.forEach(resultA => {
                 data[resultA.name] = resultA.items
             })
+            console.log('product',data)
             setLandingData(data)
         })
     }

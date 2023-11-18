@@ -1,44 +1,36 @@
 import React from 'react';
-import { FaStar, FaStarHalfAlt } from "react-icons/fa";
-import { AiOutlineStar } from "react-icons/ai";
 import { Scrollbars } from 'react-custom-scrollbars-2';
+import moment from 'moment';
+import Star from './Star';
+import ProductRating from './ProductRating';
 
-const ProductReview = () => {
+const ProductReview = ({ comments, avg_rating }) => {
     return (
-        <div className='ReviewHeight'>
-            <Scrollbars>
-                <hr />
-                <div className='d-flex justify-content-between mt-2'>
-                    <span><FaStar className="icon" /><FaStar className="icon" /><FaStar className="icon" /><FaStarHalfAlt className="icon" /><AiOutlineStar className="icon" /></span>
-                    <span>11 months ago</span>
-                </div>
-                <div>
-                    <h6 className='text-secondary'> by Customer Name</h6>
-                    <div>Product was very good and delivered so fastly also that the packaging was so awesome I am loving that product and I am hoping that it will work and losses my weight.</div>
-                    <p>Oh my goodness.</p>
-                </div>
-                <hr />
-                <div className='d-flex justify-content-between mt-2'>
-                    <span><FaStar className="icon" /><FaStar className="icon" /><FaStar className="icon" /><FaStarHalfAlt className="icon" /><AiOutlineStar className="icon" /></span>
-                    <span>11 months ago</span>
-                </div>
-                <div>
-                    <h6 className='text-secondary'> by Customer Name</h6>
-                    <div>Product was very good and delivered so fastly also that the packaging was so awesome I am loving that product and I am hoping that it will work and losses my weight.</div>
-                    <p>Oh my goodness.</p>
-                </div>
-                <hr />
-                <div className='d-flex justify-content-between mt-2'>
-                    <span><FaStar className="icon" /><FaStar className="icon" /><FaStar className="icon" /><FaStarHalfAlt className="icon" /><AiOutlineStar className="icon" /></span>
-                    <span>11 months ago</span>
-                </div>
-                <div>
-                    <h6 className='text-secondary'> by Customer Name</h6>
-                    <div>Product was very good and delivered so fastly also that the packaging was so awesome I am loving that product and I am hoping that it will work and losses my weight.</div>
-                    <p>Oh my goodness.</p>
-                </div>
-            </Scrollbars>
-        </div>
+        <>
+            <ProductRating avg_rating={avg_rating} />
+            <div className='ReviewHeight'>
+                <Scrollbars>
+                    <hr />
+                    {comments && comments.length > 0 && comments.map((comment) => {
+                        return (
+                            <div key={comment?.id}>
+                                <div className='d-flex justify-content-between mt-2'>
+                                    <span><Star stars={comment.rating} /></span>
+                                    <span>{moment(comment?.created_at).startOf('minutes').fromNow()}</span>
+                                </div>
+                                <div>
+                                    <h6 className='text-secondary'> by {comment?.user?.username}</h6>
+                                    <div>{comment.text}.</div>
+                                </div>
+                                <hr />
+                            </div>
+                        )
+                    })
+                    }
+                </Scrollbars>
+            </div>
+        </>
+
     )
 }
 
