@@ -16,7 +16,6 @@ const ShopListData = () => {
 
     useEffect(() => {
         ProductListingWithCategory()
-        //  test1()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -28,15 +27,9 @@ const ShopListData = () => {
         }
     }
 
-    // const test1 = async () =>{
-    //     let res = await ProductCategory(headers)
-    //     console.log('new-cat',res)
-    // }
-
     const ProductListingWithCategory = async () => {
         let res = await ProductCategory(headers)
         let categories = res.results
-        console.log('Category',categories)
         setCategoriesData(categories)
         let promises = categories.map(category => {
             let items_endpoint = BASE_URL + API_VERSION() + END_POINT() + CATEGORY_ITEMS_LIST_ENDPOINT() + category.name
