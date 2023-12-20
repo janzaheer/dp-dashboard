@@ -12,7 +12,7 @@ let persistor = persistStore(store)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <GoogleOAuthProvider clientId="169858684361-la5bpa0vlthm20bvi108ilgfcn47egdq.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId="597419296556-vv79jg6uqvko1rmqndeqllpjdf5tm13a.apps.googleusercontent.com">
         <Provider store={store}>
             <PersistGate persistor={persistor} >
                 <App />
