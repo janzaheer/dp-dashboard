@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import axios from "axios";
 import { Scrollbars } from 'react-custom-scrollbars-2';
-import { BASE_URL, END_POINT,API_VERSION } from '../../utlis/apiUrls';
+import { ProductDetail } from '../../utlis/services/product_category_services';
 import { useParams } from 'react-router-dom';
 import Head from '../head/Head';
 import Zoom from 'react-medium-image-zoom';
@@ -9,7 +8,6 @@ import 'react-medium-image-zoom/dist/styles.css';
 import ScrollToTop from "react-scroll-to-top";
 const ProductDetailDashboard = () => {
     const { id } = useParams();
-    console.log(`id is ${id}`)
     const [productDetail, setProductDetail] = useState([]);
     const [mainImage, setMainImage] = useState(productDetail?.images && productDetail?.images[0].image_url)
 
@@ -20,14 +18,8 @@ const ProductDetailDashboard = () => {
     const getProductDetail = async () => {
         // eslint-disable-next-line         
         try {
-            axios({
-                url: `${BASE_URL}${API_VERSION()}${END_POINT()}/${id}/`,
-                method: 'get',
-            })
-                .then((res) => {
-                    console.log(res.data)
-                    setProductDetail(res.data)
-                })
+                let resp = await ProductDetail(id)
+                setProductDetail(resp)
         } catch (error) {
             console.log(error)
         }
@@ -73,7 +65,7 @@ const ProductDetailDashboard = () => {
                     <div className="col-md-12 col-lg-7">
                         <div className="desc">
                             <h3>{productDetail?.title}</h3>
-                            <div> <h5 className='text-success'>$ {productDetail?.price}</h5></div>
+                            <div> <h5 className='text-success'>Rs {productDetail?.price}</h5></div>
                             <div>{stockHandle(productDetail?.available_quantity)}</div>
                             <div className="p-1 my-2 table-responsivedesTag">
                                 <Scrollbars>

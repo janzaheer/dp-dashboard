@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './ManageProfile.css'
 import { GiCrossMark } from 'react-icons/gi';
 import { GrFacebookOption, GrInstagram, GrYoutube } from 'react-icons/gr'
-import { MdAddLocationAlt, MdAddCall, MdMarkEmailUnread } from 'react-icons/md';
+import { MdAddCall, MdMarkEmailUnread } from 'react-icons/md';
 import { BsEyeFill } from 'react-icons/bs'
 import { FaAddressCard, FaUserCircle, FaAddressBook } from 'react-icons/fa'
 import { ImUser, ImLocation2 } from 'react-icons/im';
@@ -10,31 +10,26 @@ import { CgProfile } from 'react-icons/cg';
 import { RiShoppingBag3Fill } from 'react-icons/ri'
 import { useSelector } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
-import axios from 'axios';
-import { BASE_URL, ORDER_ENDPOINT, ADDRESS_REMOVE_ENDPOINT, ADDRESS_ADD_ENDPOINT, USER_LIST_ENDPOINT,API_VERSION } from '../utlis/apiUrls';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import moment from 'moment';
 import Header from '../common/header/Header';
 import Footer from '../common/footer/Footer';
-import { Button, Col, Form, Row, Modal, Badge } from 'react-bootstrap';
+import { Button, Badge } from 'react-bootstrap';
 import ScrollToTop from "react-scroll-to-top";
+import { SellerOrderList } from '../utlis/services/order_services';
+import { GetUserData } from '../utlis/services/user_services';
+import AddressAdd from './AddressAdd';
+import { DeleteAddress } from '../utlis/services/address_services';
 
 const ManageProfile = () => {
     const user = useSelector(state => state.user);
     const userToken = useSelector(state => state.user.token);
     const [userData, setUserData] = useState({})
-    const [phone_number, setPhone_number] = useState('')
-    const [email_address, setEmail_address] = useState('')
-    const [address, setAddress] = useState('')
     const [orderDataList, setOrderDataList] = useState([])
-    const [show, setShow] = useState(false);
 
-    console.log('==============================')
     const id = user.user.id
-    console.log('user-id', id)
-    console.log('==============================')
    
     useEffect(() => {
         userList()
@@ -42,94 +37,47 @@ const ManageProfile = () => {
          // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const userList = async () => {
-        let Api = `${API_VERSION()}${USER_LIST_ENDPOINT()}${id}/`
-        let AddFavURL = BASE_URL + Api
-        axios.get(AddFavURL, {
-            headers: {
-                'Content-Type': "application/json",
-                Authorization: `Token ${userToken}`
-            }
-        }).then((res) => {
-            setUserData(res.data)
-        }).catch(error => {
-            console.log(error)
-        })
+    let headers = {};
+    if (userToken) {
+      headers = {
+        "Content-Type": "application/json",
+        Authorization: `Token ${userToken}`,
+      };
     }
 
-    const handleCloseAdd = () => setShow(false);
-    const handleShowAdd = () => setShow(true);
-    const addAddress = async (e) => {
-        e.preventDefault();
-        let addAddressUrl = BASE_URL + API_VERSION() + USER_LIST_ENDPOINT() + ADDRESS_ADD_ENDPOINT()
+    const userList = async () => {
         try {
-            let res = await axios.post(addAddressUrl, {
-                phone_number: phone_number,
-                email_address: email_address,
-                address: address,
-            }, {
-                headers: {
-                    'Content-Type': "application/json",
-                    Authorization: `Token ${userToken}`
-                }
-            })
-            console.log(res.data)
-            setShow(false)
-            toast.success('new Address Added Successfully!', {
-                position: toast.POSITION.TOP_RIGHT,
-                theme: "colored",
-            });
-            setAddress('')
-            setEmail_address('')
-            setPhone_number('')
-            userList()
+            let response = await GetUserData(id, headers)
+            setUserData(response)
         } catch (error) {
-            console.log('add error', error)
-            toast.error('Please Required These Fields', {
-                position: toast.POSITION.TOP_RIGHT,
-                theme: "colored",
-            });
-            setShow(true)
+            console.log(error)
         }
     }
 
     const handleDelete = async (AddressId) => {
-        console.log('delete', AddressId)
-        let removeAddressUrl = BASE_URL + API_VERSION() + USER_LIST_ENDPOINT() + ADDRESS_REMOVE_ENDPOINT()
+        const payload = {
+            address_id: AddressId,
+        }
         try {
-            let res = await axios.post(removeAddressUrl, {
-                address_id: AddressId,
-            }, {
-                headers: {
-                    'Content-Type': "application/json",
-                    Authorization: `Token ${userToken}`
-                }
-            })
-            console.log(res.data)
+            let res = await DeleteAddress(payload,headers)
+            console.log(res)
             userList()
-            toast.error(res.data.message, {
+            toast.error(res.message, {
                 position: toast.POSITION.TOP_RIGHT,
                 theme: "colored",
             });
         } catch (error) {
             console.log('delete error', error)
         }
-
     }
 
     const myOrderList = async () => {
-        let finalURL = BASE_URL + API_VERSION() + ORDER_ENDPOINT()
-       await axios.get(finalURL, {
-            headers: {
-                'Content-Type': "application/json",
-                Authorization: `Token ${userToken}`
-            }
-        }).then((res) => {
-            console.log('orderList',res.data)
-            setOrderDataList(res.data.results)
-        }).catch(error => {
-            console.log(error)
-        })
+        try {
+            let resp = await SellerOrderList(headers)
+            setOrderDataList(resp.results)
+        } catch (error) {
+            console.log('orderList',error)
+        }
     }
 
     const handleBadge = (state) => {
@@ -161,41 +109,6 @@ const ManageProfile = () => {
     return (
         <div>
             <Header />
-
-            <Modal show={show} onHide={handleCloseAdd}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Add Product</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <Form onSubmit={addAddress} >
-                        <Row className="mb-3">
-                            <Form.Group as={Col} controlId="formGridEmail">
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control type="text" value={email_address} name='email_address' onChange={(e) => setEmail_address(e.target.value)} />
-                            </Form.Group>
-                            <Form.Group as={Col} controlId="formGridPhone_number">
-                                <Form.Label>Phone</Form.Label>
-                                <Form.Control type="number" value={phone_number} name='phone_number' onChange={(e) => setPhone_number(e.target.value)} />
-                            </Form.Group>
-                        </Row>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlDescription1">
-                            <Form.Label>Address</Form.Label>
-                            <Form.Control type='text' placeholder="1234 Main St" name='address' value={address} onChange={(e) => setAddress(e.target.value)} />
-                        </Form.Group>
-                        <Button variant="secondary"
-                            // onClick={handleCloseAdd} 
-                            type="submit">
-                            Save Address
-                        </Button>
-                    </Form>
-                </Modal.Body>
-                <Modal.Footer className="modal-footer d-flex justify-content-center align-items-center">
-                    <div>
-                        <p>Thanks For Add New Address</p>
-                    </div>
-                </Modal.Footer>
-            </Modal>
-
             <div className="container-fluid manage">
                 <ToastContainer />
                 <div className='container'>
@@ -227,9 +140,7 @@ const ManageProfile = () => {
                             <div className="card controlCard shadow">
                                 <div className='d-flex justify-content-between mx-3 my-2'>
                                     <h5 className='card-title mt-2'><FaAddressBook /> Address Book</h5>
-                                    <Button variant="outline-secondary" size="sm" onClick={handleShowAdd}>
-                                        Add Address <MdAddLocationAlt />
-                                    </Button>
+                                    <AddressAdd userList={userList} />
                                 </div>
                                 <Scrollbars thumbMinSize={30} >
                                     {userData.addresses?.map((item, index) => {
@@ -298,7 +209,7 @@ const ManageProfile = () => {
                                                             <td className="border-0 text-muted align-middle">{moment(ite?.created_at).format("MM-DD-YYYY")}</td>
                                                             <td className="border-0 text-muted align-middle">{ite?.total_quantity}</td>
                                                             <td className="border-0 text-muted align-middle">{handleBadge(ite?.status)}</td>
-                                                            <td className="border-0 text-muted align-middle">$ {ite?.total_amount}</td>
+                                                            <td className="border-0 text-muted align-middle">Rs {ite?.total_amount}</td>
                                                             <td className="border-0 align-middle"><NavLink to={`/productSuccess/${ite.id}`} className='text-success'><BsEyeFill /></NavLink> </td>
                                                         </tr>
                                                     )

@@ -5,3 +5,14 @@
     /* height: 900px; */
     min-height: 45vh;
 }
+
+.my-facebook-button-class{
+    background-color: rgb(69, 69, 209);
+    color: white;
+    padding: 9px 0px;
+    border: none;
+    border-radius: 2px;
+}
+.my-facebook-button-class{
+    cursor: pointer;
+}

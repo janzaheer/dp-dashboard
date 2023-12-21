@@ -229,7 +229,7 @@ const Checkout = () => {
                     {/* Add Address Modal Start */}
                     <Modal show={show} onHide={handleCloseAdd}>
                         <Modal.Header closeButton>
-                            <Modal.Title className='text-secondary'>Add Product</Modal.Title>
+                            <Modal.Title className='text-secondary'>Add Address</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <Form onSubmit={addAddress} >

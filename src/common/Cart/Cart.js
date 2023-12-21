@@ -142,7 +142,7 @@ const Cart = () => {
 
                                   <div className="ms-3 ml-3 d-inline-block align-middle">
                                     <h6 className="mb-0"> <Link to="#" className="text-dark d-inline-block align-middle">{cartProduct?.title.substring(0, 15)}...</Link>
-                                    </h6><span className="text-muted font-weight-normal font-italic d-block">$ {price(cartProduct?.price)}</span>
+                                    </h6><span className="text-muted font-weight-normal font-italic d-block">Rs {price(cartProduct?.price)}</span>
                                   </div>
                                 </div>
                               </th>

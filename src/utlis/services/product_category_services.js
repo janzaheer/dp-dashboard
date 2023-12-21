@@ -21,10 +21,20 @@ export async function ProductsSearch(headers, search_name){
     return resp.data
 }
 
-export async function SellerProductsList(){
+export async function SellerProductsList(headers){
     let finalUrl = BASE_URL + API_VERSION() + END_POINT() + SELLER_ITEMS_ENDPOINT()
-    const resp = await axios.get( finalUrl,{
-        headers: useHeaders
-    })
-    return resp
+    const resp = await axios.get( finalUrl, { headers: headers })
+    return resp.data
+}
+
+export async function DeleteSellerProducts(id,headers){
+    let finalUrl = BASE_URL + API_VERSION() + END_POINT() + id + `/`;
+    const resp = await axios.delete( finalUrl,{ headers: headers })
+    return resp.data
+}
+
+export async function ProductDetail(id,headers){
+    let finalUrl = BASE_URL + API_VERSION() + END_POINT() + id + `/`
+    const resp = await axios.get( finalUrl, { headers: headers })
+    return resp.data
 }
