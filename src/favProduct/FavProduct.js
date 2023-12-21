@@ -26,9 +26,7 @@ const FavProduct = () => {
     const handleFavList = async () => {
         try {
             let res = await ProductsFav(headers)
-            console.log('handleFavList', res)
             setProducts(res)
-
         } catch (error) {
             console.log('error while loading favorite', error)
         }
