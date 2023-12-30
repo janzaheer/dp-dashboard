@@ -45,7 +45,7 @@ const Head = () => {
               </li>
               : <li className="nav-item me-5">
                 <div className="me-5">
-                  <Link className="btn btn-danger btn-sm"to='/login'>Login Now</Link>
+                  <Link className="text-white"to='/login'>Login Now</Link>
                 </div>
               </li>
             }

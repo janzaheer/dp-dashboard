@@ -75,6 +75,7 @@ const ManageProfile = () => {
         try {
             let resp = await SellerOrderList(headers)
             setOrderDataList(resp.results)
+            console.log('orderList',resp.results)
         } catch (error) {
             console.log('orderList',error)
         }
