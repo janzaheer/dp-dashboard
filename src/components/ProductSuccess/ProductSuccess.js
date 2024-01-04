@@ -19,6 +19,7 @@ const ProductSuccess = () => {
   const user = useSelector((state) => state.user);
   const userToken = useSelector((state) => state.user.token);
   const [orderDataList, setOrderDataList] = useState({});
+  const [ordernumber, setOrdernumber] = useState();
 
   let { id } = useParams();
 
@@ -39,6 +40,7 @@ const ProductSuccess = () => {
     try {
       let response = await OrderDetail(id, headers);
       setOrderDataList(response);
+      setOrdernumber(response.order_number || "");
     } catch (error) {
       console.log(error);
     }
@@ -221,7 +223,7 @@ const ProductSuccess = () => {
                   })}
                 <div className="mt-5 amount row">
                   <div className="d-flex justify-content-center col-md-6">
-                    <Barcode value={orderDataList?.order_number} />
+                    {ordernumber && <Barcode value={ordernumber} />}
                   </div>
                   <div className="col-md-6">
                     <div className="billing">
@@ -254,7 +256,11 @@ const ProductSuccess = () => {
                     </div>
                   </div>
                 </div>
-                {orderCancelButton(orderDataList.status, orderDataList?.id)}
+                {orderDataList?.status == "completed" ? (
+                  ''
+                ) : (
+                  orderCancelButton(orderDataList.status, orderDataList?.id)
+                )}
                 <span className="d-block mt-3 text-black-50 fs-15">
                   <BsEnvelopeFill /> We will be sending a shipping confirmation
                   email when the item is shipped!

@@ -1,8 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { BASE_URL, LOGIN_ENDPOINT,SIGNUP_ENDPOINT,API_VERSION } from "../utlis/apiUrls";
 
-// const user = JSON.parse(localStorage.getItem('user'))
-
 const initialState = {
     user: '',
     token: '',
@@ -48,15 +46,6 @@ const authSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        addToken: (state, action) => {
-            // state.token = localStorage.getItem('token')
-        },
-        addUser: (state, action) => {
-            // state.isAuthenticated = true;
-            // const user = window.localStorage.getItem('user')
-            // const user_data = JSON.parse(user)
-            // state.user = user_data
-        },
         logout: (state, action) => {
             state.user = null;
             state.token = null;
@@ -64,16 +53,15 @@ const authSlice = createSlice({
             // localStorage.clear()
         },
     },
-    extraReducers: {
+    extraReducers: (builder) => {
         /* signin  */
-        [signInUser.pending]: (state, action) => {
+        builder
+        .addCase(signInUser.pending, (state, action) => {
             state.loading = true;
             state.error = null;
-        }, [signInUser.fulfilled]: (state, { payload: { message, token, user } }) => {
+        })
+        .addCase(signInUser.fulfilled, (state, { payload: { message, token, user } }) => {
             state.loading = false;
-            
-            // console.log(user)
-            // console.log('---------------------00-----------------')
 
             if (user) {
                 state.isAuthenticated = true;
@@ -81,32 +69,52 @@ const authSlice = createSlice({
                 state.token = token;
                 state.user = user;
             }
-
-        }, [signInUser.rejected]: (state, action) => {
+        })
+        .addCase(signInUser.rejected, (state, action) => {
             state.loading = true;
-            state.error = true
-            state.message = action.payload
+            state.error = true;
+            state.message = action.payload;
             state.user = null;
-            
+        });
 
-        },
+        builder
+        .addCase(signUpUser.pending, (state, action) => {
+            state.loading = true;
+            state.error = null;
+        })
+        .addCase(signUpUser.fulfilled, (state, { payload: { message, token, user } }) => {
+            state.loading = false;
+
+            if (user) {
+                state.isAuthenticated = true;
+                state.message = message;
+                state.token = token;
+                state.user = user;
+            }
+        })
+        .addCase(signUpUser.rejected, (state, action) => {
+            state.loading = true;
+            state.error = true;
+            state.message = action.payload;
+            state.user = null;
+        });
         /* signup  */
-        [signUpUser.pending]: (state, action) => {
-            state.loading = true;
-        }, [signUpUser.fulfilled]: (state, { payload: { message, token, user } }) => {
-            state.loading = false;
-            if (user) {
-                state.isAuthenticated = true;
-                state.message = message;
-                state.token = token;
-                state.user = user;
-            }
-        }, [signUpUser.rejected]: (state, action) => {
-            state.loading = true;
-            state.error = true
-            state.message = action.payload
-            state.user = null;
-        },
+        // [signUpUser.pending]: (state, action) => {
+        //     state.loading = true;
+        // }, [signUpUser.fulfilled]: (state, { payload: { message, token, user } }) => {
+        //     state.loading = false;
+        //     if (user) {
+        //         state.isAuthenticated = true;
+        //         state.message = message;
+        //         state.token = token;
+        //         state.user = user;
+        //     }
+        // }, [signUpUser.rejected]: (state, action) => {
+        //     state.loading = true;
+        //     state.error = true
+        //     state.message = action.payload
+        //     state.user = null;
+        // },
     }
 })
 

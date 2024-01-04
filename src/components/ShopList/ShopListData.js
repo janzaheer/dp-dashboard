@@ -88,7 +88,7 @@ const ShopListData = () => {
                                         {/* <hr className="border borderColor border-1 opacity-50"></hr> */}
                                         <div className="" >
                                             <div>
-                                            <CardData products={products[key]} />
+                                            <CardData products={products[key]} ProductListingWithCategory={ProductListingWithCategory}  />
                                             </div>
                                         </div>
                                         <div className="d-flex justify-content-center mt-2">

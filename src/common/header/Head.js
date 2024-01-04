@@ -6,6 +6,7 @@ import { SlLogout } from 'react-icons/sl'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from "../../store/authSlice"
 import { useNavigate } from 'react-router-dom';
+import { clearCart } from "../../store/cartSlice"
 
 
 const Head = () => {
@@ -13,8 +14,12 @@ const Head = () => {
   const isAuthenticated = useSelector(state => state.user.isAuthenticated)
   const navigation = useNavigate()
   const dispatch = useDispatch();
+  // window.location.reload();
   const handleLogout = () => {
+   
     dispatch(logout())
+    dispatch(clearCart());
+    
     navigation("/")
   }
   return (
