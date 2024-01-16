@@ -1,120 +1,195 @@
-import React, { useState } from 'react'
-import { NavLink,useNavigate } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import React, { useState } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import Heart from "react-heart";
-import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from 'react-toastify'
-import { BASE_URL, FAV_ENDPOINT, API_VERSION } from '../../utlis/apiUrls';
-import { ProductsCategoryList } from '../../utlis/services/product_category_services';
-import Star from '../ProductDetails/Star';
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast } from "react-toastify";
+import { BASE_URL, FAV_ENDPOINT, API_VERSION } from "../../utlis/apiUrls";
+import Star from "../ProductDetails/Star";
+import { AddProductsFav } from "../../utlis/services/product_category_services";
 
-const CardData = ({ products }) => {
-  const [itemFavourite, setItemFavourite] = useState({})
-  const [addFav, setAddFav] = useState('')
-  const userToken = useSelector(state => state.user.token);
-const isAuthenticated = useSelector(state => state.user.isAuthenticated)
-const navigate = useNavigate();
+const CardData = ({ products, handleFavList }) => {
+  const [itemFavourite, setItemFavourite] = useState({});
+  const [addFav, setAddFav] = useState("");
+  const userToken = useSelector((state) => state.user.token);
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const navigate = useNavigate();
 
+  let headers = {};
+  if (userToken) {
+    headers = {
+      "Content-Type": "application/json",
+      Authorization: `Token ${userToken}`,
+    };
+  }
+    const handleFav = async (id) => {
 
-  const handleFav = async (id) => {
-    console.log('addd', addFav)
+      let AddFavURL = BASE_URL + API_VERSION() + FAV_ENDPOINT()
+      axios.post(AddFavURL, { item_id: id }, {
+          headers: headers
+      }).then((result) => {
+          console.log(result)
+          setAddFav(result)
 
-    let AddFavURL = BASE_URL + API_VERSION() + FAV_ENDPOINT()
-    axios.post(AddFavURL, { item_id: id }, {
-        headers: {
-            'Content-Type': "application/json",
-            Authorization: `Token ${userToken}`
-        }
-    }).then((result) => {
-        console.log(result)
-        setAddFav(result)
-        
-        if (result.data.message.includes('remove')) {
-            let idata = itemFavourite
-            idata[id] = false
-            setItemFavourite(idata)
-            toast.error(result.data.message, {
-                position: toast.POSITION.TOP_RIGHT,
-                theme: "colored",
-            });
-        } else {
-            let data = itemFavourite
-            data[id] = true
-            setItemFavourite(data)
-            toast.success(result.data.message, {
-                position: toast.POSITION.TOP_RIGHT,
-                theme: "colored",
-            });
-        }
-        // ProductsCategoryList()
-    }).catch(error => {
-        console.log(error)
-    })
-    if (isAuthenticated == false) {
-        navigate("/login")
-    }
-}
+          if (result.data.message.includes('remove')) {
+              let idata = itemFavourite
+              idata[id] = false
+              setItemFavourite(idata)
+              toast.error(result.data.message, {
+                  position: toast.POSITION.TOP_RIGHT,
+                  theme: "colored",
+              });
+          } else {
+              let data = itemFavourite
+              data[id] = true
+              setItemFavourite(data)
+              toast.success(result.data.message, {
+                  position: toast.POSITION.TOP_RIGHT,
+                  theme: "colored",
+              });
+          }
+          handleFavList()
+      }).catch(error => {
+          console.log(error)
+      })
+      if (!isAuthenticated) {
+        navigate('/login')
+      }
+      // if (isAuthenticated == false) {
+      //     navigate("/login")
+      // }
+  }
+  // const handleFav = async (id) => {
+  //   const payload = {
+  //     item_id: id,
+  //   };
+  //   try {
+  //     let result = await AddProductsFav(payload, headers);
+  //     console.log("fav", result);
+  //     if (result.data.message.includes("remove")) {
+  //       let idata = itemFavourite;
+  //       idata[id] = false;
+  //       setItemFavourite(idata);
+  //       toast.error(result.data.message, {
+  //         position: toast.POSITION.TOP_RIGHT,
+  //         theme: "colored",
+  //       });
+  //     } else {
+  //       let data = itemFavourite;
+  //       data[id] = true;
+  //       setItemFavourite(data);
+  //       toast.success(result.data.message, {
+  //         position: toast.POSITION.TOP_RIGHT,
+  //         theme: "colored",
+  //       });
+  //     }
+  //     handleFavList();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  //   if (isAuthenticated == false) {
+  //     navigate("/login");
+  //   }
+  // };
 
   const price = (p) => {
     if (p == 0) {
-      return ''
+      return "";
     } else {
-      return `Rs ${p}`
+      return `Rs ${p}`;
     }
-  }
+  };
   const handleBadge = (seller) => {
     if (seller == null) {
-      return <span className="badge text-bg-success notify-badge">DjangoPets mall</span>
+      return (
+        <span className="badge text-bg-success notify-badge">
+          DjangoPets mall
+        </span>
+      );
     } else {
-      return ''
+      return "";
     }
-  }
-  const discountPrice =(d) =>{
+  };
+  const discountPrice = (d) => {
     if (d == undefined) {
-      return 'Rs 0'
+      return "Rs 0";
     } else {
-      return `Rs ${d}`
+      return `Rs ${d}`;
     }
-  }
+  };
 
   return (
     <div>
-       <ToastContainer />
+      <ToastContainer />
       <div className="row g-2 mx-md-5">
-        {products && products.length > 0 && products.map((product) => {
-          return (
-            <div key={product?.id} className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">
-              <div className='bg-white border rounded productShadow' >
-                <div className="">
-                  <div className="text-center mb-1 itemImage">
-                    <NavLink to={`/productDetails/${product?.id}`} className="" >
-                      {handleBadge(product.seller)}
-                      <img src={product?.images[0]?.image_url} alt='' className="images-class w-100" width={180} height={180} />
-                    </NavLink>
-                  </div>
-                  <div className="p-1">
-                    <div className="about">
-                      <h6 className="text-muted text-wrap">{product?.title.substring(0, 11)}</h6>
-                      <div className="px-2 d-flex justify-content-between align-items-center">
-                        <span className=""> {price(product?.price)}</span>
-                        <div style={{ width: "20px" }}>
-                        <Heart isActive={itemFavourite && product.id in itemFavourite ? itemFavourite[product.id] : product.is_favourite} onClick={() => handleFav(product.id)} />
+        {products &&
+          products.length > 0 &&
+          products.map((product) => {
+            return (
+              <div
+                key={product?.id}
+                className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2"
+              >
+                <div className="bg-white border rounded productShadow">
+                  <div className="">
+                    <div className="text-center mb-1 itemImage">
+                      <NavLink
+                        to={`/productDetails/${product?.id}`}
+                        className=""
+                      >
+                        {handleBadge(product.seller)}
+                        <img
+                          src={product?.images[0]?.image_url}
+                          alt=""
+                          className="images-class w-100"
+                          width={180}
+                          height={180}
+                        />
+                      </NavLink>
+                    </div>
+                    <div className="p-1">
+                      <div className="about">
+                        <h6 className="text-muted text-wrap">
+                          {product?.title.substring(0, 11)}
+                        </h6>
+                        <div className="px-2 d-flex justify-content-between align-items-center">
+                        {/* {product?.stock[0]?.discount_percentage} */}
+                          <span className=""> {price(product?.price)}</span>
+                          <div style={{ width: "20px" }}>
+                            <Heart
+                              isActive={
+                                itemFavourite && product.id in itemFavourite
+                                  ? itemFavourite[product.id]
+                                  : product.is_favourite
+                              }
+                              onClick={() => handleFav(product.id)}
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          {" "}
+                          <span className="text-decoration-line-through text-muted">
+                            {discountPrice(product?.stock[0]?.discount_price)}
+                             {/* {discountPrice(product?.stock[0]?.discount_price) || product?.price} */}
+                          </span>{" "}
+                        </div>
+                        <div className="d-flex justify-content-start align-items-center">
+                          <h6>
+                            <Star stars={product?.average_rating} />
+                          </h6>{" "}
+                          <h6 className="ms-1">(101)</h6>
+                        </div>
                       </div>
-                      </div>
-                      <div> <span className="text-decoration-line-through text-muted">{discountPrice(product?.stock[0]?.discount_price)}</span> </div>
-                      <div className='d-flex justify-content-start align-items-center'><h6><Star stars={product?.average_rating} /></h6> <h6 className='ms-1'>(101)</h6></div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )
-        })
-        }
+            );
+          })}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default CardData
+export default CardData;

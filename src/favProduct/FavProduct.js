@@ -39,7 +39,7 @@ const FavProduct = () => {
                 <div className=''>
                     <h1 className='text-center text-danger'>Favorite list</h1>
                     <div>
-                        <CardData products={products} />
+                        <CardData products={products} handleFavList={handleFavList} />
                     </div>
                 </div>
             </div>

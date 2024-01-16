@@ -4,8 +4,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCartTotal, clearCart } from '../../store/cartSlice';
-import axios from 'axios';
-import { BASE_URL, ORDER_PLACED_ENDPOINT, ADDRESS_ADD_ENDPOINT, USER_LIST_ENDPOINT,ORDER_ENDPOINT,API_VERSION } from '../../utlis/apiUrls';
 import { MdAddCall, MdMarkEmailUnread, MdAddLocationAlt } from 'react-icons/md';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
@@ -13,8 +11,12 @@ import { FaAddressCard, FaUserCircle } from 'react-icons/fa'
 import { ImLocation2 } from 'react-icons/im';
 import Header from '../../common/header/Header';
 import Footer from '../../common/footer/Footer';
-import { Button, Col, Form, Row, Modal } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import ScrollToTop from 'react-scroll-to-top';
+import AddressAdd from '../../Profile/AddressAdd';
+import { OrderAdd } from '../../utlis/services/order_services';
+import { GetUserData } from '../../utlis/services/user_services';
+
 
 const Checkout = () => {
 
@@ -27,10 +29,6 @@ const Checkout = () => {
     const [selectedAddressEmail, setSelectedAddressEmail] = useState('')
     const [selectedAddress, setSelectedAddress] = useState('')
     const [selectedAddressId, setSelectedAddressId] = useState('')
-    const [phone_number, setPhone_number] = useState('')
-    const [email_address, setEmail_address] = useState('')
-    const [address, setAddress] = useState('')
-    const [show, setShow] = useState(false);
     const [showAddressListModel, setShowAddressListModel] = useState(false);
     const navigate = useNavigate();
 
@@ -44,6 +42,15 @@ const Checkout = () => {
     useEffect(() => {
         userList()
     }, [])
+
+    let headers = {}
+    if (userToken) {
+        headers = {
+            Accept: "application/json",
+            'Content-Type': "application/json",
+            Authorization: `Token ${userToken}`
+        }
+    }
 
     // Creating a JS object to add array into
     // Array to be inserted
@@ -61,47 +68,27 @@ const Checkout = () => {
     placeOrder['total_quantity'] = my_total_quantity
 
     const handlePlaceOrder = async () => {
-        let OrderURL = BASE_URL + API_VERSION() + ORDER_ENDPOINT() + ORDER_PLACED_ENDPOINT()
-        console.log('newArray', placeOrder)
-        try {
-            const res = await fetch(OrderURL, {
-                method: "post",
-                headers: {
-                    Accept: "application/json",
-                    'Content-Type': "application/json",
-                    Authorization: `Token ${userToken}`,
-                },
-                body: JSON.stringify(
-                    placeOrder,
-                ),
-            })
-            const data = await res.json();
-            console.log('order-data', data);
-            navigate(`/productSuccess/${data, data.id}`)
-            dispatch(clearCart());
-            return data;
-        } catch (error) {
-            console.log("Error-", error)
+            try {
+                let res = await OrderAdd(placeOrder,headers)
+                console.log('order-data', res);
+                navigate(`/productSuccess/${res.id}`)
+                dispatch(clearCart());
+            } catch (error) {
+                console.log("Error-", error)
+            }
         }
-    }
 
     const userList = async () => {
-        let Api = `${API_VERSION()}${USER_LIST_ENDPOINT()}${id}/`
-        let userURL = BASE_URL + Api
-        axios.get(userURL, {
-            headers: {
-                'Content-Type': "application/json",
-                Authorization: `Token ${userToken}`
-            }
-        }).then((res) => {
-            setUserData(res.data)
-            setSelectedAddressPhone(res.data && res.data.addresses && res.data.addresses[0].phone_number)
-            setSelectedAddressEmail(res.data && res.data.addresses && res.data.addresses[0].email_address)
-            setSelectedAddress(res.data && res.data.addresses && res.data.addresses[0].address)
-            setSelectedAddressId(res.data && res.data.addresses && res.data.addresses[0].id)
-        }).catch(error => {
+        try {
+            let res = await GetUserData(id, headers)
+            setUserData(res)
+            setSelectedAddressPhone(res && res.addresses && res.addresses[0].phone_number)
+            setSelectedAddressEmail(res && res.addresses && res.addresses[0].email_address)
+            setSelectedAddress(res && res.addresses && res.addresses[0].address)
+            setSelectedAddressId(res && res.addresses && res.addresses[0].id)
+        } catch (error) {
             console.log(error)
-        })
+        }
     }
 
     const handleCloseShowAddressListModel = () => setShowAddressListModel(false);
@@ -120,43 +107,6 @@ const Checkout = () => {
             setShowAddressListModel(false)
         } catch (error) {
             console.log(error)
-        }
-    }
-
-    const handleCloseAdd = () => setShow(false);
-    const handleShowAdd = () => setShow(true);
-
-    const addAddress = async (e) => {
-        e.preventDefault();
-        let addAddressUrl = BASE_URL + API_VERSION() + USER_LIST_ENDPOINT() + ADDRESS_ADD_ENDPOINT()
-        try {
-            let res = await axios.post(addAddressUrl, {
-                phone_number: phone_number,
-                email_address: email_address,
-                address: address,
-            }, {
-                headers: {
-                    'Content-Type': "application/json",
-                    Authorization: `Token ${userToken}`
-                }
-            })
-            console.log(res.data)
-            setShow(false)
-            toast.success('new Address Added Successfully!', {
-                position: toast.POSITION.TOP_RIGHT,
-                theme: "colored",
-            });
-            setAddress('')
-            setEmail_address('')
-            setPhone_number('')
-            userList()
-        } catch (error) {
-            console.log('add error', error)
-            toast.error('Please Required These Fields', {
-                position: toast.POSITION.TOP_RIGHT,
-                theme: "colored",
-            });
-            setShow(true)
         }
     }
 
@@ -218,50 +168,11 @@ const Checkout = () => {
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button variant="outline-success" onClick={handleShowAdd}>
-                        Add New Delivery Address <MdAddLocationAlt />
-                    </Button>
+                    <AddressAdd  userList={userList} />
                 </Modal.Footer>
             </Modal>
             {/* Address List Model End */}
             <div className="container checkout-container mt-5">
-                <div>
-                    {/* Add Address Modal Start */}
-                    <Modal show={show} onHide={handleCloseAdd}>
-                        <Modal.Header closeButton>
-                            <Modal.Title className='text-secondary'>Add Address</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <Form onSubmit={addAddress} >
-                                <Row className="mb-3">
-                                    <Form.Group as={Col} controlId="formGridEmail">
-                                        <Form.Label>Email</Form.Label>
-                                        <Form.Control type="text" value={email_address} name='email_address' onChange={(e) => setEmail_address(e.target.value)} />
-                                    </Form.Group>
-                                    <Form.Group as={Col} controlId="formGridPhone_number">
-                                        <Form.Label>Phone</Form.Label>
-                                        <Form.Control type="number" value={phone_number} name='phone_number' onChange={(e) => setPhone_number(e.target.value)} />
-                                    </Form.Group>
-                                </Row>
-                                <Form.Group className="mb-3" controlId="exampleForm.ControlDescription1">
-                                    <Form.Label>Address</Form.Label>
-                                    <Form.Control type='text' placeholder="1234 Main St" name='address' value={address} onChange={(e) => setAddress(e.target.value)} />
-                                </Form.Group>
-                                <Button variant="success"
-                                    // onClick={handleCloseAdd} 
-                                    type="submit">
-                                    Save Address
-                                </Button>
-                            </Form>
-                        </Modal.Body>
-                        <Modal.Footer className="modal-footer d-flex justify-content-center align-items-center">
-                            <div>
-                                <p>Thanks For Add New Address</p>
-                            </div>
-                        </Modal.Footer>
-                    </Modal>
-                     {/* Add Address Modal End */}
-                </div>
                 <main>
                     <div className='row g-1'>
                         <div className='col-12 bg-white rounded p-5 mb-3 shadow'>

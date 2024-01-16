@@ -1,21 +1,15 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { NavLink, Link } from "react-router-dom"
 import './new.css'
 import { HiOutlineShoppingCart } from "react-icons/hi";
-import logo from '../../logo/logo_new.png';
-import { useSelector, useDispatch } from 'react-redux';
-import { getCartTotal } from "../../store/cartSlice";
+// import logo from '../../logo/logo_new.png';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { totalItems } = useSelector((state => state.cart));
   const navigate = useNavigate()
-
-  useEffect(() => {
-    dispatch(getCartTotal());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const handleSearchTerm = async (e) => {
     e.preventDefault();
@@ -51,9 +45,7 @@ const Navbar = () => {
                   </Link>
                   <div className="d-flex flex-column ms-2">
                     <span className="qty">{totalItems} Product</span>
-                    {/* <span className="fw-bold">Rs {totalAmount} </span> */}
                   </div>
-
                 </div>
               </div>
             </div>

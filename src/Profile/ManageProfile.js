@@ -75,7 +75,6 @@ const ManageProfile = () => {
         try {
             let resp = await SellerOrderList(headers)
             setOrderDataList(resp.results)
-            console.log('orderList',resp.results)
         } catch (error) {
             console.log('orderList',error)
         }
@@ -146,7 +145,7 @@ const ManageProfile = () => {
                                 <Scrollbars thumbMinSize={30} >
                                     {userData.addresses?.map((item, index) => {
                                         return (
-                                            <div className='card shadow-sm' key={item.id} >
+                                            <div className='card mb-1 mx-1 shadow-sm' key={item.id} >
                                                 <div className="card-body">
                                                     <div className='d-flex justify-content-between'>
                                                         <div>
@@ -230,5 +229,4 @@ const ManageProfile = () => {
         </div>
     )
 }
-
 export default ManageProfile
