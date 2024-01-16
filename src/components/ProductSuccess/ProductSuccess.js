@@ -285,5 +285,4 @@ const ProductSuccess = () => {
     </div>
   );
 };
-
 export default ProductSuccess;

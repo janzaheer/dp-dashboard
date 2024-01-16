@@ -6,7 +6,8 @@ import { SlLogout } from 'react-icons/sl'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from "../../store/authSlice"
 import { useNavigate } from 'react-router-dom';
-import { clearCart } from "../../store/cartSlice"
+import { clearCart } from "../../store/cartSlice";
+// import ProductListingWithCategory from "../../productForlogout/ProductListingWithCategory"
 
 
 const Head = () => {
@@ -14,12 +15,12 @@ const Head = () => {
   const isAuthenticated = useSelector(state => state.user.isAuthenticated)
   const navigation = useNavigate()
   const dispatch = useDispatch();
-  // window.location.reload();
+  
   const handleLogout = () => {
-   
+    // ProductListingWithCategory()
     dispatch(logout())
     dispatch(clearCart());
-    
+    // window.location.reload();
     navigation("/")
   }
   return (
@@ -27,8 +28,8 @@ const Head = () => {
       <nav className="navbar navbar-dark navbar-expand p-0">
         <div className="container-fluid">
           <ul className="navbar-nav d-none d-md-flex mr-auto">
-            <li className="nav-item"><a className="nav-link text-white" href="#" data-abc="true"><i className='fa fa-phone'></i> +92 314 0014939</a> </li>
-            <li className="nav-item"><a className="nav-link text-white" href="#" data-abc="true"><i className='fa fa-envelope'></i>  support@djangopets.com</a></li>
+            <li className="nav-item"><Link className="nav-link text-white" to="#" data-abc="true"><i className='fa fa-phone'></i> +92 314 0014939</Link> </li>
+            <li className="nav-item"><Link className="nav-link text-white" to="#" data-abc="true"><i className='fa fa-envelope'></i>  support@djangopets.com</Link></li>
           </ul>
 
           <ul className="navbar-nav d-flex align-items-center">

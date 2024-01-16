@@ -53,9 +53,12 @@ const CardData = ({ products, handleFavList }) => {
       }).catch(error => {
           console.log(error)
       })
-      if (isAuthenticated == false) {
-          navigate("/login")
+      if (!isAuthenticated) {
+        navigate('/login')
       }
+      // if (isAuthenticated == false) {
+      //     navigate("/login")
+      // }
   }
   // const handleFav = async (id) => {
   //   const payload = {
@@ -151,6 +154,7 @@ const CardData = ({ products, handleFavList }) => {
                           {product?.title.substring(0, 11)}
                         </h6>
                         <div className="px-2 d-flex justify-content-between align-items-center">
+                        {/* {product?.stock[0]?.discount_percentage} */}
                           <span className=""> {price(product?.price)}</span>
                           <div style={{ width: "20px" }}>
                             <Heart
@@ -167,6 +171,7 @@ const CardData = ({ products, handleFavList }) => {
                           {" "}
                           <span className="text-decoration-line-through text-muted">
                             {discountPrice(product?.stock[0]?.discount_price)}
+                             {/* {discountPrice(product?.stock[0]?.discount_price) || product?.price} */}
                           </span>{" "}
                         </div>
                         <div className="d-flex justify-content-start align-items-center">

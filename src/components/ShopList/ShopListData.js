@@ -45,6 +45,7 @@ const ShopListData = () => {
             results.forEach(resultA => {
                 data[resultA.name] = resultA.items
             })
+            console.log('data', data)
             setLandingData(data)
         })
     }
@@ -68,7 +69,6 @@ const ShopListData = () => {
                                                 <NavLink to={`/item/?category_name=${categoryName.name}`}>
                                                     <div className="card-body text-center py-2">
                                                     <img src={categoryName?.image_url} alt="Grocery Ecommerce Template" className="mb-2" style={{ height:'70px' }} />
-                                                     {/* <img src="https://freshcart.codescandy.com/assets/images/category/category-instant-food.jpg" alt="Grocery Ecommerce Template" className="mb-3" style={{ height:'70px' }} /> */}
                                                         <div className="text-truncate" style={{ color: 'black' }}>{categoryName?.name}</div>
                                                     </div>
                                                 </NavLink>
@@ -85,11 +85,8 @@ const ShopListData = () => {
                                 <div key={key} className="col-lg-12 mb-2">
                                     <div className="container">
                                         <h3 className="mt-2" style={{ color: '#374151' }}>{key}</h3>
-                                        {/* <hr className="border borderColor border-1 opacity-50"></hr> */}
                                         <div className="" >
-                                            <div>
                                             <CardData products={products[key]} ProductListingWithCategory={ProductListingWithCategory}  />
-                                            </div>
                                         </div>
                                         <div className="d-flex justify-content-center mt-2">
                                             <NavLink to={`/item/?category_name=${key}`} className="btn btn-outline-secondary btn-sm" >View More</NavLink>
@@ -104,5 +101,4 @@ const ShopListData = () => {
         </div>
     )
 }
-
 export default ShopListData
