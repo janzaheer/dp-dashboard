@@ -1,9 +1,9 @@
-import React, { useState,useEffect } from "react";
+import React, { useState } from "react";
 import "./Login.css";
-import logo from "../logo/logo_new.png";
+// import logo from "../logo/logo_new.png";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { signInUser } from "../store/authSlice";
+import { signInUser,SocialsignInUser } from "../store/authSlice";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -15,21 +15,9 @@ import MyFacebookLogin from "./MyFacebookLogin";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [facebook_id, setFacebookId] = useState(null);
-  const [name, setName] = useState(null);
-  const [email, setEmail] = useState(null);
-  const [google_name, setGoogle_name] = useState(null);
-  const [google_email, setGoogle_email] = useState(null);
-  const [google_sub, setGoogle_sub] = useState(null);
   const dispatch = useDispatch();
   const navigation = useNavigate();
   const user = useSelector((state) => state.user);
-
-  useEffect(() => {
-    handleSocial();
-  }, [google_name, google_email, google_sub, facebook_id,name,email]);
-  
-
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -59,30 +47,6 @@ const Login = () => {
 
   const handlePassword = (e) => {
     setPassword(e.target.value);
-  };
-
-  const handleFacebookLogin = (data) => {
-    console.log("Handling Facebook login data in parent:", data);
-    setFacebookId(data.facebook_id);
-    setName(data.name);
-    setEmail(data.email);
-    
-  };
-  const handleGoogleLogin = (data) => {
-    // Process or update state with the Google login data
-    console.log("Handling Google login data in parent:", data);
-    setGoogle_name(data.name);
-    setGoogle_email(data.email);
-    setGoogle_sub(data.sub);
-  };
-  const handleSocial = () => {
-    const payload = {
-      facebook_id: facebook_id,
-      google_id: google_sub,
-      email: email || google_email,
-      name: name || google_name,
-    };
-    console.log('login-socail',payload);
   };
 
   return (
@@ -145,15 +109,17 @@ const Login = () => {
                       <Link to="/register" className="btn btn-secondary w-100">
                         Register Now
                       </Link>
-                      <div className="d-flex justify-content-between align-items-center mt-1">
-                        <div className="me-1">
-                          <MyFacebookLogin
-                            onFacebookLogin={handleFacebookLogin}
-                          />
-                        </div>
-                        <div>
-                          <MyGoogleLogin onGoogleLogin={handleGoogleLogin} />
-                        </div>
+                      <div className="row g-1 mt-2">
+                          <div className="col-12 col-lg-6">
+                            <div className="">
+                                <MyFacebookLogin />
+                            </div>
+                          </div>
+                          <div className="col-12 col-lg-6">
+                              <div>
+                                <MyGoogleLogin />
+                              </div>
+                          </div>
                       </div>
                     </form>
                   </div>

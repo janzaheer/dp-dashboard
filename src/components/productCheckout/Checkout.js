@@ -22,6 +22,8 @@ const Checkout = () => {
 
     const dispatch = useDispatch();
     const { data: products, totalItems, totalAmount } = useSelector(state => state.cart);
+    console.log('products',products)
+    console.log('total',totalAmount)
     const user = useSelector((state) => state.user)
     const userToken = useSelector(state => state.user.token);
     const [userData, setUserData] = useState({})
@@ -114,7 +116,7 @@ const Checkout = () => {
         if (p == 0) {
             return `-`
         } else {
-            return p
+            return `${parseFloat(p).toFixed(0)}`
         }
     }
 
@@ -122,9 +124,16 @@ const Checkout = () => {
         if (p == 0) {
             return `-`
         } else {
-            return `${p}`
+            return `${parseFloat(p).toFixed(0)}`
         }
     }
+    const discountPrice = (d) => {
+        if (d == 0) {
+          return "";
+        } else {
+          return `Rs ${parseFloat(d).toFixed(0)}`;
+        }
+      };
 
     return (
         <div>
@@ -230,9 +239,16 @@ const Checkout = () => {
                                                                 </div>
                                                             </div>
                                                         </th>
-                                                        <td className="border-0 align-middle"><strong>
-                                                            {price(item.price)}
-                                                        </strong></td>
+                                                        <td className="border-0 align-middle">  
+                                                           {
+                                                            item?.stock.length > 0? (<>
+                                                            <strong className=' d-block'>{discountPrice(item?.stock[0]?.discount_price)}</strong>
+                                                            <strong className="text-decoration-line-through text-muted">{price(item.price)}</strong>
+                                                            </>) : (<>
+                                                                <strong>{price(item.price)}</strong>
+                                                            </>)
+                                                           }
+                                                        </td>
                                                         <td className="border-0 align-middle"><strong>{item.quantity}</strong></td>
                                                     </tr>
                                                 )

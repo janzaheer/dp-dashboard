@@ -40,6 +40,7 @@ const ProductSuccess = () => {
     try {
       let response = await OrderDetail(id, headers);
       setOrderDataList(response);
+      console.log(`order-list`,response)
       setOrdernumber(response.order_number || "");
     } catch (error) {
       console.log(error);
@@ -94,7 +95,7 @@ const ProductSuccess = () => {
     if (p == 0) {
       return `-`;
     } else {
-      return `Rs ${p}`;
+      return `Rs ${parseFloat(p).toFixed(0)}`;
     }
   };
 
@@ -102,7 +103,7 @@ const ProductSuccess = () => {
     if (p == 0) {
       return `-`;
     } else {
-      return `Rs ${p}`;
+      return `${parseFloat(p).toFixed(0)}`;
     }
   };
 
@@ -110,7 +111,14 @@ const ProductSuccess = () => {
     if (p == 0) {
       return `-`;
     } else {
-      return `${p}`;
+      return `${parseFloat(p).toFixed(0)}`;
+    }
+  };
+  const discountPrice = (d) => {
+    if (d == 0) {
+      return "";
+    } else {
+      return `Rs ${parseFloat(d).toFixed(0)}`;
     }
   };
 
@@ -216,7 +224,23 @@ const ProductSuccess = () => {
                           </div>
                         </div>
                         <div className="product-price">
-                          <h5> {price(ite?.item.price)}</h5>
+                          <div className="d-flex justify-content-start align-items-center">
+                          {ite?.item?.stock.length === 0 ? (
+                             <h6> {price(ite?.item.price)}</h6>
+                          ) : (
+                            <div>
+                              {ite?.item?.stock[0]?.discount_price > 0 ? (
+                                <>
+                                  <h5> {discountPrice(ite?.item.stock[0]?.discount_price)}</h5>
+                                  {" "}
+                                  <h6 className="text-decoration-line-through text-muted"> {price(ite?.item.price)}</h6>
+                                </>
+                              ) : (
+                                <h6> {price(ite?.item.price)}</h6>
+                              )}
+                            </div>
+                          )}
+                          </div>
                         </div>
                       </div>
                     );
@@ -266,10 +290,6 @@ const ProductSuccess = () => {
                   email when the item is shipped!
                 </span>
                 <hr />
-                {/* <div className="d-flex justify-content-between align-items-center footer mx-5">
-                                    <div className="thanks"><span className="d-block font-weight-bold">Thanks for shopping</span><span>DjangoPets Team</span></div>
-                                    <div className="d-flex flex-column justify-content-end align-items-end"><span className="d-block font-weight-bold">Need Help?</span><span>Call - 93333333333</span></div>
-                                </div> */}
                 <div className="my-3">
                   <Link to="/" className="btn btn-outline-secondary w-100">
                     Continue Shopping

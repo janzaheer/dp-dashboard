@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { BASE_URL, FAV_ENDPOINT, API_VERSION } from "../../utlis/apiUrls";
 import Star from "../ProductDetails/Star";
-import { AddProductsFav } from "../../utlis/services/product_category_services";
+// import { AddProductsFav } from "../../utlis/services/product_category_services";
 
 const CardData = ({ products, handleFavList }) => {
   const [itemFavourite, setItemFavourite] = useState({});
@@ -23,43 +23,49 @@ const CardData = ({ products, handleFavList }) => {
       Authorization: `Token ${userToken}`,
     };
   }
-    const handleFav = async (id) => {
+  const handleFav = async (id) => {
+    let AddFavURL = BASE_URL + API_VERSION() + FAV_ENDPOINT();
+    axios
+      .post(
+        AddFavURL,
+        { item_id: id },
+        {
+          headers: headers,
+        }
+      )
+      .then((result) => {
+        console.log(result);
+        setAddFav(result);
 
-      let AddFavURL = BASE_URL + API_VERSION() + FAV_ENDPOINT()
-      axios.post(AddFavURL, { item_id: id }, {
-          headers: headers
-      }).then((result) => {
-          console.log(result)
-          setAddFav(result)
-
-          if (result.data.message.includes('remove')) {
-              let idata = itemFavourite
-              idata[id] = false
-              setItemFavourite(idata)
-              toast.error(result.data.message, {
-                  position: toast.POSITION.TOP_RIGHT,
-                  theme: "colored",
-              });
-          } else {
-              let data = itemFavourite
-              data[id] = true
-              setItemFavourite(data)
-              toast.success(result.data.message, {
-                  position: toast.POSITION.TOP_RIGHT,
-                  theme: "colored",
-              });
-          }
-          handleFavList()
-      }).catch(error => {
-          console.log(error)
+        if (result.data.message.includes("remove")) {
+          let idata = itemFavourite;
+          idata[id] = false;
+          setItemFavourite(idata);
+          toast.error(result.data.message, {
+            position: toast.POSITION.TOP_RIGHT,
+            theme: "colored",
+          });
+        } else {
+          let data = itemFavourite;
+          data[id] = true;
+          setItemFavourite(data);
+          toast.success(result.data.message, {
+            position: toast.POSITION.TOP_RIGHT,
+            theme: "colored",
+          });
+        }
+        handleFavList();
       })
-      if (!isAuthenticated) {
-        navigate('/login')
-      }
-      // if (isAuthenticated == false) {
-      //     navigate("/login")
-      // }
-  }
+      .catch((error) => {
+        console.log(error);
+      });
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+    // if (isAuthenticated == false) {
+    //     navigate("/login")
+    // }
+  };
   // const handleFav = async (id) => {
   //   const payload = {
   //     item_id: id,
@@ -97,7 +103,7 @@ const CardData = ({ products, handleFavList }) => {
     if (p == 0) {
       return "";
     } else {
-      return `Rs ${p}`;
+      return `Rs ${parseFloat(p).toFixed(0)}`;
     }
   };
   const handleBadge = (seller) => {
@@ -112,10 +118,10 @@ const CardData = ({ products, handleFavList }) => {
     }
   };
   const discountPrice = (d) => {
-    if (d == undefined) {
-      return "Rs 0";
+    if (d == 0) {
+      return "";
     } else {
-      return `Rs ${d}`;
+      return `Rs ${parseFloat(d).toFixed(0)}`;
     }
   };
 
@@ -150,12 +156,49 @@ const CardData = ({ products, handleFavList }) => {
                     </div>
                     <div className="p-1">
                       <div className="about">
-                        <h6 className="text-muted text-wrap">
-                          {product?.title.substring(0, 11)}
-                        </h6>
-                        <div className="px-2 d-flex justify-content-between align-items-center">
-                        {/* {product?.stock[0]?.discount_percentage} */}
-                          <span className=""> {price(product?.price)}</span>
+                        <div className="mx-1 d-flex justify-content-between align-items-center">
+                          <h6 className="text-muted">
+                            {product?.title.substring(0, 11)}
+                          </h6>
+                          {product?.stock.length === 0 ? (
+                            " "
+                          ) : (
+                            <span style={{ fontSize: "14px" }}>
+                              {parseFloat(product?.stock[0]?.discount_percentage).toFixed(0)}% OFF
+                            </span>
+                          )}
+                        </div>
+                        <div className="px-1 d-flex justify-content-between align-items-center">
+                          {product?.stock.length === 0 ? (
+                            <span className="" style={{ fontSize: "14px" }}>
+                              {price(product?.price)}
+                            </span>
+                          ) : (
+                            <div>
+                              {product?.stock[0]?.discount_price > 0 ? (
+                                <>
+                                  <span
+                                    className=""
+                                    style={{ fontSize: "14px" }}
+                                  >
+                                    {discountPrice(
+                                      product?.stock[0]?.discount_price
+                                    )}
+                                  </span>{" "}
+                                  <span
+                                    className="text-decoration-line-through text-muted"
+                                    style={{ fontSize: "14px" }}
+                                  >
+                                    {price(product?.price)}
+                                  </span>
+                                </>
+                              ) : (
+                                <span className="" style={{ fontSize: "14px" }}>
+                                  {price(product?.price)}
+                                </span>
+                              )}
+                            </div>
+                          )}
                           <div style={{ width: "20px" }}>
                             <Heart
                               isActive={
@@ -166,13 +209,6 @@ const CardData = ({ products, handleFavList }) => {
                               onClick={() => handleFav(product.id)}
                             />
                           </div>
-                        </div>
-                        <div>
-                          {" "}
-                          <span className="text-decoration-line-through text-muted">
-                            {discountPrice(product?.stock[0]?.discount_price)}
-                             {/* {discountPrice(product?.stock[0]?.discount_price) || product?.price} */}
-                          </span>{" "}
                         </div>
                         <div className="d-flex justify-content-start align-items-center">
                           <h6>

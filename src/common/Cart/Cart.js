@@ -16,13 +16,17 @@ import ScrollToTop from "react-scroll-to-top";
 const Cart = () => {
   const dispatch = useDispatch();
   const { data: cartProducts, totalItems, totalAmount, deliveryCharge } = useSelector(state => state.cart);
-  const userToken = useSelector(state => state.user.token);
-  console.log('userToken', userToken)
-
+  // const userToken = useSelector(state => state.user.token);
+console.log('cart',cartProducts)
+console.log('total',totalAmount)
+  // useEffect(() => {
+  //   dispatch(getCartTotal());
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [useSelector(state => state.cart)]);
   useEffect(() => {
     dispatch(getCartTotal());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [useSelector(state => state.cart)]);
+  }, [dispatch, totalItems, cartProducts]);
 
   const handleRemove = (id) => {
     dispatch(remove(id));
@@ -61,7 +65,7 @@ const Cart = () => {
     if (p == 0) {
       return `-`
     } else {
-      return `${p}`
+      return `${parseFloat(p).toFixed(0)}`
     }
   }
 
@@ -70,7 +74,7 @@ const Cart = () => {
     if (p == 0) {
       return `-`
     } else {
-      return `${p}`
+      return `${parseFloat(p).toFixed(0)}`
     }
   }
 
@@ -79,7 +83,7 @@ const Cart = () => {
     if (p == 0) {
       return `-`
     } else {
-      return `${p}`
+      return `${parseFloat(p).toFixed(0)}`
     }
   }
 
@@ -88,9 +92,16 @@ const Cart = () => {
     if (p == 0) {
       return `-`
     } else {
-      return `${p}`
+      return `${parseFloat(p).toFixed(0)}`
     }
   }
+  const discountPrice = (d) => {
+    if (d == 0) {
+      return "";
+    } else {
+      return `Rs ${parseFloat(d).toFixed(0)}`;
+    }
+  };
 
   return (
     <>
@@ -118,7 +129,7 @@ const Cart = () => {
                             <div className="p-2 px-3 text-uppercase">Product</div>
                           </th>
                           <th scope="col" className="border-0 bg-light">
-                            <div className="py-2 text-uppercase">Price</div>
+                            <div className="py-2 text-uppercase">Sub Total</div>
                           </th>
                           <th scope="col" className="border-0 bg-light">
                             <div className="py-2 text-uppercase">Quantity</div>
@@ -139,10 +150,14 @@ const Cart = () => {
                               <th scope="row" className="border-0">
                                 <div className="p-2">
                                   <img src={cartProduct?.images[0]?.image_url} alt='' width={60} className="img-fluid rounded shadow-sm" />
-
                                   <div className="ms-3 ml-3 d-inline-block align-middle">
                                     <h6 className="mb-0"> <Link to="#" className="text-dark d-inline-block align-middle">{cartProduct?.title.substring(0, 15)}...</Link>
-                                    </h6><span className="text-muted font-weight-normal font-italic d-block">Rs {price(cartProduct?.price)}</span>
+                                    </h6>
+                                    {/* <span className="text-muted font-weight-normal font-italic d-block">Rs {price(cartProduct?.price)}</span> */}
+                                    { cartProduct?.stock.length > 0 ? (<>
+                                      <span className="text-muted font-weight-normal font-italic d-block"> Rs {discountPrice(cartProduct?.stock[0]?.discount_price)}</span>
+                                      <span className="text-decoration-line-through text-muted">Rs {price(cartProduct?.price)}</span>
+                                   </>) : (<span className="text-muted font-weight-normal font-italic d-block">Rs {price(cartProduct?.price)}</span>) }
                                   </div>
                                 </div>
                               </th>
@@ -204,7 +219,8 @@ const Cart = () => {
                       <h5 className="font-weight-bold">Rs {total(totalAmount) + deliveryPrice(deliveryCharge)} </h5>
                     </li>
                   </ul>
-                  <Link to='/checkout' className="btn btn-secondary">Proceed to Checkout</Link>
+                  { cartProducts.length === 0 ? <button className="btn btn-warning">Proceed to Checkout</button> : 
+                  <Link to='/checkout' className="btn btn-secondary">Proceed to Checkout</Link>}
                 </div>
               </div>
             </div>
