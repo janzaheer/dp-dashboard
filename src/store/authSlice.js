@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { BASE_URL, LOGIN_ENDPOINT,SIGNUP_ENDPOINT,API_VERSION } from "../utlis/apiUrls";
+import axios from "axios";
 
 const initialState = {
     user: '',
@@ -41,6 +42,22 @@ export const signInUser = createAsyncThunk('signinuser', async ({ username, pass
     return data
 
 })
+export const SocialsignInUser = createAsyncThunk('SocialsignInUser', async (payload ,thunkAPI) => {
+    let SocialLoginURL = BASE_URL +  `api/social-login/`
+    // const res = await fetch(SocialLoginURL, {
+    //     method: "post",
+    //     headers: {
+    //         Accept: "application/json",
+    //         'Content-Type': "application/json"
+    //     },
+    //     payload,
+    // })
+    // const data = await res.json()
+    // // console.log('user',data)
+    // return data
+    const res = await axios.post(SocialLoginURL,payload)
+    return res.data
+})
 
 const authSlice = createSlice({
     name: 'user',
@@ -71,6 +88,27 @@ const authSlice = createSlice({
             }
         })
         .addCase(signInUser.rejected, (state, action) => {
+            state.loading = true;
+            state.error = true;
+            state.message = action.payload;
+            state.user = null;
+        });
+         /* Socialsignin  */
+        builder
+        .addCase(SocialsignInUser.pending, (state, action) => {
+            state.loading = true;
+            state.error = null;
+        })
+        .addCase(SocialsignInUser.fulfilled, (state, { payload: { message, token, user } }) => {
+            state.loading = false;
+            if (user) {
+                state.isAuthenticated = true;
+                state.message = message;
+                state.token = token;
+                state.user = user;
+            }
+        })
+        .addCase(SocialsignInUser.rejected, (state, action) => {
             state.loading = true;
             state.error = true;
             state.message = action.payload;

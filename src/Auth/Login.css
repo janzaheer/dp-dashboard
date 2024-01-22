@@ -7,11 +7,17 @@
 }
 
 .my-facebook-button-class{
-    background-color: rgb(69, 69, 209);
-    color: white;
-    padding: 9px 0px;
+    background-color: #4267B2; /* Facebook blue */
+    color: #fff; /* White text color */
+    padding: 11px 18px;
     border: none;
-    border-radius: 2px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 .my-facebook-button-class{
     cursor: pointer;

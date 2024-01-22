@@ -46,7 +46,12 @@ const ProductDetail = () => {
 
   const addToCartHandler = (product) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    let totalPrice = qty * product.price;
+    // Check if the product has a discount
+  const discountedPrice = product.stock[0]?.discount_price;
+
+  // Calculate the total price based on the discount status
+  let totalPrice = qty * (discountedPrice !== undefined && discountedPrice > 0 ? discountedPrice : product.price);
+    // let totalPrice = qty * product.price;
     const tempProduct = {
       ...product,
       quantity: qty,
@@ -58,6 +63,7 @@ const ProductDetail = () => {
       theme: "colored",
     });
     navigate(`/cart`);
+    console.log('tem',tempProduct)
   };
 
   const increaseQty = () => {
@@ -128,6 +134,21 @@ const ProductDetail = () => {
     }
   };
 
+  const discountPrice = (d) => {
+    if (d == 0) {
+      return "";
+    } else {
+      return `Rs ${parseFloat(d).toFixed(0)}`;
+    }
+  };
+  const prices = (p) => {
+    if (p == 0) {
+      return "";
+    } else {
+      return `Rs ${parseFloat(p).toFixed(0)}`;
+    }
+  };
+
   return (
     <div>
       <Header />
@@ -183,7 +204,37 @@ const ProductDetail = () => {
                   )}{" "}
                   {product?.title}
                 </h3>
-                <div>{price(product?.price)}</div>
+                <h6>Category {product?.category}</h6>
+                <div>
+                  {product?.stock?.length === 0 ? (
+                    <span className="" style={{ fontSize: "14px" }}>
+                      {price(product?.price)}
+                    </span>
+                  ) : (
+                    <div>
+                      {product?.stock &&
+                      product?.stock.length > 0 &&
+                      product?.stock[0]?.discount_price !== undefined &&
+                      product?.stock[0]?.discount_price > 0 ? (
+                        <>
+                          <span className="" style={{ fontSize: "14px" }}>
+                            {discountPrice(product?.stock[0]?.discount_price)}
+                          </span>{" "}
+                          <span
+                            className="text-decoration-line-through text-muted"
+                            style={{ fontSize: "14px" }}
+                          >
+                            {prices(product?.price)}
+                          </span>
+                        </>
+                      ) : (
+                        <span className="" style={{ fontSize: "14px" }}>
+                          {prices(product?.price)}
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
                 <div>{stockHandle(product?.available_quantity)}</div>
                 <div className="p-1 my-2 table-responsivedesTag">
                   <Scrollbars>
@@ -305,7 +356,9 @@ const ProductDetail = () => {
             <div className="card me-4">
               <div className="card-header">Ratings & Reviews of Product</div>
               <div className="card-body">
-                <p className="card-text text-center">This product has no reviews.</p>
+                <p className="card-text text-center">
+                  This product has no reviews.
+                </p>
               </div>
             </div>
           ) : (
