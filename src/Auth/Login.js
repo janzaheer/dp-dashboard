@@ -74,7 +74,7 @@ const Login = () => {
                         <h4 className="mb-1" style={{ color: "#374151" }}>
                           DjangoPets
                         </h4>
-                        <h3>Welcome to DjangoPets! Please login.</h3>
+                        <h3>Welcome to DjangoPets Please login.</h3>
                       </div>
                       <div className="form-floating mb-3">
                         <input
