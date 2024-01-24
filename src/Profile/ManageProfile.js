@@ -209,7 +209,7 @@ const ManageProfile = () => {
                                                             <td className="border-0 text-muted align-middle">{moment(ite?.created_at).format("MM-DD-YYYY")}</td>
                                                             <td className="border-0 text-muted align-middle">{ite?.total_quantity}</td>
                                                             <td className="border-0 text-muted align-middle">{handleBadge(ite?.status)}</td>
-                                                            <td className="border-0 text-muted align-middle">Rs {ite?.total_amount}</td>
+                                                            <td className="border-0 text-muted align-middle">Rs {parseFloat(ite?.total_amount).toFixed(0)}</td>
                                                             <td className="border-0 align-middle"><NavLink to={`/productSuccess/${ite.id}`} className='text-success'><BsEyeFill /></NavLink> </td>
                                                         </tr>
                                                     )

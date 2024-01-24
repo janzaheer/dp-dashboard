@@ -1,7 +1,7 @@
 import React from 'react'
 import Star from './Star';
 
-const ProductRating = ({avg_rating}) => {
+const ProductRating = ({avg_rating, total_ratings}) => {
   return (
     <div>
       <div className='row'>
@@ -12,7 +12,7 @@ const ProductRating = ({avg_rating}) => {
                 <span className="score-average">{avg_rating?.toFixed(1)}</span><span className="score-max">/5</span>
               </div>
               <h6><Star stars={avg_rating} /></h6>
-              <span className='text-secondary'>634 Ratings</span>
+              <span className='text-secondary'>{total_ratings} Rating</span>
             </div>
             {/* <div className='mt-1'>
               <div className=''>

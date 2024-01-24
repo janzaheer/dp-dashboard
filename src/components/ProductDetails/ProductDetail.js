@@ -235,6 +235,15 @@ const ProductDetail = () => {
                     </div>
                   )}
                 </div>
+                <div>
+                          {product && product?.stock && product?.stock.length > 0 ? (
+                            <span style={{ fontSize: "14px" }}>
+                            {parseFloat(product?.stock[0]?.discount_percentage).toFixed(0)}% OFF
+                          </span>
+                          ) : (
+                            " "
+                          )}
+                  </div>
                 <div>{stockHandle(product?.available_quantity)}</div>
                 <div className="p-1 my-2 table-responsivedesTag">
                   <Scrollbars>
@@ -327,7 +336,7 @@ const ProductDetail = () => {
                     <td className="col-md-9">
                       <ul>
                         <li>
-                          {product.title} {product.id}
+                          {product.title}
                         </li>
                       </ul>
                     </td>
@@ -366,12 +375,10 @@ const ProductDetail = () => {
               comments={comments}
               id={product.id}
               avg_rating={product.average_rating}
+              total_ratings={product?.total_ratings}
             />
           )}
         </div>
-        {/* <div className='my-3'>
-                    <Comments />
-                </div> */}
         <ScrollToTop smooth />
       </div>
       <Footer />

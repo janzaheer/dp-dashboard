@@ -59,7 +59,10 @@ const Footer = () => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form onSubmit={addSeller} >
+          <div className="text-center text-success">
+              <h4>DjangoPets Seller Acount is Comming Soon</h4>
+          </div>
+          {/* <Form onSubmit={addSeller} >
             <Row className="mb-3">
               <Form.Group as={Col} controlId="formGridSeller_name">
                 <Form.Label>Name</Form.Label>
@@ -86,7 +89,7 @@ const Footer = () => {
                 Request Seller
               </Button>
             </div>
-          </Form>
+          </Form> */}
         </Modal.Body>
       </Modal>
       <footer className="px-5 py-5 text-white footer">
@@ -136,7 +139,7 @@ const Footer = () => {
                   {/* <li><NavLink className='text-white' to='#'>Contact us</NavLink></li> */}
                   <li><ImLocation2 /> Co-Llision M-1 Gate-3 Lake City Lahore </li>
                   <li><MdAttachEmail /> support@djangopets.com</li>
-                  <li><BsTelephonePlusFill /> +92 314 0014939</li>
+                  <li><BsTelephonePlusFill /> +92 342 8053 402</li>
                 </ul>
               </div>
             </div>

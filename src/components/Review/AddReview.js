@@ -5,7 +5,7 @@ import ReactStars from "react-rating-stars-component";
 import { useSelector } from "react-redux";
 import { CreateReview } from "../../utlis/review_services";
 
-const AddReview = ({id}) => {
+const AddReview = ({id, onReviewSubmit}) => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -42,6 +42,7 @@ const AddReview = ({id}) => {
         theme: "colored",
       });
       setShow(false);
+      onReviewSubmit();
     } catch (error) {
       console.log(error);
     }

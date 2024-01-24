@@ -214,7 +214,7 @@ console.log('total',totalAmount)
                   <ul className="list-unstyled mb-4">
                     <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Selected {totalItems} items(s) Quantity Price</strong><strong>Rs {total(totalAmount)}</strong></li>
                     <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Delivery Cost</strong><strong>Rs {deliveryPrice(deliveryCharge)}</strong></li>
-                    <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Discount</strong><strong>Rs -</strong></li>
+                    {/* <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Discount</strong><strong>Rs -</strong></li> */}
                     <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Total</strong>
                       <h5 className="font-weight-bold">Rs {total(totalAmount) + deliveryPrice(deliveryCharge)} </h5>
                     </li>
