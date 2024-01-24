@@ -20,6 +20,7 @@ const ProductSuccess = () => {
   const userToken = useSelector((state) => state.user.token);
   const [orderDataList, setOrderDataList] = useState({});
   const [ordernumber, setOrdernumber] = useState();
+  const [isReviewSubmitted, setIsReviewSubmitted] = useState(false);
 
   let { id } = useParams();
 
@@ -122,6 +123,10 @@ const ProductSuccess = () => {
     }
   };
 
+  const handleReviewSubmited = () => {
+    setIsReviewSubmitted(true);
+  }
+
   return (
     <div>
       <Header />
@@ -214,8 +219,8 @@ const ProductSuccess = () => {
                                 Qty: {ite?.quantity} pcs
                               </span>
                               <div>
-                                {orderDataList?.status == "completed" ? (
-                                  <AddReview id={ite?.item.id} />
+                                {orderDataList?.status == "completed"  && !isReviewSubmitted ? (
+                                  <AddReview id={ite?.item.id} onReviewSubmit={handleReviewSubmited} />
                                 ) : (
                                   ""
                                 )}
@@ -263,12 +268,12 @@ const ProductSuccess = () => {
                           Rs {ShippingPrice(orderDataList?.shipping_amount)}
                         </span>
                       </div>
-                      <div className="d-flex justify-content-between mt-2">
+                      {/* <div className="d-flex justify-content-between mt-2">
                         <span className="text-secondary">Discount</span>
                         <span className="font-weight-bold text-secondary">
                           Rs -
                         </span>
-                      </div>
+                      </div> */}
                       <hr />
                       <div className="d-flex justify-content-between mt-1">
                         <span className="font-weight-bold">Total</span>

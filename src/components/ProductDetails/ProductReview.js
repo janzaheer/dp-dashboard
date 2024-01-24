@@ -4,10 +4,10 @@ import moment from 'moment';
 import Star from './Star';
 import ProductRating from './ProductRating';
 
-const ProductReview = ({ comments, avg_rating }) => {
+const ProductReview = ({ comments, avg_rating, total_ratings }) => {
     return (
         <>
-            <ProductRating avg_rating={avg_rating} />
+            <ProductRating avg_rating={avg_rating} total_ratings={total_ratings} />
             <div className='ReviewHeight'>
                 <Scrollbars>
                     <hr />

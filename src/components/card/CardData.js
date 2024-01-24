@@ -214,7 +214,7 @@ const CardData = ({ products, handleFavList }) => {
                           <h6>
                             <Star stars={product?.average_rating} />
                           </h6>{" "}
-                          <h6 className="ms-1">(101)</h6>
+                          <h6 className="ms-1">({product?.total_ratings})</h6>
                         </div>
                       </div>
                     </div>

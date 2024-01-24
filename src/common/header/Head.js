@@ -28,7 +28,7 @@ const Head = () => {
       <nav className="navbar navbar-dark navbar-expand p-0">
         <div className="container-fluid">
           <ul className="navbar-nav d-none d-md-flex mr-auto">
-            <li className="nav-item"><Link className="nav-link text-white" to="#" data-abc="true"><i className='fa fa-phone'></i> +92 314 0014939</Link> </li>
+            <li className="nav-item"><Link className="nav-link text-white" to="#" data-abc="true"><i className='fa fa-phone'></i> +92 342 8053 402</Link> </li>
             <li className="nav-item"><Link className="nav-link text-white" to="#" data-abc="true"><i className='fa fa-envelope'></i>  support@djangopets.com</Link></li>
           </ul>
 
