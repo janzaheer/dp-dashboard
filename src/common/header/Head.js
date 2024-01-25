@@ -30,6 +30,7 @@ const Head = () => {
           <ul className="navbar-nav d-none d-md-flex mr-auto">
             <li className="nav-item"><Link className="nav-link text-white" to="#" data-abc="true"><i className='fa fa-phone'></i> +92 342 8053 402</Link> </li>
             <li className="nav-item"><Link className="nav-link text-white" to="#" data-abc="true"><i className='fa fa-envelope'></i>  support@djangopets.com</Link></li>
+            <li className="nav-item"><Link className="nav-link text-white" to="/chat"><i className='fa fa-envelope'></i>  Questions & Answer</Link></li>
           </ul>
 
           <ul className="navbar-nav d-flex align-items-center">
