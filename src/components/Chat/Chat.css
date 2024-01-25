@@ -1,0 +1,15 @@
+.table-chat{
+    min-height: 35rem !important;
+}
+.roundedCircle{
+    width: 70px; /* Set the desired width and height for your circle */
+    height: 70px;
+    border-radius: 50%; /* Make the div a circle by setting border-radius to 50% */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Apply a shadow around the circle */
+  
+    /* Additional styles for centering content and background color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+}
