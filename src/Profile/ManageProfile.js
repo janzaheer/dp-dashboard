@@ -3,37 +3,34 @@ import './ManageProfile.css'
 import { GiCrossMark } from 'react-icons/gi';
 import { GrFacebookOption, GrInstagram, GrYoutube } from 'react-icons/gr'
 import { MdAddCall, MdMarkEmailUnread } from 'react-icons/md';
-import { BsEyeFill } from 'react-icons/bs'
 import { FaAddressCard, FaUserCircle, FaAddressBook } from 'react-icons/fa'
 import { ImUser, ImLocation2 } from 'react-icons/im';
 import { CgProfile } from 'react-icons/cg';
-import { RiShoppingBag3Fill } from 'react-icons/ri'
+import { RiQuestionnaireLine } from 'react-icons/ri'
 import { useSelector } from 'react-redux';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { Scrollbars } from 'react-custom-scrollbars-2';
-import moment from 'moment';
 import Header from '../common/header/Header';
 import Footer from '../common/footer/Footer';
-import { Button, Badge } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import ScrollToTop from "react-scroll-to-top";
-import { SellerOrderList } from '../utlis/services/order_services';
 import { GetUserData } from '../utlis/services/user_services';
 import AddressAdd from './AddressAdd';
 import { DeleteAddress } from '../utlis/services/address_services';
+import ChatsCardDtata from '../components/Chat/ChatsCardData';
+import OrderCard from '../components/OrdersCard/OrderCard';
 
 const ManageProfile = () => {
     const user = useSelector(state => state.user);
     const userToken = useSelector(state => state.user.token);
     const [userData, setUserData] = useState({})
-    const [orderDataList, setOrderDataList] = useState([])
 
     const id = user.user.id
    
     useEffect(() => {
         userList()
-        myOrderList()
          // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -69,41 +66,6 @@ const ManageProfile = () => {
         } catch (error) {
             console.log('delete error', error)
         }
-    }
-
-    const myOrderList = async () => {
-        try {
-            let resp = await SellerOrderList(headers)
-            setOrderDataList(resp.results)
-        } catch (error) {
-            console.log('orderList',error)
-        }
-    }
-
-    const handleBadge = (state) => {
-        if (state == 'completed') {
-            /* eslint eqeqeq: 0 */
-            return <Badge bg="success">
-                completed
-            </Badge>
-        } else if (state == 'placed') {
-            return <Badge bg="primary">
-                placed
-            </Badge>
-        } else if (state == 'processed') {
-            return <Badge bg="warning">
-                processed
-            </Badge>
-        } else if (state == 'received') {
-            return <Badge bg="info">
-                received
-            </Badge>
-        } else if (state == 'canceled') {
-            return <Badge bg="danger">
-                canceled
-            </Badge>
-        }
-        return ':'
     }
 
     return (
@@ -168,57 +130,23 @@ const ManageProfile = () => {
                             </div>
                         </div>
                     </div>
-                    <div className='row'>
-                        <div className='col-12'>
-                            <div className='rounded bg-white shadow my-3'>
-                                <div className='d-flex align-items-center justify-content-start mx-3'>
-                                    <h5 className='text-danger mt-4'>My Orders <RiShoppingBag3Fill /></h5>
+                    <div>
+                        <OrderCard />
+                    </div>
+                    <div>
+                        <div className='row'>
+                            <div className='col-12'>
+                                <div className='rounded bg-white shadow my-3'>
+                                    <div className='d-flex align-items-center justify-content-start mx-3'>
+                                        <h5 className='text-danger mt-4'>My Questions <RiQuestionnaireLine /></h5>
+                                    </div>
+                                    <hr />
+                                    {/* Questions listing */}
+                                    <div className="container">
+                                        <ChatsCardDtata />
+                                    </div>
+                                    {/* End */}
                                 </div>
-                                <hr />
-                                {/* Shopping cart table */}
-                                <div className="table-responsive">
-                                    <Scrollbars>
-                                        <table className="table table-bordered table-hover mt-1 text-center">
-                                            <thead>
-                                                <tr>
-                                                    <th scope="col" className="border-0 bg-light">
-                                                        <div className="p-2 px-3 text-uppercase">Order #</div>
-                                                    </th>
-                                                    <th scope="col" className="border-0 bg-light">
-                                                        <div className="p-2 px-3 text-uppercase">Placed On</div>
-                                                    </th>
-                                                    <th scope="col" className="border-0 bg-light">
-                                                        <div className="py-2 text-uppercase">Quantity</div>
-                                                    </th>
-                                                    <th scope="col" className="border-0 bg-light">
-                                                        <div className="py-2 text-uppercase">Status</div>
-                                                    </th>
-                                                    <th scope="col" className="border-0 bg-light">
-                                                        <div className="py-2 text-uppercase">Price</div>
-                                                    </th>
-                                                    <th scope="col" className="border-0 bg-light">
-                                                        <div className="py-2 text-uppercase">Action</div>
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {orderDataList && orderDataList?.map((ite) => {
-                                                    return (
-                                                        <tr key={ite?.id}>
-                                                            <td className="border-0 text-muted align-middle">{ite?.order_number}</td>
-                                                            <td className="border-0 text-muted align-middle">{moment(ite?.created_at).format("MM-DD-YYYY")}</td>
-                                                            <td className="border-0 text-muted align-middle">{ite?.total_quantity}</td>
-                                                            <td className="border-0 text-muted align-middle">{handleBadge(ite?.status)}</td>
-                                                            <td className="border-0 text-muted align-middle">Rs {parseFloat(ite?.total_amount).toFixed(0)}</td>
-                                                            <td className="border-0 align-middle"><NavLink to={`/productSuccess/${ite.id}`} className='text-success'><BsEyeFill /></NavLink> </td>
-                                                        </tr>
-                                                    )
-                                                })}
-                                            </tbody>
-                                        </table>
-                                    </Scrollbars>
-                                </div>
-                                {/* End */}
                             </div>
                         </div>
                     </div>
