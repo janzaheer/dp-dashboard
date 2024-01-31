@@ -44,17 +44,6 @@ export const signInUser = createAsyncThunk('signinuser', async ({ username, pass
 })
 export const SocialsignInUser = createAsyncThunk('SocialsignInUser', async (payload ,thunkAPI) => {
     let SocialLoginURL = BASE_URL +  `api/social-login/`
-    // const res = await fetch(SocialLoginURL, {
-    //     method: "post",
-    //     headers: {
-    //         Accept: "application/json",
-    //         'Content-Type': "application/json"
-    //     },
-    //     payload,
-    // })
-    // const data = await res.json()
-    // // console.log('user',data)
-    // return data
     const res = await axios.post(SocialLoginURL,payload)
     return res.data
 })

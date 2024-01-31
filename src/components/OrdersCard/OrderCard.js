@@ -31,6 +31,7 @@ const OrderCard = () => {
         try {
             let resp = await SellerOrderList(headers)
             setOrderDataList(resp.results)
+            // console.log('order-list',resp.results)
         } catch (error) {
             console.log('orderList',error)
         } finally {

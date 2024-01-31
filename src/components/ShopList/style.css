@@ -16,14 +16,14 @@
 .productShadow:hover{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
+/* 
 .form-check-label {
     cursor: pointer !important;
 }
 
 .form-check-label:hover {
     color: #198754 !important;
-}
+} */
 
 .product {
     width: 100% !important;
@@ -34,11 +34,11 @@
     overflow:hidden !important;
 }
 
-.about span {
+/* .about span {
     color: #198754;
     font-size: 16px
-}
-
+} */
+/* 
 .col-lg-3 .btn.btn-primary {
     width: 100% !important;
     height: 43px !important;
@@ -83,7 +83,7 @@
     font-size: 20px !important;
     text-decoration: none !important;
     color: black !important;
-}
+} */
 @media screen and (max-width: 1415px) {
     .images-class {
         width: 97% !important;
@@ -108,7 +108,7 @@
     }
 }
 
-@media screen and (max-width: 321px) {
+/* @media screen and (max-width: 321px) {
     .about h6{
         font-size: 12px;
     }
@@ -116,4 +116,4 @@
         color: #4a1af8;
         font-size: 12px
     }
-}
+} */

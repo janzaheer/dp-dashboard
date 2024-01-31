@@ -65,11 +65,7 @@ const Login = () => {
                   <div className="card-body p-5 text-center">
                     <form onSubmit={handleLogin} autoComplete="on">
                       <div className="mb-5 mt-2">
-                        {user.user?.is_seller == true
-                          ? "seller"
-                          : user.user?.is_seller == false
-                          ? "user"
-                          : ""}
+                        
                         {/* <img className="mb-1" src={logo} alt='' width={110} /> */}
                         <h4 className="mb-1" style={{ color: "#374151" }}>
                           DjangoPets
