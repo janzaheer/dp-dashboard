@@ -4,17 +4,17 @@ import { ToastContainer, toast } from "react-toastify";
 import ReactStars from "react-rating-stars-component";
 import { useSelector } from "react-redux";
 import { CreateReview } from "../../utlis/review_services";
+import { Link } from "react-router-dom";
 
-const AddReview = ({id, onReviewSubmit}) => {
+const AddReview = ({id,itemId,orderListData}) => {
   const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
   let user = useSelector((state) => state.user.user.id);
   const userToken = useSelector((state) => state.user.token);
   const [feedback, setFeedback] = useState("");
   const [rat, setRat] = useState("");
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   let headers = {};
   if (userToken) {
@@ -28,7 +28,7 @@ const AddReview = ({id, onReviewSubmit}) => {
     e.preventDefault();
     const payload = {
       user: user,
-      item: id,
+      item: itemId,
       text: feedback,
       rating: rat,
     };
@@ -41,12 +41,12 @@ const AddReview = ({id, onReviewSubmit}) => {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
       });
+      orderListData()
       setShow(false);
-      onReviewSubmit();
     } catch (error) {
       console.log(error);
     }
-  };
+    };
 
   const ratingChanged = (newRating) => {
     setRat(newRating)
@@ -55,9 +55,9 @@ const AddReview = ({id, onReviewSubmit}) => {
   return (
     <div>
       <ToastContainer />
-      <Button variant="primary" size="sm" onClick={handleShow}>
+      <Link to="#" onClick={handleShow} style={{ color: 'green', fontSize: '18px' }}>
        Write a Review
-      </Button>
+      </Link>
       <Modal
         show={show}
         onHide={handleClose}

@@ -17,7 +17,7 @@ const MyFacebookLogin = () => {
         try {
           const Data = await dispatch(SocialsignInUser(payload));
           console.log('login-socail',Data);   
-          navigation("/");
+           navigation("/");
         } catch (error) {
           console.log(error)
         }

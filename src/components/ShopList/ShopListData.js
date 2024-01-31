@@ -10,7 +10,8 @@ import { ProductCategory } from "../../utlis/services/product_category_services"
 
 const ShopListData = () => {
     const [categoriesData, setCategoriesData] = useState('')
-    const [products, setLandingData] = useState({})
+    const [products, setLandingData] = useState({});
+    const [loading, setLoading] = useState(true);
 
     const userToken = useSelector(state => state.user.token);
 
@@ -61,7 +62,7 @@ const ShopListData = () => {
                                     <h3 className="mt-2" style={{ color: '#374151' }}>Featured Categories</h3>
                                 </div>
                             </div>
-                            <div className="row g-0 d-flex justify-content-center">
+                            <div className="row g-1 d-flex justify-content-center">
                                 {categoriesData && categoriesData.slice(0, 12).map((categoryName) => {
                                     return (
                                         <div key={categoryName.id} className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2">

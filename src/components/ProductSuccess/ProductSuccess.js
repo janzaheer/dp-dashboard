@@ -20,7 +20,6 @@ const ProductSuccess = () => {
   const userToken = useSelector((state) => state.user.token);
   const [orderDataList, setOrderDataList] = useState({});
   const [ordernumber, setOrdernumber] = useState();
-  const [isReviewSubmitted, setIsReviewSubmitted] = useState(false);
 
   let { id } = useParams();
 
@@ -123,10 +122,6 @@ const ProductSuccess = () => {
     }
   };
 
-  const handleReviewSubmited = () => {
-    setIsReviewSubmitted(true);
-  }
-
   return (
     <div>
       <Header />
@@ -219,8 +214,8 @@ const ProductSuccess = () => {
                                 Qty: {ite?.quantity} pcs
                               </span>
                               <div>
-                                {orderDataList?.status == "completed"  && !isReviewSubmitted ? (
-                                  <AddReview id={ite?.item.id} onReviewSubmit={handleReviewSubmited} />
+                                {orderDataList?.status == "completed" &&  ite.has_comment == false ? (
+                                  <AddReview id={ite?.id} itemId={ite?.item?.id} orderListData={orderListData}/>
                                 ) : (
                                   ""
                                 )}
@@ -231,7 +226,7 @@ const ProductSuccess = () => {
                         <div className="product-price">
                           <div className="d-flex justify-content-start align-items-center">
                           {ite?.item?.stock.length === 0 ? (
-                             <h6> {price(ite?.item.price)}</h6>
+                            <h6> {price(ite?.item.price)}</h6>
                           ) : (
                             <div>
                               {ite?.item?.stock[0]?.discount_price > 0 ? (
@@ -281,6 +276,9 @@ const ProductSuccess = () => {
                           {subTotal(orderDataList?.total_amount) +
                             ShippingPrice(orderDataList?.shipping_amount)}
                         </span>
+                      </div>
+                      <div className="d-flex justify-content-between mt-1">
+                        <span className="font-weight-bold">Cash on Delivery</span>
                       </div>
                     </div>
                   </div>

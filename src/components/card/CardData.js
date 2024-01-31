@@ -106,17 +106,17 @@ const CardData = ({ products, handleFavList }) => {
       return `Rs ${parseFloat(p).toFixed(0)}`;
     }
   };
-  const handleBadge = (seller) => {
-    if (seller == null) {
-      return (
-        <span className="badge text-bg-success notify-badge">
-          DjangoPets mall
-        </span>
-      );
-    } else {
-      return "";
-    }
-  };
+  // const handleBadge = (seller) => {
+  //   if (seller == null) {
+  //     return (
+  //       <span className="badge text-bg-success notify-badge">
+  //         DjangoPets mall
+  //       </span>
+  //     );
+  //   } else {
+  //     return "";
+  //   }
+  // };
   const discountPrice = (d) => {
     if (d == 0) {
       return "";
@@ -137,14 +137,19 @@ const CardData = ({ products, handleFavList }) => {
                 key={product?.id}
                 className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2"
               >
-                <div className="bg-white border rounded productShadow">
+                <div className="bg-white border productShadow">
                   <div className="">
                     <div className="text-center mb-1 itemImage">
                       <NavLink
                         to={`/productDetails/${product?.id}`}
                         className=""
                       >
-                        {handleBadge(product.seller)}
+                        {/* {handleBadge(product.seller)} */}
+                        { product.stock.length > 0 ? (
+                          <span className="badge text-bg-success notify-badge me-1">
+                            {parseFloat(product?.stock[0]?.discount_percentage).toFixed(0)}% OFF
+                          </span>
+                        ) : ' ' }
                         <img
                           src={product?.images[0]?.image_url}
                           alt=""
@@ -158,15 +163,15 @@ const CardData = ({ products, handleFavList }) => {
                       <div className="about">
                         <div className="mx-1 d-flex justify-content-between align-items-center">
                           <h6 className="text-muted">
-                            {product?.title.substring(0, 11)}
+                            {product?.title.substring(0, 14)}
                           </h6>
-                          {product?.stock.length === 0 ? (
+                          {/* {product?.stock.length === 0 ? (
                             " "
                           ) : (
                             <span style={{ fontSize: "14px" }}>
                               {parseFloat(product?.stock[0]?.discount_percentage).toFixed(0)}% OFF
                             </span>
-                          )}
+                          )} */}
                         </div>
                         <div className="px-1 d-flex justify-content-between align-items-center">
                           {product?.stock.length === 0 ? (
@@ -214,7 +219,7 @@ const CardData = ({ products, handleFavList }) => {
                           <h6>
                             <Star stars={product?.average_rating} />
                           </h6>{" "}
-                          <h6 className="ms-1">({product?.total_ratings})</h6>
+                          <h6 className="text-muted ms-1" style={{ fontSize : '13px'}}>({product?.total_ratings})</h6>
                         </div>
                       </div>
                     </div>
