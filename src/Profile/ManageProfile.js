@@ -21,16 +21,21 @@ import AddressAdd from './AddressAdd';
 import { DeleteAddress } from '../utlis/services/address_services';
 import ChatsCardDtata from '../components/Chat/ChatsCardData';
 import OrderCard from '../components/OrdersCard/OrderCard';
+import { GetPersonalQuestionListings } from '../utlis/services/ques-ans-services';
 
 const ManageProfile = () => {
     const user = useSelector(state => state.user);
     const userToken = useSelector(state => state.user.token);
     const [userData, setUserData] = useState({})
+    const[data, setData]= useState([])
+    const [loading, setLoading] = useState(true);
 
+    console.log('User',userToken)
     const id = user.user.id
    
     useEffect(() => {
         userList()
+        personalQuestionListData()
          // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -65,6 +70,17 @@ const ManageProfile = () => {
             });
         } catch (error) {
             console.log('delete error', error)
+        }
+    }
+
+    const personalQuestionListData = async () => {
+        try {
+            let ListData = await GetPersonalQuestionListings(headers)
+            setData(ListData)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -143,7 +159,7 @@ const ManageProfile = () => {
                                     <hr />
                                     {/* Questions listing */}
                                     <div className="container">
-                                        <ChatsCardDtata />
+                                        <ChatsCardDtata data={data} loading={loading} />
                                     </div>
                                     {/* End */}
                                 </div>
