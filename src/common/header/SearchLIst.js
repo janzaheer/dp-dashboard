@@ -60,4 +60,4 @@ const SearchLIst = () => {
     </>
   )
 }
-export default SearchLIst
+export default SearchLIst;
