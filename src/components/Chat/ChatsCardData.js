@@ -40,11 +40,11 @@ const ChatsCardDtata = ({ data, loading }) => {
                                   fontSize: "16px", // Set the font size
                                 }}
                               >
-                                A
+                                {item?.user_first_name.substring(0, 1)}
                               </div>
                               <div className="d-flex gap-2 w-100 justify-content-between">
                                 <div>
-                                  <span>Question By Atif {item?.user} </span>
+                                  <span>Question By {item?.user_first_name} {item?.user_last_name} </span>
                                   <h6 className="mb-0">
                                     {item?.question_text}?
                                   </h6>
