@@ -22,6 +22,7 @@ import { DeleteAddress } from '../utlis/services/address_services';
 import ChatsCardDtata from '../components/Chat/ChatsCardData';
 import OrderCard from '../components/OrdersCard/OrderCard';
 import { GetPersonalQuestionListings } from '../utlis/services/ques-ans-services';
+import ProfileEdit from './ProfileEdit';
 
 const ManageProfile = () => {
     const user = useSelector(state => state.user);
@@ -51,6 +52,7 @@ const ManageProfile = () => {
         try {
             let response = await GetUserData(id, headers)
             setUserData(response)
+            console.log('userList', response)
         } catch (error) {
             console.log(error)
         }
@@ -90,16 +92,19 @@ const ManageProfile = () => {
             <div className="container-fluid manage">
                 <ToastContainer />
                 <div className='container'>
-                    <h3 className='text-center mb-3'>Hello, {user.user.username}</h3>
+                    <h3 className='text-center mb-3'>Hello, {user?.user?.username}</h3>
                     <div className='row'>
                         <div className='col-md-4'>
                             <div className='card shadow'>
                                 <div className="card-body mb-5">
-                                    <h5 className="card-title"><CgProfile /> Personal Profile | <Link to='#' className='text-secondary' >Edit</Link> </h5>
+                                    <h5 className="card-title d-flex "><CgProfile /> Personal Profile | <ProfileEdit userName={userData?.username}
+                                    first_name={userData?.first_name} last_name={userData?.last_name} phoneNumber={userData?.phone_number}
+                                    Email={userData?.email} DOB={userData?.dob} City={userData?.city} country={userData?.country} userList={userList}  /> </h5>
                                     <hr className='mt-0' />
-                                    <h6 className="card-subtitle mb-2 text-muted"><FaUserCircle /> Name: {user.user.username}</h6>
-                                    <p className="card-subtitle mb-2"><MdMarkEmailUnread /> Email: {userData?.email}</p>
+                                    <h6 className="card-subtitle text-muted"><FaUserCircle /> Name: {user?.user?.username}</h6>
+                                    <p className="card-subtitle my-1"><MdMarkEmailUnread /> Email: {userData?.email}</p>
                                     <p className="card-subtitle"><ImUser /> FullName: {userData?.first_name} {userData?.last_name}</p>
+                                    <p className="card-subtitle"><ImUser /> Phone: {userData?.phone_number}</p>
                                 </div>
                                 <div className='d-flex justify-content-center mb-5'>
                                     <Button variant="outline-primary" className='me-1' size="sm">
@@ -114,7 +119,7 @@ const ManageProfile = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className=' col-md-8'>
+                        <div className='col-md-8 my-1'>
                             <div className="card controlCard shadow">
                                 <div className='d-flex justify-content-between mx-3 my-2'>
                                     <h5 className='card-title mt-2'><FaAddressBook /> Address Book</h5>
