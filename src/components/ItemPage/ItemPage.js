@@ -64,6 +64,7 @@ const ItemPage = () => {
         if (val == 'all-categories') {
             val = ''
         }
+        console.log('---------------', val)
         let finalURL = BASE_URL + API_VERSION() + END_POINT() + CATEGORY_ITEMS_LIST_ENDPOINT() + val
 
         axios.get(finalURL, {
@@ -121,7 +122,7 @@ const ItemPage = () => {
                         <div className='container'>
                             <div className="d-flex justify-content-between">
                                 <div className="">
-                                    <h2 className="text-success">Just For You</h2>
+                                    <h2 className="text-just">Just For You</h2>
                                 </div>
                                 <div className="d-flex justify-content-between">
                                     <div className="mt-1 me-2">
@@ -147,14 +148,14 @@ const ItemPage = () => {
                                     </div>
                                 </div>
                             </div>
-                            <hr className="border border-success border-1 opacity-50"></hr>
+                            <hr className="border border-hr border-1 opacity-100"></hr>
                             <div>
                                 <CardData products={products} />
                             </div>
                             <div className="row g-2 mx-md-5 mt-2">
                                 <div className="d-flex justify-content-center">
-                                    <button className='btn btn-success bt-sm me-2' disabled={prevUrlPage === null} onClick={() => handleNextPage(prevUrlPage)} > &larr; Previous</button>
-                                    <button className='btn btn-success bt-sm' disabled={nextUrlPage === null} onClick={() => handleNextPage(nextUrlPage)}>Next &rarr; </button>
+                                    <button className='main-btn-color bt-sm me-2' disabled={prevUrlPage === null} onClick={() => handleNextPage(prevUrlPage)} > &larr; Previous</button>
+                                    <button className='main-btn-color bt-sm' disabled={nextUrlPage === null} onClick={() => handleNextPage(nextUrlPage)}>Next &rarr; </button>
                                 </div>
                             </div>
                         </div>

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./Login.css";
-// import logo from "../logo/logo_new.png";
+import logo from "../logo/Django_Pets.png";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { signInUser,SocialsignInUser } from "../store/authSlice";
+import { signInUser } from "../store/authSlice";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
@@ -64,13 +64,9 @@ const Login = () => {
                 >
                   <div className="card-body p-5 text-center">
                     <form onSubmit={handleLogin} autoComplete="on">
-                      <div className="mb-5 mt-2">
-                        
-                        {/* <img className="mb-1" src={logo} alt='' width={110} /> */}
-                        <h4 className="mb-1" style={{ color: "#374151" }}>
-                          DjangoPets
-                        </h4>
-                        <h3>Welcome to DjangoPets Please login.</h3>
+                      <div className="mb-4 mt-2">
+                        <img className="mb-1" src={logo} alt='' width={110} />
+                        <h3 style={{ fontSize: "1rem" }}>Welcome to DjangoPets Please login.</h3>
                       </div>
                       <div className="form-floating mb-3">
                         <input
@@ -98,11 +94,11 @@ const Login = () => {
                         />
                         <label htmlFor="floatingPassword">Password</label>
                       </div>
-                      <button className="btn btn-secondary w-50" type="submit">
+                      <button className="login-btn-color w-50" type="submit">
                         Login
                       </button>
                       <hr className="my-3" />
-                      <Link to="/register" className="btn btn-secondary w-100">
+                      <Link to="/register" className="register-btn-color w-100">
                         Register Now
                       </Link>
                       <div className="row g-1 mt-2">

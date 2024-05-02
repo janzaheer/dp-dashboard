@@ -90,7 +90,7 @@ const ShopListData = () => {
                                             <CardData products={products[key]} ProductListingWithCategory={ProductListingWithCategory}  />
                                         </div>
                                         <div className="d-flex justify-content-center mt-2">
-                                            <NavLink to={`/item/?category_name=${key}`} className="btn btn-outline-secondary btn-sm" >View More</NavLink>
+                                            <NavLink to={`/item/?category_name=${key}`} className="view-more-btn btn-sm" >View More</NavLink>
                                         </div>
                                     </div>
                                 </div>)

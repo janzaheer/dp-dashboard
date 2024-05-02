@@ -53,13 +53,13 @@ const AddressAdd = ({userList}) => {
   return (
     <div>
       <ToastContainer />
-      <Button variant="outline-secondary" size="sm" onClick={handleShowAdd}>
+      <Button className="add-address-btn" onClick={handleShowAdd}>
         Add Address <MdAddLocationAlt />
       </Button>
 
       <Modal show={show} onHide={handleCloseAdd}>
         <Modal.Header closeButton>
-          <Modal.Title>Add Address</Modal.Title>
+          <Modal.Title className="price-text">Add Address</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={addAddress}>
@@ -97,7 +97,7 @@ const AddressAdd = ({userList}) => {
               />
             </Form.Group>
             <Button
-              variant="secondary"
+             className="add-address-btn"
               // onClick={handleCloseAdd}
               type="submit"
             >

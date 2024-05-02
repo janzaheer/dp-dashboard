@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { BsEnvelopeFill } from "react-icons/bs";
 import "./ProductSuccess.css";
-// import logo from '../../logo/logo_new.png';
+import logo from '../../logo/Django_Pets.png';
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Barcode from "react-barcode";
@@ -131,10 +131,7 @@ const ProductSuccess = () => {
           <div className="d-flex justify-content-center row">
             <div className="col-md-10">
               <div className="receipt bg-white p-3 rounded shadow">
-                {/* <img src={logo} alt='logo' width={120} /> */}
-                <h4 className="" style={{ colo: "#374151" }}>
-                  DjangoPets
-                </h4>
+                <img src={logo} alt='logo' width={110} />
                 <h4 className="mt-2 mb-3">
                   Your order is {orderStatusHeadings(orderDataList?.status)}
                 </h4>
@@ -226,17 +223,17 @@ const ProductSuccess = () => {
                         <div className="product-price">
                           <div className="d-flex justify-content-start align-items-center">
                           {ite?.item?.stock.length === 0 ? (
-                            <h6> {price(ite?.item.price)}</h6>
+                            <h6 className="price-text"> {price(ite?.item.price)}</h6>
                           ) : (
                             <div>
                               {ite?.item?.stock[0]?.discount_price > 0 ? (
                                 <>
-                                  <h5> {discountPrice(ite?.item.stock[0]?.discount_price)}</h5>
+                                  <h5 className="price-text"> {discountPrice(ite?.item.stock[0]?.discount_price)}</h5>
                                   {" "}
                                   <h6 className="text-decoration-line-through text-muted"> {price(ite?.item.price)}</h6>
                                 </>
                               ) : (
-                                <h6> {price(ite?.item.price)}</h6>
+                                <h6 className="price-text"> {price(ite?.item.price)}</h6>
                               )}
                             </div>
                           )}
@@ -272,7 +269,7 @@ const ProductSuccess = () => {
                       <hr />
                       <div className="d-flex justify-content-between mt-1">
                         <span className="font-weight-bold">Total</span>
-                        <span className="font-weight-bold text-secondary">
+                        <span className="font-weight-bold price-text">
                           {subTotal(orderDataList?.total_amount) +
                             ShippingPrice(orderDataList?.shipping_amount)}
                         </span>
@@ -294,7 +291,7 @@ const ProductSuccess = () => {
                 </span>
                 <hr />
                 <div className="my-3">
-                  <Link to="/" className="btn btn-outline-secondary w-100">
+                  <Link to="/" className="shopping-btn w-100">
                     Continue Shopping
                   </Link>
                 </div>

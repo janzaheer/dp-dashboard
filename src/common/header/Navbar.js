@@ -2,7 +2,7 @@ import React from "react"
 import { NavLink, Link } from "react-router-dom"
 import './new.css'
 import { HiOutlineShoppingCart } from "react-icons/hi";
-// import logo from '../../logo/logo_new.png';
+import logo from '../../logo/Django_Pets.png';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
@@ -25,11 +25,11 @@ const Navbar = () => {
       <header className="section-header sticky-top shadow">
         <section className="header-main border-bottom bg-white">
           <div className="container-fluid">
-            <div className="row p-2 pt-3 pb-3 d-flex align-items-center">
+            <div className="row p-2 p-1 d-flex align-items-center">
               <div className="col-md-2">
                 <NavLink to='/' className="text-decoration-none">
-                  {/* <img className="d-md-flex" src={logo} alt='' width={110} /> */}
-                  <h4 className="text-decoration-none" style={{ width: '110px', color: '#374151'}}>DjangoPets</h4>
+                  <img className="d-md-flex" src={logo} alt='' height={90} />
+                  {/* <h4 className="text-decoration-none" style={{ width: '110px', color: '#374151'}}>DjangoPets</h4> */}
                 </NavLink>
               </div>
               <div className="col-md-8">

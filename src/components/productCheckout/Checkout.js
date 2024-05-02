@@ -148,7 +148,7 @@ const Checkout = () => {
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title className='text-secondary' >Select New Address</Modal.Title>
+                    <Modal.Title className='price-text' >Select New Address</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className='row'>
@@ -189,10 +189,10 @@ const Checkout = () => {
                                 <div className="card-body mb-5">
                                     <div className='d-flex justify-content-between align-items-center'>
                                         <div>
-                                            <h5 className="card-title"><ImLocation2 /> Address</h5>
+                                            <h5 className="card-title price-text"><ImLocation2 /> Address</h5>
                                         </div>
                                         <div className='mb-2'>
-                                            <Button variant="outline-secondary" onClick={handleShowShowAddressListModel}>
+                                            <Button className='address-btn' onClick={handleShowShowAddressListModel}>
                                                 <MdAddLocationAlt /> Changes Address
                                             </Button>
                                         </div>
@@ -242,10 +242,10 @@ const Checkout = () => {
                                                         <td className="border-0 align-middle">  
                                                            {
                                                             item?.stock.length > 0? (<>
-                                                            <strong className=' d-block'>{discountPrice(item?.stock[0]?.discount_price)}</strong>
-                                                            <strong className="text-decoration-line-through text-muted">{price(item.price)}</strong>
+                                                            <strong className='price-text d-block'>{discountPrice(item?.stock[0]?.discount_price)}</strong>
+                                                            <strong className="text-decoration-line-through text-muted">Rs {price(item.price)}</strong>
                                                             </>) : (<>
-                                                                <strong>{price(item.price)}</strong>
+                                                                <strong className='price-text'>Rs {price(item.price)}</strong>
                                                             </>)
                                                            }
                                                         </td>
@@ -278,10 +278,10 @@ const Checkout = () => {
                                         <p> {totalItems}</p>
                                         <p className='text-muted text-wrap'>Calculate by support after placing order </p>
                                         <p>Rs {total(totalAmount)}</p>
-                                        <p className='text-secondary fw-bolder'>Rs {total(totalAmount)}</p>
+                                        <p className='price-text fw-bolder'>Rs {total(totalAmount)}</p>
                                     </div>
                                 </div>
-                                <button onClick={() => handlePlaceOrder()} className='btn btn-outline-secondary w-100 my-3'>Place Order</button>
+                                <button onClick={() => handlePlaceOrder()} className='btn place-btn-color w-100 my-3'>Place Order</button>
                             </div>
                         </div>
                     </div>

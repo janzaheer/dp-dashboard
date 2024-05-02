@@ -35,7 +35,7 @@ const ChatsCardDtata = ({ data, loading }) => {
                                 style={{
                                   width: "40px",
                                   height: "40px",
-                                  background: "#007BFF", // Set your preferred background color
+                                  background: "#008080", // Set your preferred background color
                                   color: "#fff", // Set the text color
                                   fontSize: "16px", // Set the font size
                                 }}

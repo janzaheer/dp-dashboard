@@ -75,7 +75,7 @@ const AddChat = () => {
       </div>
       <Modal show={show} onHide={handleClose} centered>
         <Modal.Header closeButton>
-          <Modal.Title>Ask us Anything</Modal.Title>
+          <Modal.Title className="text-just">Ask us Anything</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -97,7 +97,7 @@ const AddChat = () => {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleSubmit}>
+          <Button className="add-address-btn" onClick={handleSubmit}>
             Submit
           </Button>
         </Modal.Footer>
