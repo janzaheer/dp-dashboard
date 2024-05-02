@@ -175,7 +175,7 @@ const CardData = ({ products, handleFavList }) => {
                         </div>
                         <div className="px-1 d-flex justify-content-between align-items-center">
                           {product?.stock.length === 0 ? (
-                            <span className="" style={{ fontSize: "14px" }}>
+                            <span className="price-text" style={{ fontSize: "17px" }}>
                               {price(product?.price)}
                             </span>
                           ) : (
@@ -183,8 +183,8 @@ const CardData = ({ products, handleFavList }) => {
                               {product?.stock[0]?.discount_price > 0 ? (
                                 <>
                                   <span
-                                    className=""
-                                    style={{ fontSize: "14px" }}
+                                    className="price-text"
+                                    style={{ fontSize: "17px" }}
                                   >
                                     {discountPrice(
                                       product?.stock[0]?.discount_price
@@ -198,7 +198,7 @@ const CardData = ({ products, handleFavList }) => {
                                   </span>
                                 </>
                               ) : (
-                                <span className="" style={{ fontSize: "14px" }}>
+                                <span className="price-text" style={{ fontSize: "17px" }}>
                                   {price(product?.price)}
                                 </span>
                               )}

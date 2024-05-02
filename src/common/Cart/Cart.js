@@ -153,11 +153,10 @@ console.log('total',totalAmount)
                                   <div className="ms-3 ml-3 d-inline-block align-middle">
                                     <h6 className="mb-0"> <Link to="#" className="text-dark d-inline-block align-middle">{cartProduct?.title.substring(0, 15)}...</Link>
                                     </h6>
-                                    {/* <span className="text-muted font-weight-normal font-italic d-block">Rs {price(cartProduct?.price)}</span> */}
                                     { cartProduct?.stock.length > 0 ? (<>
-                                      <span className="text-muted font-weight-normal font-italic d-block"> Rs {discountPrice(cartProduct?.stock[0]?.discount_price)}</span>
-                                      <span className="text-decoration-line-through text-muted">Rs {price(cartProduct?.price)}</span>
-                                   </>) : (<span className="text-muted font-weight-normal font-italic d-block">Rs {price(cartProduct?.price)}</span>) }
+                                      <span className="price-text d-block">{discountPrice(cartProduct?.stock[0]?.discount_price)}</span>
+                                      <span className="text-decoration-line-through text-muted" style={{ fontSize: '12px' }}>Rs {price(cartProduct?.price)}</span>
+                                   </>) : (<span className="price-text d-block">Rs {price(cartProduct?.price)}</span>) }
                                   </div>
                                 </div>
                               </th>
@@ -165,10 +164,10 @@ console.log('total',totalAmount)
                               <td className="border-0 align-middle"><strong>{cartProduct?.quantity}</strong></td>
                               <td className="border-0 align-middle"><strong>
                                 <div className=''>
-                                  <button className='btn btn-outline-success me-4' onClick={() => increase(cartProduct.id)}>
+                                  <button className='inc-dec-btn me-4' onClick={() => increase(cartProduct.id)}>
                                     <AiOutlinePlus />
                                   </button>
-                                  <button className='btn btn-outline-warning' onClick={() => decrease(cartProduct.id)}>
+                                  <button className='inc-dec-btn' onClick={() => decrease(cartProduct.id)}>
                                     <AiOutlineMinus />
                                   </button>
                                 </div>
@@ -220,7 +219,7 @@ console.log('total',totalAmount)
                     </li>
                   </ul>
                   { cartProducts.length === 0 ? <button className="btn btn-warning">Proceed to Checkout</button> : 
-                  <Link to='/checkout' className="btn btn-secondary">Proceed to Checkout</Link>}
+                  <Link to='/checkout' className="prooced-btn">Proceed to Checkout</Link>}
                 </div>
               </div>
             </div>

@@ -3,7 +3,7 @@ import './Register.css'
 import './Login.css'
 import { useDispatch } from 'react-redux';
 import { signUpUser } from '../store/authSlice';
-// import logo from '../logo/logo_new.png';
+import logo from "../logo/Django_Pets.png";
 import { useNavigate } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify'
@@ -68,11 +68,8 @@ const Register = () => {
                     <div className="card shadow-2-strong shadow" style={{ borderRadius: '1rem' }}>
                         <div className="card-body p-5 text-center" >
                             <div className="mb-5">
-                                {/* <img className="mb-1" src={logo} alt='' width={110} /> */}
-                                <h4 className="mb-1" style={{ color: "#374151" }}>
-                                    DjangoPets
-                                </h4>
-                                <h3>Welcome to DjangoPets Please Register Now.</h3>
+                                <img className="mb-1" src={logo} alt='' width={110} />
+                                <h3 style={{ fontSize: "1rem" }}>Welcome to DjangoPets Please Register Now.</h3>
                             </div>
                             <form className="row g-3 " onSubmit={handleRegister}>
                                 <div className="col-md-6 form-floating">
@@ -111,7 +108,7 @@ const Register = () => {
                                     <label htmlFor="floatingInputConfirmPassword" className='ms-3'>Confirm Password</label>
                                 </div>
                                 <div className="col-12">
-                                    <button className="btn btn-secondary mt-2" type="submit">Register Now</button>
+                                    <button className="register-btn-color mt-2" type="submit">Register Now</button>
                                 </div>
                                 <div className="d-flex justify-content-center align-items-center">
                                     <div className="me-2">

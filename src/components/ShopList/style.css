@@ -34,56 +34,19 @@
     overflow:hidden !important;
 }
 
-/* .about span {
-    color: #198754;
-    font-size: 16px
-} */
-/* 
-.col-lg-3 .btn.btn-primary {
-    width: 100% !important;
-    height: 43px !important;
-    box-shadow: none !important;
-    outline: none !important;
-    background-color: #198754 !important;
-    color: white !important;
-    font-weight: 800 !important;
-    padding: 0px 15px !important;
-    line-height: 22px !important;
-    border: none !important;
+.view-more-btn {
+    border: 1px solid #008080;
+    padding: 7px 30px;
+    color: #008080;
+    border-radius: 5px;
 }
 
-.col-lg-3 .btn.btn-primary:focus {
-    outline: none !important;
-    box-shadow: none !important;
+.view-more-btn:hover {
+    color: white;
+    border: 1px solid #008e8e;
+    background-color: #008e8e
 }
 
-.col-lg-3 .btn.btn-primary:hover {
-    background-color: #19875479 !important;
-}
-
-.col-lg-3 ul {
-    width: 100% !important;
-    background-color: white !important;
-    display: block;
-    padding: 10px;
-}
-
-.col-lg-3 ul a {
-    margin-top: 8px;
-    margin-left: 15px;
-    font-size: 15px;
-}
-
-.col-lg-3 ul a:hover {
-    color: #198754;
-}
-
-.col-lg-3 a.fas {
-    position: relative !important;
-    font-size: 20px !important;
-    text-decoration: none !important;
-    color: black !important;
-} */
 @media screen and (max-width: 1415px) {
     .images-class {
         width: 97% !important;

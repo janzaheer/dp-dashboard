@@ -10,3 +10,15 @@
 .controlCard{
     height: 20em !important;
 }
+.add-address-btn{
+    color: #008080;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #008080;
+    padding: 5px 20px;
+}
+.add-address-btn:hover {
+    color: white;
+    background-color: #008080 !important;
+    border: 1px solid #008080 !important;
+}

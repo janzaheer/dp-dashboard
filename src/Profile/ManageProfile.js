@@ -92,12 +92,12 @@ const ManageProfile = () => {
             <div className="container-fluid manage">
                 <ToastContainer />
                 <div className='container'>
-                    <h3 className='text-center mb-3'>Hello, {user?.user?.username}</h3>
+                    <h3 className='text-center text-just mt-5 mb-3'>Hello, {user?.user?.username}</h3>
                     <div className='row'>
                         <div className='col-md-4'>
                             <div className='card shadow'>
                                 <div className="card-body mb-5">
-                                    <h5 className="card-title d-flex "><CgProfile /> Personal Profile | <ProfileEdit userName={userData?.username}
+                                    <h5 className="card-title d-flex price-text "><CgProfile /> Personal Profile | <ProfileEdit userName={userData?.username}
                                     first_name={userData?.first_name} last_name={userData?.last_name} phoneNumber={userData?.phone_number}
                                     Email={userData?.email} DOB={userData?.dob} City={userData?.city} country={userData?.country} userList={userList}  /> </h5>
                                     <hr className='mt-0' />
@@ -122,7 +122,7 @@ const ManageProfile = () => {
                         <div className='col-md-8 my-1'>
                             <div className="card controlCard shadow">
                                 <div className='d-flex justify-content-between mx-3 my-2'>
-                                    <h5 className='card-title mt-2'><FaAddressBook /> Address Book</h5>
+                                    <h5 className='card-title price-text mt-2'><FaAddressBook /> Address Book</h5>
                                     <AddressAdd userList={userList} />
                                 </div>
                                 <Scrollbars thumbMinSize={30} >
@@ -159,7 +159,7 @@ const ManageProfile = () => {
                             <div className='col-12'>
                                 <div className='rounded bg-white shadow my-3'>
                                     <div className='d-flex align-items-center justify-content-start mx-3'>
-                                        <h5 className='text-danger mt-4'>My Questions <RiQuestionnaireLine /></h5>
+                                        <h5 className='price-text mt-4'>My Questions <RiQuestionnaireLine /></h5>
                                     </div>
                                     <hr />
                                     {/* Questions listing */}

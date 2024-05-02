@@ -28,6 +28,32 @@
   margin-top: 13px;
 }
 
+.shopping-btn {
+  color: #008080;
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid #008080;
+  padding: 7px 440px;
+}
+
+.shopping-btn:hover {
+  color: white;
+  background-color: #008080 !important;
+  border: 1px solid #008080 !important;
+}
+
+@media (max-width: 1417px) {
+  .shopping-btn {
+    padding: 7px 350px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .shopping-btn {
+    padding: 7px 290px;
+  }
+}
+
 @media (max-width: 992px) {
   .image_list li img {
     max-width: 20%;
@@ -35,6 +61,10 @@
 
   .image_selected img {
     max-width: 40%;
+  }
+
+  .shopping-btn {
+    padding: 7px 190px;
   }
 }
 
@@ -48,5 +78,34 @@
   }
   .receipt {
     margin-top: 30px !important;
+  }
+  .shopping-btn {
+    padding: 7px 155px;
+  }
+}
+
+@media (max-width: 520px) {
+  .shopping-btn {
+    padding: 7px 140px;
+  }
+}
+@media (max-width: 486px) {
+  .shopping-btn {
+    padding: 7px 120px;
+  }
+}
+@media (max-width: 446px) {
+  .shopping-btn {
+    padding: 7px 100px;
+  }
+}
+@media (max-width: 407px) {
+  .shopping-btn {
+    padding: 7px 80px;
+  }
+}
+@media (max-width: 367px) {
+  .shopping-btn {
+    padding: 7px 60px;
   }
 }

@@ -22,3 +22,28 @@
 .my-facebook-button-class{
     cursor: pointer;
 }
+
+.login-btn-color {
+    color: white;
+    background-color: #008080;
+    border-radius: 5px;
+    border: 1px solid #008080;
+    padding: 7px 0;
+}
+
+.login-btn-color:hover {
+    background-color: #007171;
+}
+
+.register-btn-color {
+    color: white;
+    background-color: #008080;
+    border-radius: 5px;
+    border: 1px solid #008080;
+    padding: 7px 100px;
+}
+
+.register-btn-color:hover {
+    background-color: #007171;
+    color: white;
+}

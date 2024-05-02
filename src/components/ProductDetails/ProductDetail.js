@@ -47,10 +47,14 @@ const ProductDetail = () => {
   const addToCartHandler = (product) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     // Check if the product has a discount
-  const discountedPrice = product.stock[0]?.discount_price;
+    const discountedPrice = product.stock[0]?.discount_price;
 
-  // Calculate the total price based on the discount status
-  let totalPrice = qty * (discountedPrice !== undefined && discountedPrice > 0 ? discountedPrice : product.price);
+    // Calculate the total price based on the discount status
+    let totalPrice =
+      qty *
+      (discountedPrice !== undefined && discountedPrice > 0
+        ? discountedPrice
+        : product.price);
     // let totalPrice = qty * product.price;
     const tempProduct = {
       ...product,
@@ -63,7 +67,7 @@ const ProductDetail = () => {
       theme: "colored",
     });
     navigate(`/cart`);
-    console.log('tem',tempProduct)
+    console.log("tem", tempProduct);
   };
 
   const increaseQty = () => {
@@ -204,10 +208,10 @@ const ProductDetail = () => {
                   )}{" "}
                   {product?.title}
                 </h3>
-                <h6>Category {product?.category}</h6>
+                <h6 className="text-just">Category {product?.category}</h6>
                 <div>
                   {product?.stock?.length === 0 ? (
-                    <span className="" style={{ fontSize: "14px" }}>
+                    <span className="price-text" style={{ fontSize: "19px" }}>
                       {price(product?.price)}
                     </span>
                   ) : (
@@ -217,7 +221,7 @@ const ProductDetail = () => {
                       product?.stock[0]?.discount_price !== undefined &&
                       product?.stock[0]?.discount_price > 0 ? (
                         <>
-                          <span className="" style={{ fontSize: "14px" }}>
+                          <span className="price-text" style={{ fontSize: "19px" }}>
                             {discountPrice(product?.stock[0]?.discount_price)}
                           </span>{" "}
                           <span
@@ -228,7 +232,7 @@ const ProductDetail = () => {
                           </span>
                         </>
                       ) : (
-                        <span className="" style={{ fontSize: "14px" }}>
+                        <span className="price-text" style={{ fontSize: "19px" }}>
                           {prices(product?.price)}
                         </span>
                       )}
@@ -236,14 +240,17 @@ const ProductDetail = () => {
                   )}
                 </div>
                 <div>
-                          {product && product?.stock && product?.stock.length > 0 ? (
-                            <span style={{ fontSize: "14px" }}>
-                            {parseFloat(product?.stock[0]?.discount_percentage).toFixed(0)}% OFF
-                          </span>
-                          ) : (
-                            " "
-                          )}
-                  </div>
+                  {product && product?.stock && product?.stock.length > 0 ? (
+                    <span style={{ fontSize: "14px" }}>
+                      {parseFloat(
+                        product?.stock[0]?.discount_percentage
+                      ).toFixed(0)}
+                      % OFF
+                    </span>
+                  ) : (
+                    " "
+                  )}
+                </div>
                 <div>{stockHandle(product?.available_quantity)}</div>
                 <div className="p-1 my-2 table-responsivedesTag">
                   <Scrollbars>
@@ -256,7 +263,7 @@ const ProductDetail = () => {
                       <div className="">
                         <button
                           type="button"
-                          className="btn btn-outline-warning fs-14"
+                          className="inc-dec-btn fs-14"
                           onClick={() => decreaseQty()}
                         >
                           -
@@ -266,7 +273,7 @@ const ProductDetail = () => {
                         </span>
                         <button
                           type="button"
-                          className="btn btn-outline-success fs-14"
+                          className="inc-dec-btn fs-14"
                           onClick={() => increaseQty()}
                         >
                           +
@@ -275,7 +282,7 @@ const ProductDetail = () => {
                       <div className="mt-5">
                         <button
                           type="button"
-                          className="btn btn-secondary me-1"
+                          className="main-btn-color me-1"
                           onClick={() => addToCartHandler(product)}
                         >
                           Add to Cart
@@ -335,9 +342,7 @@ const ProductDetail = () => {
                     </td>
                     <td className="col-md-9">
                       <ul>
-                        <li>
-                          {product.title}
-                        </li>
+                        <li>{product.title}</li>
                       </ul>
                     </td>
                   </tr>

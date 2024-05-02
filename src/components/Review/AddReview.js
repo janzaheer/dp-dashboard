@@ -65,7 +65,7 @@ const AddReview = ({id,itemId,orderListData}) => {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Add Review</Modal.Title>
+          <Modal.Title className="price-text">Add Review</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={addFeedbackProduct}>
@@ -95,7 +95,7 @@ const AddReview = ({id,itemId,orderListData}) => {
                 />
               </div>
                <Modal.Footer>
-                  <Button type="submit" variant="primary">Submit Review</Button>
+                  <Button type="submit" className="add-address-btn">Submit Review</Button>
                 </Modal.Footer>
             </div>
           </Form>

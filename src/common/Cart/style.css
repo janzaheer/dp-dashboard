@@ -96,3 +96,14 @@
   height: 20rem !important;
   /* overflow-y: scroll !important; */
 }
+.prooced-btn {
+  color: white;
+  background-color: #FF7F4F;
+  border-radius: 5px;
+  border: 1px solid #FF7F4F;
+  padding: 7px 100px;
+}
+.prooced-btn:hover {
+  background-color: #FF7F4F;
+  color: white;
+}

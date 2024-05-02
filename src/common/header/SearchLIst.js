@@ -47,7 +47,7 @@ const SearchLIst = () => {
           <div className='search-content bg-whitesmoke'>
               <div className='py-5'>
                 <div className='title-md text-center mb-3'>
-                  <h3 className='text-danger'>Search results</h3>
+                  <h3 className='price-text'>Search results</h3>
                 </div>
                 <div>
                   <CardData products={products} />

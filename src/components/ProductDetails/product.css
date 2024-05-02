@@ -131,3 +131,17 @@ body {
 .ReviewHeight{
     height: 350px;
 }
+
+.price-text {
+    color: #FF7F4F;
+}
+
+.inc-dec-btn {
+    color: #008080;
+    padding: 7px 15px;
+    border: 5px;
+}
+
+.inc-dec-btn:hover {
+    color: #FF7F4F;
+}
