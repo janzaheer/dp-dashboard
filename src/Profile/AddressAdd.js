@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import { Button, Col, Form, Row, Modal } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { MdAddLocationAlt } from 'react-icons/md';
+import { Button, Col, Form, Row, Modal } from "react-bootstrap";
+import { useSelector } from "react-redux";
+import { MdAddLocationAlt } from "react-icons/md";
 import { CreateAddress } from "../utlis/services/address_services";
 
-const AddressAdd = ({userList}) => {
+const AddressAdd = ({ userList }) => {
   const [phone_number, setPhone_number] = useState("");
   const [email_address, setEmail_address] = useState("");
   const [address, setAddress] = useState("");
+  const [provinces, setProvinces] = useState("");
   const [show, setShow] = useState(false);
   const userToken = useSelector((state) => state.user.token);
 
@@ -20,17 +21,20 @@ const AddressAdd = ({userList}) => {
       Authorization: `Token ${userToken}`,
     };
   }
+
   const handleCloseAdd = () => setShow(false);
   const handleShowAdd = () => setShow(true);
+
   const addAddress = async (e) => {
     e.preventDefault();
     const payload = {
-        phone_number: phone_number,
-          email_address: email_address,
-          address: address,
-    }
+      phone_number: phone_number,
+      email_address: email_address,
+      address: address,
+      province : provinces
+    };
     try {
-        await CreateAddress(payload, headers);
+      await CreateAddress(payload, headers);
       setShow(false);
       toast.success("new Address Added Successfully!", {
         position: toast.POSITION.TOP_RIGHT,
@@ -39,7 +43,8 @@ const AddressAdd = ({userList}) => {
       setAddress("");
       setEmail_address("");
       setPhone_number("");
-    userList();
+      setProvinces("");
+      userList();
     } catch (error) {
       console.log("add error", error);
       toast.error("Please Required These Fields", {
@@ -59,7 +64,7 @@ const AddressAdd = ({userList}) => {
 
       <Modal show={show} onHide={handleCloseAdd}>
         <Modal.Header closeButton>
-          <Modal.Title className="price-text">Add Address</Modal.Title>
+          <Modal.Title className="price-text">Add Address {provinces}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form onSubmit={addAddress}>
@@ -85,6 +90,24 @@ const AddressAdd = ({userList}) => {
             </Row>
             <Form.Group
               className="mb-3"
+              controlId="exampleForm.ControlProvince"
+            >
+              <Form.Label>Select Province</Form.Label>
+              <Form.Select
+                aria-label="Default select example"
+                defaultValue="Choose..."
+                onChange={(e) => setProvinces(e.target.value)}
+                name="provinceDataSelect"
+              >
+                <option>Select Your Province</option>
+                <option value="Balochistan">Balochistan</option>
+                <option value="Punjab">Punjab</option>
+                <option value="Sindh">Sindh</option>
+                <option value="KPK">KPK</option>
+              </Form.Select>
+            </Form.Group>
+            <Form.Group
+              className="mb-3"
               controlId="exampleForm.ControlDescription1"
             >
               <Form.Label>Address</Form.Label>
@@ -97,7 +120,7 @@ const AddressAdd = ({userList}) => {
               />
             </Form.Group>
             <Button
-             className="add-address-btn"
+              className="add-address-btn"
               // onClick={handleCloseAdd}
               type="submit"
             >
@@ -116,4 +139,4 @@ const AddressAdd = ({userList}) => {
 };
 
 export default AddressAdd;
-// 
+//

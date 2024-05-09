@@ -11,9 +11,8 @@ import { Button, Col, Form, Row, Modal } from "react-bootstrap";
 import { uploadFile } from "react-s3";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import { IoAddCircle } from 'react-icons/io5';
+import { IoAddCircle } from "react-icons/io5";
 import { ProductCategory } from "../../utlis/services/product_category_services";
-
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
@@ -45,6 +44,7 @@ const AddProduct = ({ productList }) => {
   const [selectImage4, setSelectImage4] = useState("");
   const [stock_quantity, setStock_quantity] = useState("");
   const [discount_percentage, setdDiscount_percentage] = useState("");
+  const [weight, setWeight] = useState("");
 
   const [showAdd, setShowAdd] = useState(false);
 
@@ -89,6 +89,8 @@ const AddProduct = ({ productList }) => {
           images: imageData,
           category_id: categoriesDataSelect,
           price: price,
+          weight: weight,
+          dimensions: 0.00,
           brand: brand,
           store: store,
           stock_quantity: stock_quantity,
@@ -117,7 +119,8 @@ const AddProduct = ({ productList }) => {
         setPrice("");
         setStore("");
         setCategoriesDataSelect("");
-        setdDiscount_percentage("")
+        setdDiscount_percentage("");
+        setWeight("")
         productList();
       })
       .catch((resp) => {
@@ -206,8 +209,8 @@ const AddProduct = ({ productList }) => {
     <div>
       <ToastContainer />
       <Button variant="outline-success" onClick={handleShowAdd}>
-                    Add Product <IoAddCircle />
-                  </Button>
+        Add Product <IoAddCircle />
+      </Button>
       {/* Add Product Model */}
       <Modal show={showAdd} onHide={handleCloseAdd}>
         <Modal.Header closeButton>
@@ -353,6 +356,16 @@ const AddProduct = ({ productList }) => {
                   placeholder="discount_percentage 5"
                   value={discount_percentage}
                   onChange={(e) => setdDiscount_percentage(e.target.value)}
+                />
+              </Form.Group>
+              <Form.Group as={Col} controlId="formGridWeight">
+                <Form.Label>Weight</Form.Label>
+                <Form.Control
+                  type="number"
+                  name="weight"
+                  placeholder="Weight"
+                  value={weight}
+                  onChange={(e) => setWeight(e.target.value)}
                 />
               </Form.Group>
             </Row>

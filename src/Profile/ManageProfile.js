@@ -141,7 +141,8 @@ const ManageProfile = () => {
                                                     <hr className='mb-3 mt-0' />
                                                     <h6 className="card-subtitle mb-2 text-muted"><FaUserCircle /> Name: {userData.first_name} {userData.last_name}</h6>
                                                     <p className='card-subtitle mb-1'><MdAddCall /> Phone: {item?.phone_number}</p>
-                                                    <p className='card-subtitle mb-1'><MdMarkEmailUnread /> Email: {item?.email_address}</p>
+                                                    <p className='card-subtitle mb-0'><MdMarkEmailUnread /> Email: {item?.email_address}</p>
+                                                    <p className="card-text mb-0"><ImLocation2 /> Province: {item?.province}</p>
                                                     <p className="card-text"><FaAddressCard /> Address: {item?.address}</p>
                                                 </div>
                                             </div>

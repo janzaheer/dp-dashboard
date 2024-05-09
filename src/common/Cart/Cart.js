@@ -15,14 +15,8 @@ import ScrollToTop from "react-scroll-to-top";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const { data: cartProducts, totalItems, totalAmount, deliveryCharge } = useSelector(state => state.cart);
-  // const userToken = useSelector(state => state.user.token);
-console.log('cart',cartProducts)
-console.log('total',totalAmount)
-  // useEffect(() => {
-  //   dispatch(getCartTotal());
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [useSelector(state => state.cart)]);
+  const { data: cartProducts, totalItems, totalAmount, deliveryCharge, totalAmountItems } = useSelector(state => state.cart);
+  
   useEffect(() => {
     dispatch(getCartTotal());
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -62,41 +56,50 @@ console.log('total',totalAmount)
 
   const price = (p) => {
     /* eslint eqeqeq: 0 */
-    if (p == 0) {
-      return `-`
+    if (p === 0 || p === undefined) {
+      return "-";
     } else {
-      return `${parseFloat(p).toFixed(0)}`
+      return `${parseFloat(p).toFixed(0)}`;
     }
   }
 
   const TotalPrice = (p) => {
     /* eslint eqeqeq: 0 */
-    if (p == 0) {
-      return `-`
+    if (p === 0 || p === undefined) {
+      return "-";
     } else {
-      return `${parseFloat(p).toFixed(0)}`
+      return `${parseFloat(p).toFixed(0)}`;
     }
   }
 
   const total = (p) => {
     /* eslint eqeqeq: 0 */
-    if (p == 0) {
-      return `-`
+    if (p === 0 || p === undefined) {
+      return "-";
     } else {
-      return `${parseFloat(p).toFixed(0)}`
+      return `${parseFloat(p).toFixed(0)}`;
+    }
+  }
+
+  const totalAmountItemsFunc = (p) => {
+    /* eslint eqeqeq: 0 */
+    if (p === 0 || p === undefined) {
+      return "-";
+    } else {
+      return `${parseFloat(p).toFixed(0)}`;
     }
   }
 
   const deliveryPrice = (p) => {
     /* eslint eqeqeq: 0 */
-    if (p == 0) {
-      return `-`
+    if (p === 0 || p === undefined) {
+      return "-";
     } else {
-      return `${parseFloat(p).toFixed(0)}`
+      return `${parseFloat(p).toFixed(0)}`;
     }
   }
   const discountPrice = (d) => {
-    if (d == 0) {
+    if (d === 0 || d === undefined) {
       return "";
     } else {
       return `Rs ${parseFloat(d).toFixed(0)}`;
@@ -211,11 +214,12 @@ console.log('total',totalAmount)
                 <div className="p-4">
                   <p className="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
                   <ul className="list-unstyled mb-4">
-                    <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Selected {totalItems} items(s) Quantity Price</strong><strong>Rs {total(totalAmount)}</strong></li>
+                    <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Selected {totalItems} items(s) Quantity Price</strong><strong>Rs {totalAmountItemsFunc(totalAmountItems)}
+                      </strong></li>
                     <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Delivery Cost</strong><strong>Rs {deliveryPrice(deliveryCharge)}</strong></li>
                     {/* <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Discount</strong><strong>Rs -</strong></li> */}
                     <li className="d-flex justify-content-between py-3 border-bottom"><strong className="text-muted">Total</strong>
-                      <h5 className="font-weight-bold">Rs {total(totalAmount) + deliveryPrice(deliveryCharge)} </h5>
+                      <h5 className="font-weight-bold">Rs {total(totalAmount)} </h5>
                     </li>
                   </ul>
                   { cartProducts.length === 0 ? <button className="btn btn-warning">Proceed to Checkout</button> : 
