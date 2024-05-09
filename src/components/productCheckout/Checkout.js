@@ -17,13 +17,10 @@ import AddressAdd from '../../Profile/AddressAdd';
 import { OrderAdd } from '../../utlis/services/order_services';
 import { GetUserData } from '../../utlis/services/user_services';
 
-
 const Checkout = () => {
 
     const dispatch = useDispatch();
-    const { data: products, totalItems, totalAmount } = useSelector(state => state.cart);
-    console.log('products',products)
-    console.log('total',totalAmount)
+    const { data: products, totalItems, totalAmount, deliveryCharge, totalAmountItems } = useSelector(state => state.cart);
     const user = useSelector((state) => state.user)
     const userToken = useSelector(state => state.user.token);
     const [userData, setUserData] = useState({})
@@ -31,15 +28,13 @@ const Checkout = () => {
     const [selectedAddressEmail, setSelectedAddressEmail] = useState('')
     const [selectedAddress, setSelectedAddress] = useState('')
     const [selectedAddressId, setSelectedAddressId] = useState('')
+    const [selectedProvinces, setSelectedProvinces] = useState('')
     const [showAddressListModel, setShowAddressListModel] = useState(false);
+
+    const handleCloseShowAddressListModel = () => setShowAddressListModel(false);
+    const handleShowShowAddressListModel = () => setShowAddressListModel(true);
     const navigate = useNavigate();
-
     const id = user.user.id
-
-    useEffect(() => {
-        dispatch(getCartTotal());
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [useSelector(state => state.cart)]);
 
     useEffect(() => {
         userList()
@@ -84,24 +79,29 @@ const Checkout = () => {
         try {
             let res = await GetUserData(id, headers)
             setUserData(res)
-            setSelectedAddressPhone(res && res.addresses && res.addresses[0].phone_number)
-            setSelectedAddressEmail(res && res.addresses && res.addresses[0].email_address)
-            setSelectedAddress(res && res.addresses && res.addresses[0].address)
-            setSelectedAddressId(res && res.addresses && res.addresses[0].id)
+            const defaultAddress = res.addresses && res.addresses[0];
+            if (defaultAddress) {
+                setSelectedAddressPhone(defaultAddress.phone_number);
+                setSelectedAddressEmail(defaultAddress.email_address);
+                setSelectedAddress(defaultAddress.address);
+                setSelectedProvinces(defaultAddress.province); // Set default province
+                setSelectedAddressId(defaultAddress.id);
+                dispatch(getCartTotal({ province: defaultAddress.province })); // Calculate total with default province
+            }
+
         } catch (error) {
             console.log(error)
         }
     }
 
-    const handleCloseShowAddressListModel = () => setShowAddressListModel(false);
-    const handleShowShowAddressListModel = () => setShowAddressListModel(true);
-
-    const handleSelectNewAddress = async (id, phone_number, email_address, address) => {
+    const handleSelectNewAddress = async (id, phone_number, email_address, address, province) => {
         try {
             setSelectedAddressPhone(phone_number)
             setSelectedAddressEmail(email_address)
             setSelectedAddress(address)
             setSelectedAddressId(id)
+            setSelectedProvinces(province);
+            dispatch(getCartTotal({ province }));
             toast.success('Selected New Address Successfully', {
                 position: toast.POSITION.TOP_RIGHT,
                 theme: "colored",
@@ -119,7 +119,6 @@ const Checkout = () => {
             return `${parseFloat(p).toFixed(0)}`
         }
     }
-
     const total = (p) => {
         if (p == 0) {
             return `-`
@@ -133,7 +132,24 @@ const Checkout = () => {
         } else {
           return `Rs ${parseFloat(d).toFixed(0)}`;
         }
-      };
+    };
+    const deliveryPrice = (p) => {
+        /* eslint eqeqeq: 0 */
+        if (p === 0 || p === undefined) {
+          return "-";
+        } else {
+          return `${parseFloat(p).toFixed(0)}`;
+        }
+    }
+
+    const totalAmountItemsFunc = (p) => {
+        /* eslint eqeqeq: 0 */
+        if (p === 0 || p === undefined) {
+          return "-";
+        } else {
+          return `${parseFloat(p).toFixed(0)}`;
+        }
+      }
 
     return (
         <div>
@@ -156,7 +172,7 @@ const Checkout = () => {
                             return (
                                 <div className='col-6' key={item.id}>
                                     <div className='card shadow-sm my-2'  >
-                                        <div className="card-body product" onClick={() => handleSelectNewAddress(item.id, item?.phone_number, item?.email_address, item?.address)}>
+                                        <div className="card-body product" onClick={() => handleSelectNewAddress(item.id, item?.phone_number, item?.email_address, item?.address, item?.province)}>
                                             <div className='d-flex justify-content-between'>
                                                 <div>
                                                     <p className='text-muted'><ImLocation2 /> Address # {index + 1}</p>
@@ -167,8 +183,9 @@ const Checkout = () => {
                                             <hr className='mb-3 mt-0' />
                                             <h6 className="card-subtitle mb-2 text-muted"><FaUserCircle /> Name: {userData.first_name} {userData.last_name}</h6>
                                             <p className='card-subtitle mb-1'><MdAddCall /> Phone: {item?.phone_number}</p>
-                                            <p className='card-subtitle mb-1'><MdMarkEmailUnread /> Email: {item?.email_address}</p>
-                                            <p className="card-text"><FaAddressCard /> Address: {item?.address}</p>
+                                            <p className='card-subtitle mb-0'><MdMarkEmailUnread /> Email: {item?.email_address}</p>
+                                            <p className="card-text mb-0"><ImLocation2 /> Province: {item?.province}</p>
+                                            <p className="card-text mb-0"><FaAddressCard /> Address: {item?.address}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -201,7 +218,8 @@ const Checkout = () => {
                                     <h6 className="card-subtitle mb-2 text-muted" >Name: {user.user.username}</h6>
                                     <h6 className="card-subtitle mb-2 text-muted"> FullName: {userData?.first_name} {userData?.last_name}</h6>
                                     <p className='card-subtitle mb-1'> Phone: {selectedAddressPhone}</p>
-                                    <p className='card-subtitle mb-1'> Email: {selectedAddressEmail}</p>
+                                    <p className='card-subtitle mb-0'> Email: {selectedAddressEmail}</p>
+                                    <p className="card-text mb-0">Province: {selectedProvinces}</p>
                                     <p className="card-text">Address: {selectedAddress}</p>
                                 </div>
                             </div>
@@ -243,13 +261,13 @@ const Checkout = () => {
                                                            {
                                                             item?.stock.length > 0? (<>
                                                             <strong className='price-text d-block'>{discountPrice(item?.stock[0]?.discount_price)}</strong>
-                                                            <strong className="text-decoration-line-through text-muted">Rs {price(item.price)}</strong>
+                                                            <strong className="text-decoration-line-through text-muted">Rs {price(item?.price)}</strong>
                                                             </>) : (<>
-                                                                <strong className='price-text'>Rs {price(item.price)}</strong>
+                                                                <strong className='price-text'>Rs {price(item?.price)}</strong>
                                                             </>)
                                                            }
                                                         </td>
-                                                        <td className="border-0 align-middle"><strong>{item.quantity}</strong></td>
+                                                        <td className="border-0 align-middle"><strong>{item?.quantity}</strong></td>
                                                     </tr>
                                                 )
                                             })}
@@ -276,8 +294,11 @@ const Checkout = () => {
                                     </div>
                                     <div className='mt-1 ms-1'>
                                         <p> {totalItems}</p>
-                                        <p className='text-muted text-wrap'>Calculate by support after placing order </p>
-                                        <p>Rs {total(totalAmount)}</p>
+                                        <p className='text-muted text-wrap'>
+                                        Rs {deliveryPrice(deliveryCharge)}
+                                            {/* Calculate by support after placing order  */}
+                                            </p>
+                                        <p>Rs {totalAmountItemsFunc(totalAmountItems)}</p>
                                         <p className='price-text fw-bolder'>Rs {total(totalAmount)}</p>
                                     </div>
                                 </div>

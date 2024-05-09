@@ -126,7 +126,7 @@ const ProductDetail = () => {
         </span>
       );
     } else {
-      return `${seller.company}`;
+      return `${seller?.company}`;
     }
   };
 
