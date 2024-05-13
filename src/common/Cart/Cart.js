@@ -32,6 +32,7 @@ const Cart = () => {
 
   const increase = (id) => {
     dispatch(toggleCartQty({ id: id, type: "INC" }));
+    dispatch(getCartTotal());
     toast.success("Increase +1 Qty successfully", {
       position: toast.POSITION.TOP_RIGHT,
       theme: "colored",
@@ -39,6 +40,7 @@ const Cart = () => {
   }
   const decrease = (id) => {
     dispatch(toggleCartQty({ id: id, type: "DEC" }));
+    dispatch(getCartTotal());
     toast.warning("Decrease -1 Qty successfully", {
       position: toast.POSITION.TOP_RIGHT,
       theme: "colored",

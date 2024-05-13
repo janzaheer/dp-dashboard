@@ -48,10 +48,10 @@ const Checkout = () => {
             Authorization: `Token ${userToken}`
         }
     }
-
+    console.log('delivery',deliveryCharge)
     // Creating a JS object to add array into
     // Array to be inserted
-    var placeOrder = { total_amount: totalAmount, total_quantity: totalItems, address_id: selectedAddressId, items: [] };
+    var placeOrder = { total_amount: totalAmount, total_quantity: totalItems, address_id: selectedAddressId,shipping_amount:deliveryCharge,  items: [] };
     let my_total_quantity = 0;
     products.forEach(element => {
         let data = {
@@ -87,8 +87,8 @@ const Checkout = () => {
                 setSelectedProvinces(defaultAddress.province); // Set default province
                 setSelectedAddressId(defaultAddress.id);
                 dispatch(getCartTotal({ province: defaultAddress.province })); // Calculate total with default province
+                
             }
-
         } catch (error) {
             console.log(error)
         }
@@ -168,6 +168,7 @@ const Checkout = () => {
                 </Modal.Header>
                 <Modal.Body>
                     <div className='row'>
+                        {userData?.addresses?.length === 0 ? 'Please Add Your Address before place order' : '' }
                         {userData.addresses?.map((item, index) => {
                             return (
                                 <div className='col-6' key={item.id}>
@@ -221,6 +222,7 @@ const Checkout = () => {
                                     <p className='card-subtitle mb-0'> Email: {selectedAddressEmail}</p>
                                     <p className="card-text mb-0">Province: {selectedProvinces}</p>
                                     <p className="card-text">Address: {selectedAddress}</p>
+                                    {userData?.addresses?.length === 0 ? 'Please Add Your Address before place order' : '' }
                                 </div>
                             </div>
                         </div>
@@ -302,7 +304,10 @@ const Checkout = () => {
                                         <p className='price-text fw-bolder'>Rs {total(totalAmount)}</p>
                                     </div>
                                 </div>
-                                <button onClick={() => handlePlaceOrder()} className='btn place-btn-color w-100 my-3'>Place Order</button>
+                                <div> 
+                                    {userData?.addresses?.length === 0 ? <button className='btn btn-danger w-100 my-3'>address missing</button>
+                                     : <button onClick={() => handlePlaceOrder()} className='btn place-btn-color w-100 my-3'>Place Order</button> }
+                                </div>
                             </div>
                         </div>
                     </div>

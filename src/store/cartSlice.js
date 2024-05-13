@@ -85,6 +85,30 @@ const cartSlice = createSlice({
       state.data = [];
       state.totalItems = 0;
     },
+    // toggleCartQty(state, action) {
+    //   const { id, type } = action.payload;
+    //   const item = state.data.find((item) => item.id === id);
+
+    //   if (!item) {
+    //     return;
+    //   }
+
+    //   const tempCart = state.data.map((cartItem) => {
+    //     if (cartItem.id === id) {
+    //       let tempQty = cartItem.quantity;
+
+    //       if (type === "INC") {
+    //         tempQty += 1;
+    //       } else if (type === "DEC") {
+    //         tempQty = Math.max(tempQty - 1, 1);
+    //       }
+
+    //       return { ...cartItem, quantity: tempQty };
+    //     }
+    //     return cartItem;
+    //   });
+    //   state.data = tempCart;
+    // },
     toggleCartQty(state, action) {
       const tempCart = state.data.map((item) => {
         if (item.id === action.payload.id) {
@@ -109,7 +133,6 @@ const cartSlice = createSlice({
           return item;
         }
       });
-
       state.data = tempCart;
     },
     getCartTotal(state, action) {
@@ -145,7 +168,7 @@ const cartSlice = createSlice({
       state.totalAmount = parseFloat((totalAmount).toFixed(2));
       state.totalAmountItems = parseFloat((totalAmountItems).toFixed(2))
       // Calculate delivery charge based on the selected province and total weight
-      state.deliveryCharge = calculateDeliveryCharge(totalWeight, province);
+      state.deliveryCharge = calculateDeliveryCharge(totalWeight, province) * state.totalItems;
       // Add delivery charge to the total amount
       state.totalAmount += state.deliveryCharge;
     },
