@@ -11,7 +11,7 @@ import Star from "../ProductDetails/Star";
 
 const CardData = ({ products, handleFavList }) => {
   const [itemFavourite, setItemFavourite] = useState({});
-  const [addFav, setAddFav] = useState("");
+  // const [addFav, setAddFav] = useState("");
   const userToken = useSelector((state) => state.user.token);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const CardData = ({ products, handleFavList }) => {
       )
       .then((result) => {
         console.log(result);
-        setAddFav(result);
+        // setAddFav(result);
 
         if (result.data.message.includes("remove")) {
           let idata = itemFavourite;

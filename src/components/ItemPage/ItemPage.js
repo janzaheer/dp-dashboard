@@ -49,8 +49,7 @@ const ItemPage = () => {
         category_name = ''
         return await axios.get(final, { headers: headers })
             .then((res) => {
-                // const apiRes = [...products, ...res?.data?.results]
-                // console.log('---------------', res?.data?.results)
+     
                 setProducts(res?.data?.results)
                 setNextUrlPage(res?.data?.next)
                 setPrevUrlPage(res?.data?.previous)
