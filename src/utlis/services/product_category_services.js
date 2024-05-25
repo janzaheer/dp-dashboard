@@ -14,7 +14,7 @@ export async function ProductsFav(headers){
     return resp.data
 }
 
-export async function ProductsSearch(headers, search_name){
+export async function ProductsSearch(search_name, headers){
     let finalUrl = BASE_URL + API_VERSION() + END_POINT() + `?search=${search_name}`
     const resp = await axios.get(finalUrl, { headers: headers })
     return resp.data

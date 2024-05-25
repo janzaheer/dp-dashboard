@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
-  // const dispatch = useDispatch();
   const { totalItems } = useSelector((state => state.cart));
   const navigate = useNavigate()
 
@@ -29,13 +28,23 @@ const Navbar = () => {
               <div className="col-md-2">
                 <NavLink to='/' className="text-decoration-none">
                   <img className="d-md-flex" src={logo} alt='' height={90} />
-                  {/* <h4 className="text-decoration-none" style={{ width: '110px', color: '#374151'}}>DjangoPets</h4> */}
                 </NavLink>
               </div>
               <div className="col-md-8">
                 <div className="d-flex form-inputs">
-                  <input className="form-control" type="text" placeholder="Search any product..."
-                    onKeyUp={(e) => handleSearchTerm(e)} />
+                  {/* <input className="form-control" type="text" placeholder="Search any product..."
+                    onKeyUp={(e) => handleSearchTerm(e)} /> */}
+                     <input
+                    className="form-control"
+                    type="text"
+                    placeholder="Search any product..."
+                    onChange={(e) => handleSearchTerm(e)}
+                    onKeyUp={(e) => {
+                      if (e.key === 'Enter') {
+                        handleSearchTerm(e);
+                      }
+                    }}
+                  />
                 </div>
               </div>
               <div className="col-md-2">

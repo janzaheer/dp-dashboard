@@ -28,7 +28,7 @@ const ManageProfile = () => {
     const user = useSelector(state => state.user);
     const userToken = useSelector(state => state.user.token);
     const [userData, setUserData] = useState({})
-    const[data, setData]= useState([])
+    const [data, setData]= useState([])
     const [loading, setLoading] = useState(true);
 
     console.log('User',userToken)
@@ -91,8 +91,8 @@ const ManageProfile = () => {
             <Header />
             <div className="container-fluid manage">
                 <ToastContainer />
-                <div className='container'>
-                    <h3 className='text-center text-just mt-5 mb-3'>Hello, {user?.user?.username}</h3>
+                <div className='container' style={{ marginTop: '80px' }}>
+                    <h3 className='text-center text-just mt-5 mb-md-3'>Hello, {user?.user?.username}</h3>
                     <div className='row'>
                         <div className='col-md-4'>
                             <div className='card shadow'>
