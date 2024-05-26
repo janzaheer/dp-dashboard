@@ -270,8 +270,9 @@ const ProductSuccess = () => {
                       <div className="d-flex justify-content-between mt-1">
                         <span className="font-weight-bold">Total</span>
                         <span className="font-weight-bold price-text">
-                          {subTotal(orderDataList?.total_amount) +
-                            ShippingPrice(orderDataList?.shipping_amount)}
+                          Rs {subTotal(orderDataList?.total_amount)
+                            // ShippingPrice(orderDataList?.shipping_amount)
+                            }
                         </span>
                       </div>
                       <div className="d-flex justify-content-between mt-1">
