@@ -35,7 +35,6 @@ const Wrapper = styled.section`
     align-items: center;
     justify-content: flex-start;
     .icon {
-      
       color: orange;
     }
     .empty-icon {

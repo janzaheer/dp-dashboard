@@ -7,11 +7,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { BASE_URL, FAV_ENDPOINT, API_VERSION } from "../../utlis/apiUrls";
 import Star from "../ProductDetails/Star";
-// import { AddProductsFav } from "../../utlis/services/product_category_services";
 
 const CardData = ({ products, handleFavList }) => {
   const [itemFavourite, setItemFavourite] = useState({});
-  // const [addFav, setAddFav] = useState("");
   const userToken = useSelector((state) => state.user.token);
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const navigate = useNavigate();
@@ -34,9 +32,6 @@ const CardData = ({ products, handleFavList }) => {
         }
       )
       .then((result) => {
-        console.log(result);
-        // setAddFav(result);
-
         if (result.data.message.includes("remove")) {
           let idata = itemFavourite;
           idata[id] = false;
@@ -62,9 +57,6 @@ const CardData = ({ products, handleFavList }) => {
     if (!isAuthenticated) {
       navigate("/login");
     }
-    // if (isAuthenticated == false) {
-    //     navigate("/login")
-    // }
   };
   // const handleFav = async (id) => {
   //   const payload = {
@@ -162,16 +154,9 @@ const CardData = ({ products, handleFavList }) => {
                     <div className="p-1">
                       <div className="about">
                         <div className="mx-1 d-flex justify-content-between align-items-center">
-                          <h6 className="text-muted">
-                            {product?.title.substring(0, 14)}
-                          </h6>
-                          {/* {product?.stock.length === 0 ? (
-                            " "
-                          ) : (
-                            <span style={{ fontSize: "14px" }}>
-                              {parseFloat(product?.stock[0]?.discount_percentage).toFixed(0)}% OFF
-                            </span>
-                          )} */}
+                          <p className="text-muted mb-0" style={{ fontWeight: 'bold' }}>
+                            {product?.title.substring(0, 15)}
+                          </p>
                         </div>
                         <div className="px-1 d-flex justify-content-between align-items-center">
                           {product?.stock.length === 0 ? (

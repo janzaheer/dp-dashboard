@@ -176,7 +176,7 @@ const ShopListData = () => {
                                                 <Spinner animation="border" size="lg" variant="success" />
                                             </div>
                                         ) : (
-                                            <CardData products={products[key]} ProductListingWithCategory={ProductListingWithCategory} />
+                                            <CardData products={products[key]} handleFavList={ProductListingWithCategory} />
                                         )}
                                     </div>
                                     <div className="d-flex justify-content-center mt-2">
