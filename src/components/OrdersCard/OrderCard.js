@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { RiShoppingBag3Fill } from "react-icons/ri";
 import { BsEyeFill } from "react-icons/bs";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { SellerOrderList } from "../../utlis/services/order_services";
 import { Scrollbars } from "react-custom-scrollbars-2";

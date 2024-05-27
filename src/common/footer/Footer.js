@@ -4,7 +4,7 @@ import { Button, Modal } from 'react-bootstrap';
 // import axios from "axios";
 // import { BASE_URL, SELLER_ENDPOINT,API_VERSION } from "../../utlis/apiUrls";
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { BsTelephonePlusFill } from 'react-icons/bs';
 import { MdAttachEmail } from 'react-icons/md';
 import { ImLocation2 } from 'react-icons/im'

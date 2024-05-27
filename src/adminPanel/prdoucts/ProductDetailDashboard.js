@@ -18,7 +18,7 @@ const ProductDetailDashboard = () => {
     const getProductDetail = async () => {
         // eslint-disable-next-line         
         try {
-                let resp = await ProductDetail(id)
+            let resp = await ProductDetail(id)
                 setProductDetail(resp)
         } catch (error) {
             console.log(error)
@@ -27,7 +27,7 @@ const ProductDetailDashboard = () => {
     const { images } = productDetail;
 
     const stockHandle = (available_quantity) => {
-        if (available_quantity == 0) {
+        if (available_quantity === 0) {
             return 'Out Of Stock'
         } else {
             return `Stock ${available_quantity}`

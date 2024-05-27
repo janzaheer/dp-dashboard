@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import logo from "../logo/Django_Pets.png";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signInUser } from "../store/authSlice";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";

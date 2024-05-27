@@ -17,7 +17,7 @@ import { ProductCategory } from "../../utlis/services/product_category_services"
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
 const BN =
-  process.env.NODE_ENV == "development"
+  process.env.NODE_ENV === "development"
     ? `meditech-products`
     : `cosemedicos-prod`;
 const config = {

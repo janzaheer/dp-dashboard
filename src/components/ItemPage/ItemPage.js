@@ -64,10 +64,9 @@ const ItemPage = () => {
     const categoryList = async (e) => {
         let val = e.target.value;
         setCat(val)
-        if (val == 'all-categories') {
-            val = ''
+        if (val === 'all-categories') {
+            val = '';
         }
-        console.log('---------------', val)
         let finalURL = BASE_URL + API_VERSION() + END_POINT() + CATEGORY_ITEMS_LIST_ENDPOINT() + val
 
         axios.get(finalURL, {

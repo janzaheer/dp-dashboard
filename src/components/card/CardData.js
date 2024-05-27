@@ -92,7 +92,7 @@ const CardData = ({ products, handleFavList }) => {
   // };
 
   const price = (p) => {
-    if (p == 0) {
+    if (p === 0) {
       return "";
     } else {
       return `Rs ${parseFloat(p).toFixed(0)}`;
@@ -110,7 +110,7 @@ const CardData = ({ products, handleFavList }) => {
   //   }
   // };
   const discountPrice = (d) => {
-    if (d == 0) {
+    if (d === 0) {
       return "";
     } else {
       return `Rs ${parseFloat(d).toFixed(0)}`;

@@ -22,6 +22,7 @@ const Order = () => {
   const userToken = useSelector((state) => state.user.token);
   const user = useSelector((state) => state.user);
   const id = user.user.id;
+  
   useEffect(() => {
     userList();
     myOrderList();
@@ -47,7 +48,7 @@ const Order = () => {
 
   const myOrderList = async () => {
     try {
-        let resp = await  SellerOrderList(headers);
+        let resp = await SellerOrderList(headers);
       setOrderDataList(resp.results);
     } catch (error) {
       console.log(error);
@@ -55,38 +56,25 @@ const Order = () => {
   };
 
   const handleBadge = (state) => {
-    if (state == "completed") {
+    if (state === "completed") {
       /* eslint eqeqeq: 0 */
       return <Badge bg="success">completed</Badge>;
-    } else if (state == "placed") {
+    } else if (state === "placed") {
       return <Badge bg="primary">placed</Badge>;
-    } else if (state == "processed") {
+    } else if (state === "processed") {
       return <Badge bg="warning">processed</Badge>;
-    } else if (state == "received") {
+    } else if (state === "received") {
       return <Badge bg="info">received</Badge>;
-    } else if (state == "canceled") {
+    } else if (state === "canceled") {
       return <Badge bg="danger">canceled</Badge>;
     }
     return ":";
   };
 
   const cancelOrder = async (id) => {
-    console.log("order-cancel", id);
-    // let final = BASE_URL + API_VERSION() + ORDER_ENDPOINT() + ORDER_CANCEL(id);
     try {
-        let response = await OrderCancel(id, headers)
-    //   let res = await axios.post(
-    //     final,
-    //     {},
-    //     {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //         Authorization: `Token ${userToken}`,
-    //       },
-    //     }
-    //   );
-    //   console.log('delete',response);
-         setOrderDataList(response)
+        let response = await OrderCancel(id, headers);
+        setOrderDataList(response);
       toast.error("Order Canceled Successfully", {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
@@ -124,9 +112,7 @@ const Order = () => {
                           <div className="p-2 px-3 text-uppercase">Order</div>
                         </th>
                         <th scope="col" className="border-0 bg-light">
-                          <div className="p-2 px-3 text-uppercase">
-                            Placed On
-                          </div>
+                          <div className="p-2 px-3 text-uppercase">Placed On</div>
                         </th>
                         <th scope="col" className="border-0 bg-light">
                           <div className="py-2 text-uppercase">Quantity</div>
@@ -167,58 +153,57 @@ const Order = () => {
                               </td>
                               <td className="border-0 text-danger align-middle">
                                 <div className="dropdown">
-                                  <a
+                                  <button
                                     className="btn dropdown-toggle"
                                     id="dropdownMenuButton1"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false"
                                   >
                                     <BsThreeDotsVertical />
-                                  </a>
+                                  </button>
                                   <ul
                                     className="dropdown-menu"
                                     aria-labelledby="dropdownMenuButton1"
                                   >
                                     <li>
-                                      <a
+                                      <button
                                         className="dropdown-item text-success"
-                                        href="#"
+                                        onClick={() => {/* handleCompleteOrder */}}
                                       >
                                         <IoCheckmarkDoneCircleSharp /> Completed
-                                      </a>
+                                      </button>
                                     </li>
                                     <li>
-                                      <a
+                                      <button
                                         className="dropdown-item text-info"
-                                        href="#"
+                                        onClick={() => {/* handleReceiveOrder */}}
                                       >
                                         <GiReceiveMoney /> Received
-                                      </a>
+                                      </button>
                                     </li>
                                     <li>
-                                      <a
+                                      <button
                                         className="dropdown-item text-primary"
-                                        href="#"
+                                        onClick={() => {/* handlePlaceOrder */}}
                                       >
                                         <GiBottomRight3DArrow /> Placed
-                                      </a>
+                                      </button>
                                     </li>
                                     <li>
-                                      <a
+                                      <button
                                         className="dropdown-item text-warning"
-                                        href="#"
+                                        onClick={() => {/* handleProcessOrder */}}
                                       >
                                         <FcProcess /> Processed
-                                      </a>
+                                      </button>
                                     </li>
                                     <li>
-                                      <a
+                                      <button
                                         className="dropdown-item text-danger"
                                         onClick={() => cancelOrder(item?.id)}
-                                        href="#"
                                       >
                                         <IoTrashBin /> Canceled
-                                      </a>
+                                      </button>
                                     </li>
                                     <li>
                                       <NavLink

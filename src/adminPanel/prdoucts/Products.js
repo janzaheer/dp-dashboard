@@ -153,26 +153,26 @@ const Products = () => {
                                 </td>
                                 <td className="border-0 align-middle">
                                   <div className="dropdown">
-                                    <a
+                                    <button
                                       className="btn dropdown-toggle"
                                       id="dropdownMenuButton1"
                                       data-bs-toggle="dropdown"
                                       aria-expanded="false"
                                     >
                                       <BsThreeDotsVertical />
-                                    </a>
+                                    </button>
                                     <ul
                                       className="dropdown-menu"
                                       aria-labelledby="dropdownMenuButton1"
                                     >
                                       <li>
-                                        <a
+                                        <button
                                           className="dropdown-item text-danger"
                                           onClick={() => deleteProduct(ite?.id)}
                                           href="#"
                                         >
                                           Delete <FaTrash />
-                                        </a>
+                                        </button>
                                       </li>
                                       <li>
                                         <Link
