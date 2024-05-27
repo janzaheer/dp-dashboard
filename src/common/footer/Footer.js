@@ -1,10 +1,10 @@
 import React, { useState } from "react"
 import "./style.css"
-import { Button, Col, Form, Row, Modal } from 'react-bootstrap';
-import axios from "axios";
-import { BASE_URL, SELLER_ENDPOINT,API_VERSION } from "../../utlis/apiUrls";
+import { Button, Modal } from 'react-bootstrap';
+// import axios from "axios";
+// import { BASE_URL, SELLER_ENDPOINT,API_VERSION } from "../../utlis/apiUrls";
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import { BsTelephonePlusFill } from 'react-icons/bs';
 import { MdAttachEmail } from 'react-icons/md';
 import { ImLocation2 } from 'react-icons/im'
@@ -12,42 +12,42 @@ import { ImLocation2 } from 'react-icons/im'
 const Footer = () => {
 
   const [show, setShow] = useState(false);
-  const [seller_name, setSeller_name] = useState('')
-  const [email, setEmail] = useState('')
-  const [phone_num, setPhone_num] = useState('')
-  const [company_name, setCompany_name] = useState('')
+  // const [seller_name, setSeller_name] = useState('')
+  // const [email, setEmail] = useState('')
+  // const [phone_num, setPhone_num] = useState('')
+  // const [company_name, setCompany_name] = useState('')
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const addSeller = async (e) => {
-    e.preventDefault();
-    let final = BASE_URL + API_VERSION() + SELLER_ENDPOINT()
-    await axios.post(final, {
-      seller_name: seller_name,
-      email: email,
-      phone_num: phone_num,
-      company_name: company_name
-    }, {
-      headers: {
-        'Content-Type': "application/json"
-      }
-    }).then((resp) => {
-      console.log('seller', resp)
-      toast.success(resp.data.message, {
-        position: toast.POSITION.TOP_RIGHT,
-        theme: "colored",
-      });
-    }).catch(resp => {
-      console.log(resp)
+  // const addSeller = async (e) => {
+  //   e.preventDefault();
+  //   let final = BASE_URL + API_VERSION() + SELLER_ENDPOINT()
+  //   await axios.post(final, {
+  //     seller_name: seller_name,
+  //     email: email,
+  //     phone_num: phone_num,
+  //     company_name: company_name
+  //   }, {
+  //     headers: {
+  //       'Content-Type': "application/json"
+  //     }
+  //   }).then((resp) => {
+  //     console.log('seller', resp)
+  //     toast.success(resp.data.message, {
+  //       position: toast.POSITION.TOP_RIGHT,
+  //       theme: "colored",
+  //     });
+  //   }).catch(resp => {
+  //     console.log(resp)
 
-    })
-    setSeller_name('')
-    setEmail('')
-    setPhone_num('')
-    setCompany_name('')
-    setShow(false)
-  }
+  //   })
+  //   setSeller_name('')
+  //   setEmail('')
+  //   setPhone_num('')
+  //   setCompany_name('')
+  //   setShow(false)
+  // }
 
   return (
     <>

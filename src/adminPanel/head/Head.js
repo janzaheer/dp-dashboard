@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 // import logo from '../../logo/logo_new.png';
 import { SlLogout } from 'react-icons/sl';
@@ -14,7 +14,6 @@ import { logout } from '../../store/authSlice';
 
 const Head = () => {
   const user = useSelector(state => state.user)
-  const userToken = useSelector(state => state.user.token);
   const navigation = useNavigate();
   const dispatch = useDispatch();
   // const [notification, setNotification] = useState('')
@@ -71,12 +70,20 @@ const Head = () => {
                 DjangoPets {user?.user?.username}
               </button>
               <ul className="dropdown-menu text-small shadow me-5">
-                <li><a className="dropdown-item" href="#"><FaUserTie /> {user?.user?.first_name} {user?.user?.last_name}</a></li>
+                <li>
+                  <span className="dropdown-item">
+                    <FaUserTie /> {user?.user?.first_name} {user?.user?.last_name}
+                  </span>
+                </li>
                 <li><hr className="dropdown-divider" /></li>
                 <li><Link className="dropdown-item" to='#'><AiOutlineHome /> Home</Link></li>
                 <li><Link className="dropdown-item" to='#'><CgProfile /> Profile</Link></li>
                 <li><hr className="dropdown-divider" /></li>
-                <li><a className="dropdown-item" href="#" onClick={handleLogout}><SlLogout /> Sign Out</a></li>
+                <li>
+                  <button className="dropdown-item" onClick={handleLogout}>
+                    <SlLogout /> Sign Out
+                  </button>
+                </li>
               </ul>
             </div>
           </div>

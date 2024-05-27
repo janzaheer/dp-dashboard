@@ -25,7 +25,7 @@ const ChatsCardDtata = ({ data, loading }) => {
                       <div className="col-12  mt-2" key={item.id}>
                         <Card border="success" className="shadow-sm">
                           <Card.Body>
-                            <a
+                            <button
                               href="#"
                               className="list-group-item list-group-item-action d-flex gap-3 py-3"
                               aria-current="true"
@@ -58,7 +58,7 @@ const ChatsCardDtata = ({ data, loading }) => {
                                     .fromNow()}
                                 </small>
                               </div>
-                            </a>
+                            </button>
                           </Card.Body>
                         </Card>
                       </div>

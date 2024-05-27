@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import logo from "../logo/Django_Pets.png";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signInUser } from "../store/authSlice";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,7 +17,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigation = useNavigate();
-  const user = useSelector((state) => state.user);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -28,10 +27,8 @@ const Login = () => {
       setPassword("");
       if (loginData.payload.user.is_seller) {
         navigation("/dashboard");
-        console.log("seller");
       } else {
         navigation("/");
-        console.log("regular user");
       }
     } else {
       toast.error(`Invalid username or password`, {

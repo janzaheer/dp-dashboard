@@ -115,8 +115,8 @@ const Cart = () => {
         <div className="container text-dark py-5 text-center mt-1">
           <h1 className="display-4">Shopping Cart</h1>
           <p className="lead mb-0">Build a fully structred shopping cart page using DjangoPets. </p>
-          <p className="lead">Snippet by <a href="#" className="text-success font-italic">
-            <u>DjangoPets</u></a>
+          <p className="lead">Snippet by <Link to="#" className="text-success font-italic">
+            <u>DjangoPets</u></Link>
           </p>
         </div>
         {/* End */}
