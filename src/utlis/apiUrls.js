@@ -1,5 +1,5 @@
 
-export const BASE_URL = process.env.NODE_ENV === 'development' ? `https://35.77.160.222/` : `https://api.cosmedicos.com/`;
+export const BASE_URL = process.env.NODE_ENV == 'development' ? `https://35.77.160.222/` : `https://api.cosmedicos.com/`;
 
 export const API_VERSION = () => {
     return `api/v1/`
