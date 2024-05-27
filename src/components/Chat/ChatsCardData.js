@@ -35,9 +35,9 @@ const ChatsCardDtata = ({ data, loading }) => {
                                 style={{
                                   width: "40px",
                                   height: "40px",
-                                  background: "#008080", // Set your preferred background color
-                                  color: "#fff", // Set the text color
-                                  fontSize: "16px", // Set the font size
+                                  background: "#008080",
+                                  color: "#fff",
+                                  fontSize: "16px",
                                 }}
                               >
                                 {item?.user_first_name.substring(0, 1)}
@@ -53,9 +53,7 @@ const ChatsCardDtata = ({ data, loading }) => {
                                   </p>
                                 </div>
                                 <small className="opacity-50 text-nowrap">
-                                  {moment(item?.created_at)
-                                    .startOf("minutes")
-                                    .fromNow()}
+                                  {moment(item?.created_at).startOf("minutes").fromNow()}
                                 </small>
                               </div>
                             </button>
