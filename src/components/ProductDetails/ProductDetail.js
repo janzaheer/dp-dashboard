@@ -112,23 +112,23 @@ const ProductDetail = () => {
     }
   };
 
-  const handleCompany = (seller) => {
-    if (seller == null) {
-      return (
-        <span>
-          {" "}
-          djangopets
-          <img
-            src="https://img.alicdn.com/imgextra/i1/O1CN01cLS4Rj1vgZ8xaij1e_!!6000000006202-2-tps-64-32.png"
-            alt=""
-            height={25}
-          />
-        </span>
-      );
-    } else {
-      return `${seller?.company}`;
-    }
-  };
+  // const handleCompany = (seller) => {
+  //   if (seller == null) {
+  //     return (
+  //       <span>
+  //         {" "}
+  //         djangopets
+  //         <img
+  //           src="https://img.alicdn.com/imgextra/i1/O1CN01cLS4Rj1vgZ8xaij1e_!!6000000006202-2-tps-64-32.png"
+  //           alt=""
+  //           height={25}
+  //         />
+  //       </span>
+  //     );
+  //   } else {
+  //     return `${seller?.company}`;
+  //   }
+  // };
 
   const stockHandle = (available_quantity) => {
     if (available_quantity == 0) {
@@ -252,7 +252,7 @@ const ProductDetail = () => {
                   )}
                 </div>
                 <div>{stockHandle(product?.available_quantity)}</div>
-                <div className="p-1 my-2 table-responsivedesTag">
+                <div className="p-1 my-1 table-responsivedesTag">
                   <Scrollbars>
                     <p> {product?.description}</p>
                   </Scrollbars>
@@ -290,7 +290,7 @@ const ProductDetail = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="col-md-8">
+                  {/* <div className="col-md-8">
                     <div className="me-5">
                       <div className="card">
                         <p className="card-header">Sold By</p>
@@ -319,7 +319,7 @@ const ProductDetail = () => {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

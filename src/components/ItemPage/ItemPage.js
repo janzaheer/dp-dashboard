@@ -8,18 +8,19 @@ import axios from "axios";
 // import InfiniteScroll from 'react-infinite-scroll-component';
 import Form from 'react-bootstrap/Form';
 import ScrollToTop from "react-scroll-to-top";
-import { ProductCategory, ProductsCategoryList } from "../../utlis/services/product_category_services";
+import { ProductCategory } from "../../utlis/services/product_category_services";
 import CardData from "../card/CardData";
+import { Spinner } from "react-bootstrap";
 
 const ItemPage = () => {
 
     const [sortTerm, setSortTerm] = useState('')
-    // const [addFav, setAddFav] = useState('')
     const [products, setProducts] = useState([], []);
     const [nextUrlPage, setNextUrlPage] = useState(null);
     const [prevUrlPage, setPrevUrlPage] = useState(null);
     const [cat, setCat] = useState('');
-    const [categoriesData, setCategoriesData] = useState('')
+    const [categoriesData, setCategoriesData] = useState('');
+    const [loader, setLoader] = useState(true)
 
     const userToken = useSelector(state => state.user.token);
 
@@ -47,14 +48,17 @@ const ItemPage = () => {
         let final = BASE_URL + API_VERSION() + END_POINT() + CATEGORY_ITEMS_LIST_ENDPOINT() + category_name
         window.scrollTo(0, 0);
         category_name = ''
-        return await axios.get(final, { headers: headers })
-            .then((res) => {
-     
+            try {
+                setLoader(true);
+                let res = await axios.get(final, { headers: headers })
                 setProducts(res?.data?.results)
                 setNextUrlPage(res?.data?.next)
                 setPrevUrlPage(res?.data?.previous)
-            })
-            .catch((err) => console.log(err))
+            } catch (error) {
+                console.log("error while loading", error);
+            } finally {
+                setLoader(false);
+            }
     }
 
     const categoryList = async (e) => {
@@ -149,7 +153,19 @@ const ItemPage = () => {
                             </div>
                             <hr className="border border-hr border-1 opacity-100"></hr>
                             <div>
-                                <CardData products={products} />
+                            {loader ? (
+                                <div className="text-center m-5">
+                                <Spinner animation="border" size="lg" variant="success" />
+                                </div>
+                                ) : products.length === 0 ? (
+                                <h3 className="text-center m-5 text-just">
+                                    No Products Available.
+                                </h3>
+                                ) : (
+                                <div>
+                                    <CardData products={products} />
+                                </div>
+                                )}
                             </div>
                             <div className="row g-2 mx-md-5 mt-2">
                                 <div className="d-flex justify-content-center">

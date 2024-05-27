@@ -2,7 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import { BsEmojiSmile, BsBox } from 'react-icons/bs'
 import { MdOutlineFavoriteBorder } from 'react-icons/md'
-import { SlLogout } from 'react-icons/sl'
+// import { SlLogout } from 'react-icons/sl'
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from "../../store/authSlice"
 import { useNavigate } from 'react-router-dom';

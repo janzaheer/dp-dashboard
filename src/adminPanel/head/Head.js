@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 // import logo from '../../logo/logo_new.png';
 import { SlLogout } from 'react-icons/sl';
@@ -14,7 +14,6 @@ import { logout } from '../../store/authSlice';
 
 const Head = () => {
   const user = useSelector(state => state.user)
-  const userToken = useSelector(state => state.user.token);
   const navigation = useNavigate();
   const dispatch = useDispatch();
   // const [notification, setNotification] = useState('')

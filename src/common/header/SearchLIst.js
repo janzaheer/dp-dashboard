@@ -70,7 +70,7 @@ const SearchLIst = () => {
                 </h3>
               ) : (
                 <div>
-                  <CardData products={products} />
+                  <CardData products={products} handleFavList={searchFunction} />
                 </div>
               )}
             </div>

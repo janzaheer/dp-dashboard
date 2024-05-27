@@ -17,7 +17,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigation = useNavigate();
-  const user = useSelector((state) => state.user);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -28,10 +27,8 @@ const Login = () => {
       setPassword("");
       if (loginData.payload.user.is_seller) {
         navigation("/dashboard");
-        console.log("seller");
       } else {
         navigation("/");
-        console.log("regular user");
       }
     } else {
       toast.error(`Invalid username or password`, {
