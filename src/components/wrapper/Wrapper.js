@@ -7,25 +7,25 @@ const Wrapper = () => {
       id: 1,
       cover: <i className='fa-solid fa-truck-fast'></i>,
       title: "Worldwide Delivery",
-      decs: "We offer competitive prices on our 100 million plus product any range.",
+      decs: "Enjoy fast, reliable Pakistan-wide delivery for all your favorite products. Shop now.",
     },
     {
       id: 2,
       cover: <i className='fa-solid fa-id-card'></i>,
       title: "Safe Payment",
-      decs: "We offer competitive prices on our 100 million plus product any range.",
+      decs: "Enjoy the convenience of cash on delivery with our secure and reliable payment options.",
     },
     {
       id: 3,
       cover: <i className='fa-solid fa-shield'></i>,
-      title: "Shop With Confidence ",
-      decs: "We offer competitive prices on our 100 million plus product any range.",
+      title: "Shop With Confidence",
+      decs: "Shop with confidence knowing your satisfaction and security are our top priorities.",
     },
     {
       id: 4,
       cover: <i className='fa-solid fa-headset'></i>,
-      title: "24/7 Support ",
-      decs: "We offer competitive prices on our 100 million plus product any range.",
+      title: "24/7 Support",
+      decs: "Enjoy 24/7 support for all your needs, any time, day or night.",
     },
   ]
   return (
@@ -35,7 +35,7 @@ const Wrapper = () => {
           <div className="row">
             {data.map((val) => {
               return (
-                <div key={val.id} className=" col-6 col-md-6 col-lg-3 ">
+                <div key={val.id} className=" col-12 col-md-6 col-lg-3 ">
                   <div className="card border border-secondary shadow-sm m-1 d-flex align-items-center justify-content-center"
                   >
                     <div className='img mt-4'>
@@ -43,7 +43,7 @@ const Wrapper = () => {
                     </div>
                     <div className="card-body">
                       <h5 className="card-title">{val.title}</h5>
-                      <p className="text-muted text-wrap">{val.decs}.</p>
+                      <p className="text-muted text-wrap">{val.decs}</p>
                     </div>
                   </div>
                 </div>
