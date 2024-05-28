@@ -33,6 +33,7 @@ const ProductDetail = () => {
   }, []);
 
   const getProduct = async () => {
+    window.scrollTo(0, 0);
     // eslint-disable-next-line
     try {
       let res = await SingleProductDetail(id);

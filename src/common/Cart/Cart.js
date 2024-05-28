@@ -225,7 +225,7 @@ const Cart = () => {
                     </li>
                   </ul>
                   { cartProducts.length === 0 ? <button className="btn btn-warning">Proceed to Checkout</button> : 
-                  <Link to='/checkout' className="prooced-btn">Proceed to Checkout</Link>}
+                  <Link to='/checkout' className="btn prooced-btn">Proceed to Checkout</Link>}
                 </div>
               </div>
             </div>
