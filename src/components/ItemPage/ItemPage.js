@@ -233,7 +233,7 @@ const ItemPage = () => {
                   </h3>
                 ) : (
                   <div>
-                    <CardData products={products} />
+                    <CardData products={products} handleFavList={productList} />
                   </div>
                 )}
               </div>
