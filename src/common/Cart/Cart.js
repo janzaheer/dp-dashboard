@@ -111,7 +111,7 @@ const Cart = () => {
   return (
     <>
       <Header />
-      <div className="px-4 px-lg-0">
+      <div className="px-4 px-lg-0 mt-5">
         <div className="container text-dark py-5 text-center mt-1">
           <h1 className="display-4">Shopping Cart</h1>
           <p className="lead mb-0">Build a fully structred shopping cart page using DjangoPets. </p>

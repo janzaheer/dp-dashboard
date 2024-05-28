@@ -49,7 +49,7 @@ const Chats = () => {
   return (
     <>
       <Header />
-      <div className="container-fluid mt-3 mb-1 newCLass">
+      <div className="container-fluid mt-5 mb-1 newCLass">
         <Card
           className="bg-secondary text-white text-center shadow"
           style={{ height: "14rem" }}

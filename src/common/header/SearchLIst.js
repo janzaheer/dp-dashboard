@@ -52,7 +52,7 @@ const SearchLIst = () => {
   return (
     <>
       <Header />
-      <div className="container searchClass">
+      <div className="container mt-5 searchClass">
         <div className="search-content bg-whitesmoke">
           <div className="py-5">
             <div className="title-md text-center my-4">
