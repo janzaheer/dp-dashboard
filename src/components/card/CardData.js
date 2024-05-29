@@ -120,7 +120,7 @@ const CardData = ({ products, handleFavList }) => {
   return (
     <div>
       <ToastContainer />
-      <div className="row g-2 mx-md-5">
+      <div className="row g-2 mx-md-2">
         {products &&
           products.length > 0 &&
           products.map((product) => {

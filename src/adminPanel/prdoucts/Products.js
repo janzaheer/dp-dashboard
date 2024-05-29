@@ -15,6 +15,7 @@ import { Link } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import AddProduct from "./AddProduct";
+// import { Notify } from "../../utlis/services/notify_services";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -23,6 +24,7 @@ const Products = () => {
 
   useEffect(() => {
     productList();
+    // UserNotify();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -33,6 +35,11 @@ const Products = () => {
       Authorization: `Token ${userToken}`,
     };
   }
+
+  // const UserNotify = async () =>{
+  //   let res = await Notify()
+  //   console.log('notify',res)
+  // }
 
   const productList = async () => {
     try {

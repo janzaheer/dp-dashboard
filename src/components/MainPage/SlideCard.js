@@ -1,20 +1,58 @@
 import React, { useState, useEffect } from "react"
-import Sdata from "./Sdata"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
+import  d  from '../assets/images/DJANGOPETS.png';
+import d2 from '../assets/images/slider.png'
+import d3 from '../assets/images/slider2.png'
 
 const SlideCard = () => {
-  const [sd, setSd] = useState(Sdata)
-  function name() {
-    setSd(sd)
-  }
+
+  const Sliddata = [
+    {
+      id: 1,
+      title: "50% Off For Your First Shopping",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis lobortis consequat eu, quam etiam at quis ut convallis.",
+      // cover: "https://royalpets.pk/wp-content/uploads/2023/10/dimond-family-2.jpg",
+      cover: `${d2}`,
+      price: 20000
+    },
+    {
+      id: 2,
+      title: "50% Off For Your First Shopping",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis lobortis consequat eu, quam etiam at quis ut convallis.",
+      // cover: "https://royalpets.pk/wp-content/uploads/2023/10/dimond-natural-grai-free.jpg",
+      cover: `${d3}`,
+      price: 2500
+    },
+    {
+      id: 3,
+      title: "50% Off For Your First Shopping",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis lobortis consequat eu, quam etiam at quis ut convallis.",
+      cover: "https://royalpets.pk/wp-content/uploads/2023/10/Last-Banner.jpg",
+      price: 3000
+    },
+    {
+      id: 4,
+      title: "50% Off For Your First Shopping",
+      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis lobortis consequat eu, quam etiam at quis ut convallis.",
+      cover: `${d}`,
+      price: 3000
+    },
+  ]
+
+  const [sd, setSd] = useState([])
+
   useEffect(() => {
-    name();
+    sliderFunc()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const sliderFunc = () => {
+    let data = Sliddata
+    setSd(data)
+  }
 
 
   const settings = {

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { BASE_URL,API_VERSION,END_POINT,CATEGORY_ENDPOINT,SELLER_ITEMS_ENDPOINT,FAV_ENDPOINT } from "../apiUrls";
+import { BASE_URL,API_VERSION,END_POINT,CATEGORY_ENDPOINT,SELLER_ITEMS_ENDPOINT,FAV_ENDPOINT,ADD_PRODUCT_ENDPOINT } from "../apiUrls";
 
 export async function ProductCategory(headers) {
     let finalUrl = BASE_URL + API_VERSION() + CATEGORY_ENDPOINT()
@@ -47,5 +47,11 @@ export async function SingleProductDetail(id){
 export async function AddProductsFav(payload,headers){
     let finalUrl = BASE_URL + API_VERSION() + FAV_ENDPOINT()
     const resp = await axios.post( finalUrl,payload, { headers: headers })
+    return resp
+}
+
+export async function AddSellerProduct(payload,headers){
+    let finalUrl = BASE_URL + API_VERSION() + END_POINT() + ADD_PRODUCT_ENDPOINT()
+    const resp = await axios.post( finalUrl,payload, {headers: headers})
     return resp
 }
