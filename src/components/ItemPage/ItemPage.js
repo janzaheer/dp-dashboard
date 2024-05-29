@@ -77,6 +77,7 @@ const ItemPage = () => {
     let val = e.target.value;
     setCat(val);
     if (val == "all-categories") {
+      /* eslint eqeqeq: 0 */
       val = "";
     }
     let finalURL =

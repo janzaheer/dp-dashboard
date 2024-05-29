@@ -97,7 +97,7 @@ const AddProduct = ({ productList }) => {
         specification: null, // str
       };
   
-      const resp = await AddSellerProduct(payload, headers);
+       await AddSellerProduct(payload, headers);
   
       // if (resp.ok) {
         setShowAdd(false);
