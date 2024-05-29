@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import {
-  BASE_URL,
-  END_POINT,
-  ADD_PRODUCT_ENDPOINT,
-  API_VERSION,
-} from "../../utlis/apiUrls";
+// import {
+//   BASE_URL,
+//   END_POINT,
+//   ADD_PRODUCT_ENDPOINT,
+//   API_VERSION,
+// } from "../../utlis/apiUrls";
 import { useSelector } from "react-redux";
-import axios from "axios";
+// import axios from "axios";
 import { Button, Col, Form, Row, Modal } from "react-bootstrap";
 import { uploadFile } from "react-s3";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { IoAddCircle } from "react-icons/io5";
-import { ProductCategory } from "../../utlis/services/product_category_services";
+import { ProductCategory,AddSellerProduct } from "../../utlis/services/product_category_services";
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
@@ -68,7 +68,7 @@ const AddProduct = ({ productList }) => {
 
   const addProducts = async (e) => {
     e.preventDefault();
-    let FInal = BASE_URL + API_VERSION() + END_POINT() + ADD_PRODUCT_ENDPOINT();
+    // let FInal = BASE_URL + API_VERSION() + END_POINT() + ADD_PRODUCT_ENDPOINT();
     let imageData = [selectImage];
     if (selectImage2) {
       imageData.push(selectImage2);
@@ -80,38 +80,33 @@ const AddProduct = ({ productList }) => {
       imageData.push(selectImage4);
     }
 
-    await axios
-      .post(
-        FInal,
-        {
-          title: title,
-          description: description,
-          images: imageData,
-          category_id: categoriesDataSelect,
-          price: price,
-          weight: weight,
-          dimensions: 0.00,
-          brand: brand,
-          store: store,
-          stock_quantity: stock_quantity,
-          discount_percentage: discount_percentage,
-          specification: null, // str
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Token ${userToken}`,
-          },
-        }
-      )
-      .then((resp) => {
-        console.log(resp.ok);
-
+    try {
+  
+      const payload = {
+        title,
+        description,
+        images: imageData,
+        category_id: categoriesDataSelect,
+        price,
+        weight,
+        dimensions: 0.00,
+        brand,
+        store,
+        stock_quantity,
+        discount_percentage,
+        specification: null, // str
+      };
+  
+       await AddSellerProduct(payload, headers);
+  
+      // if (resp.ok) {
         setShowAdd(false);
-        toast.success("Product Add Successfully", {
+        toast.success("Product added successfully", {
           position: toast.POSITION.TOP_RIGHT,
           theme: "colored",
         });
+  
+        // Reset form fields after successful submission
         setTitle("");
         setDescription("");
         setSelectImage("");
@@ -119,29 +114,95 @@ const AddProduct = ({ productList }) => {
         setPrice("");
         setStore("");
         setCategoriesDataSelect("");
+        setStock_quantity("");
         setdDiscount_percentage("");
-        setWeight("")
+        setWeight("");
+  
+        // Fetch updated product list
         productList();
-      })
-      .catch((resp) => {
-        setShowAdd(true);
-        if (resp.response) {
-          console.log(resp.response);
-          // console.log(resp.response.data);
-          // setField_error(resp.response.data)
-          toast.error("please required these fields", {
-            position: toast.POSITION.TOP_RIGHT,
-            theme: "colored",
-          });
-        } else if (resp.request) {
-          toast.warning("network error", {
-            position: toast.POSITION.TOP_RIGHT,
-            theme: "colored",
-          });
-        } else {
-          console.log(resp);
-        }
-      });
+      // } 
+    } catch (error) {
+      setShowAdd(true);
+  
+      if (error.response) {
+        console.error(error.response);
+        toast.error("Please fill in required fields", {
+          position: toast.POSITION.TOP_RIGHT,
+          theme: "colored",
+        });
+      } else if (error.request) {
+        toast.warning("Network error", {
+          position: toast.POSITION.TOP_RIGHT,
+          theme: "colored",
+        });
+      } else {
+        console.error(error);
+      }
+    }  
+
+    // await axios
+    //   .post(
+    //     FInal,
+    //     {
+    //       title: title,
+    //       description: description,
+    //       images: imageData,
+    //       category_id: categoriesDataSelect,
+    //       price: price,
+    //       weight: weight,
+    //       dimensions: 0.0,
+    //       brand: brand,
+    //       store: store,
+    //       stock_quantity: stock_quantity,
+    //       discount_percentage: discount_percentage,
+    //       specification: null, // str
+    //     },
+    //     {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //         Authorization: `Token ${userToken}`,
+    //       },
+    //     }
+    //   )
+    //   .then((resp) => {
+    //     console.log(resp.ok);
+
+    //     setShowAdd(false);
+    //     toast.success("Product Add Successfully", {
+    //       position: toast.POSITION.TOP_RIGHT,
+    //       theme: "colored",
+    //     });
+    //     setTitle("");
+    //     setDescription("");
+    //     setSelectImage("");
+    //     setBrand("");
+    //     setPrice("");
+    //     setStore("");
+    //     setCategoriesDataSelect("");
+    //     setStock_quantity("");
+    //     setdDiscount_percentage("");
+    //     setWeight("");
+    //     productList();
+    //   })
+    //   .catch((resp) => {
+    //     setShowAdd(true);
+    //     if (resp.response) {
+    //       console.log(resp.response);
+    //       // console.log(resp.response.data);
+    //       // setField_error(resp.response.data)
+    //       toast.error("please required these fields", {
+    //         position: toast.POSITION.TOP_RIGHT,
+    //         theme: "colored",
+    //       });
+    //     } else if (resp.request) {
+    //       toast.warning("network error", {
+    //         position: toast.POSITION.TOP_RIGHT,
+    //         theme: "colored",
+    //       });
+    //     } else {
+    //       console.log(resp);
+    //     }
+    //   });
   };
 
   const categoriesDataSelectFun = (e) => {
@@ -308,8 +369,23 @@ const AddProduct = ({ productList }) => {
 
               <Form.Group as={Col} controlId="formGridState">
                 <Form.Label>Categories</Form.Label>
-                <Form.Select
+                {/* <Form.Select
                   defaultValue="Choose..."
+                  onChange={categoriesDataSelectFun}
+                  name="categoriesDataSelect"
+                  value={categoriesDataSelect}
+                >
+                  <option>Choose...</option>
+                  {categoriesData &&
+                    categoriesData.map((catee) => {
+                      return (
+                        <option key={catee.id} value={catee?.id}>
+                          {catee?.name}
+                        </option>
+                      );
+                    })}
+                </Form.Select> */}
+                <Form.Select
                   onChange={categoriesDataSelectFun}
                   name="categoriesDataSelect"
                   value={categoriesDataSelect}

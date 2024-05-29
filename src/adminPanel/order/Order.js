@@ -149,7 +149,7 @@ const Order = () => {
                                 {handleBadge(item?.status)}
                               </td>
                               <td className="border-0 text-muted align-middle">
-                                $ {item?.total_amount}
+                                Rs {item?.total_amount}
                               </td>
                               <td className="border-0 text-danger align-middle">
                                 <div className="dropdown">

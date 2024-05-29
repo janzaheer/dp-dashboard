@@ -63,6 +63,7 @@ const ItemPage = () => {
       setLoader(true);
       let res = await axios.get(final, { headers: headers });
       setProducts(res?.data?.results);
+      console.log(res)
       setNextUrlPage(res?.data?.next);
       setPrevUrlPage(res?.data?.previous);
     } catch (error) {
@@ -75,7 +76,8 @@ const ItemPage = () => {
   const categoryList = async (e) => {
     let val = e.target.value;
     setCat(val);
-    if (val === "all-categories") {
+    if (val == "all-categories") {
+      /* eslint eqeqeq: 0 */
       val = "";
     }
     let finalURL =
