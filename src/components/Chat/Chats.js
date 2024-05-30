@@ -49,19 +49,18 @@ const Chats = () => {
   return (
     <>
       <Header />
-      <div className="container-fluid mt-5 mb-1 newCLass">
+      <div className="container-fluid chat-CLass">
         <Card
-          className="bg-secondary text-white text-center shadow"
-          style={{ height: "14rem" }}
-        >
+          className="bg-secondary text-white text-center shadow mt-5 mt-md-4 mt-lg-3"
+          style={{ height: "auto"}}>
           <Card.Body>
             <Card.Text>FAQs</Card.Text>
-            <Card.Title className="mt-2" style={{ fontSize: "25px" }}>
+            <Card.Title className="question-title">
               Your Question is Answer By Professional Vet Doctors
             </Card.Title>
-            <Card.Text>Have any questions? We're here to assist you</Card.Text>
+            <Card.Text className="mt-2 question-text">Have any questions? We're here to assist you</Card.Text>
             <Row className="d-flex justify-content-center">
-              <Col xs={3}>
+              <Col xs={12} sm={8} md={6} lg={3}>
                 <Form>
                   <Form.Group
                     className="mb-3"
@@ -83,6 +82,9 @@ const Chats = () => {
           <ChatsCardDtata data={data} loading={loading} />
           <div>
             <AddChat />
+            <div className="d-flex justify-content-end">
+              <p className="mt-2 price-text">Ask Us Anything</p>
+            </div>
           </div>
         </div>
       </div>

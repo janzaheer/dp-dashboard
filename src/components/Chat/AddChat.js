@@ -62,8 +62,7 @@ const AddChat = () => {
                 justifyContent: "center",
                 border: "none", // Remove border for a cleaner look
                 background: "transparent", // Make the button background transparent
-              }}
-            >
+              }}>
               <RiQuestionnaireLine size={30} color="green" />
             </Button>
           ) : (

@@ -13,3 +13,56 @@
     justify-content: center;
     background-color: #ffffff;
 }
+
+.chat-CLass{ 
+    margin-bottom: 40px;
+}
+
+@media (max-width: 600px) {
+    .question-title {
+      font-size: 16px;
+    }
+    .question-text {
+        font-size: 12px;
+    }
+    .chat-CLass{
+        margin-top: 90px;
+    }
+    .question-user{
+        font-size: 13px;
+    }
+    .ans-user{
+        font-size: 12px;
+    }
+  }
+  @media (min-width: 601px) and (max-width: 1024px) {
+    .question-title {
+      font-size: 24px;
+    }
+    .question-text {
+        font-size: 16px;
+    }
+    .chat-CLass{
+        margin-top: 90px;
+    }
+    .question-user{
+        font-size: 13px;
+    }
+  }
+  @media (min-width: 1025px) {
+    .question-title {
+      font-size: 32px;
+    }
+    .question-text {
+        font-size: 20px;
+    }
+    .chat-CLass{
+        margin-top: 60px;
+    }
+    .question-user{
+        font-size: 17px;
+    }
+    .ans-user{
+        font-size: 14px;
+    }
+  }

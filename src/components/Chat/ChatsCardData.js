@@ -45,11 +45,11 @@ const ChatsCardDtata = ({ data, loading }) => {
                               <div className="d-flex gap-2 w-100 justify-content-between">
                                 <div>
                                   <span>Question By {item?.user_first_name} {item?.user_last_name} </span>
-                                  <h6 className="mb-0">
+                                  <h6 className="mb-0 question-user">
                                     {item?.question_text}?
                                   </h6>
-                                  <p className="mb-0 opacity-75">
-                                    {item?.answer_text}
+                                  <p className="mb-0 opacity-75 ans-user">
+                                    {item?.answer_text}.
                                   </p>
                                 </div>
                                 <small className="opacity-50 text-nowrap">
