@@ -37,7 +37,6 @@ const ProductDetail = () => {
     // eslint-disable-next-line
     try {
       let res = await SingleProductDetail(id);
-      console.log("detail", res);
       setProduct(res.item);
       setComments(res.comments);
     } catch (error) {

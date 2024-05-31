@@ -49,7 +49,7 @@ const Checkout = () => {
             Authorization: `Token ${userToken}`
         }
     }
-    console.log('delivery',deliveryCharge)
+    // console.log('delivery',deliveryCharge)
     // Creating a JS object to add array into
     // Array to be inserted
     var placeOrder = { total_amount: totalAmount, total_quantity: totalItems, address_id: selectedAddressId,shipping_amount:deliveryCharge,  items: [] };
@@ -68,7 +68,7 @@ const Checkout = () => {
     const handlePlaceOrder = async () => {
             try {
                 let res = await OrderAdd(placeOrder,headers)
-                console.log('order-data', res);
+                // console.log('order-data', res);
                 navigate(`/productSuccess/${res.id}`)
                 dispatch(clearCart());
             } catch (error) {

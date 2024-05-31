@@ -3,41 +3,62 @@ const { createSlice } = require("@reduxjs/toolkit");
 // Define the calculatePrice function
 const provinceRates = {
   Punjab: {
-    upTo0_5kg: 150,
-    upTo1kg: 200,
-    upTo5kg: 300,
+    upTo0_5kg: 100,
+    upTo1kg: 120,
+    upTo5kg: 150,
+    upTo30kg: 200,
   },
   Balochistan: {
-    upTo0_5kg: 160,
-    upTo1kg: 210,
-    upTo5kg: 310,
+    upTo0_5kg: 110,
+    upTo1kg: 130,
+    upTo5kg: 160,
+    upTo30kg: 210,
   },
   Sindh: {
-    upTo0_5kg: 170,
-    upTo1kg: 220,
-    upTo5kg: 320,
+    upTo0_5kg: 120,
+    upTo1kg: 140,
+    upTo5kg: 170,
+    upTo30kg: 220,
   },
   KPK: {
-    upTo0_5kg: 180,
-    upTo1kg: 230,
-    upTo5kg: 330,
+    upTo0_5kg: 130,
+    upTo1kg: 150,
+    upTo5kg: 180,
+    upTo30kg: 230,
   },
 };
 
+// const calculateDeliveryCharge = (totalWeight, province = "Punjab") => {
+//   let deliveryCharge = 0;
+//   const rates = provinceRates[province];
+
+//   if (totalWeight <= 0.5) {
+//     deliveryCharge = rates.upTo0_5kg;
+//   } else if (totalWeight <= 1) {
+//     deliveryCharge = rates.upTo1kg;
+//   } else if (totalWeight <= 5) {
+//     deliveryCharge = rates.upTo5kg;
+//   }
+
+//   return deliveryCharge;
+// };
+
 const calculateDeliveryCharge = (totalWeight, province = "Punjab") => {
-  let deliveryCharge = 0;
   const rates = provinceRates[province];
 
-  if (totalWeight <= 0.5) {
-    deliveryCharge = rates.upTo0_5kg;
-  } else if (totalWeight <= 1) {
-    deliveryCharge = rates.upTo1kg;
-  } else if (totalWeight <= 5) {
-    deliveryCharge = rates.upTo5kg;
+  if (totalWeight <= 0.5 && totalWeight >= 0.1) {
+    return rates.upTo0_5kg;
+  } else if (totalWeight <= 1 && totalWeight > 0.5) {
+    return rates.upTo1kg;
+  } else if (totalWeight <= 5 && totalWeight > 1) {
+    return rates.upTo5kg;
+  } else if (totalWeight <= 30 && totalWeight > 5) {
+    return rates.upTo30kg;
+  } else {
+    return 0; // Default to 0 if the weight does not fall within any specified range
   }
-
-  return deliveryCharge;
 };
+
 
 const cartSlice = createSlice({
   name: "cart",

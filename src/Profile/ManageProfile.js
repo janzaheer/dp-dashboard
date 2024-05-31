@@ -30,8 +30,6 @@ const ManageProfile = () => {
     const [userData, setUserData] = useState({})
     const [data, setData]= useState([])
     const [loading, setLoading] = useState(true);
-
-    console.log('User',userToken)
     const id = user.user.id
    
     useEffect(() => {
@@ -52,7 +50,6 @@ const ManageProfile = () => {
         try {
             let response = await GetUserData(id, headers)
             setUserData(response)
-            console.log('userList', response)
         } catch (error) {
             console.log(error)
         }
@@ -64,7 +61,6 @@ const ManageProfile = () => {
         }
         try {
             let res = await DeleteAddress(payload,headers)
-            console.log(res)
             userList()
             toast.error(res.message, {
                 position: toast.POSITION.TOP_RIGHT,

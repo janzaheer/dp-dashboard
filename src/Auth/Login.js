@@ -31,6 +31,7 @@ const Login = () => {
         navigation("/");
       }
     } else {
+      console.log("Login-error",loginData)
       toast.error(`Invalid username or password`, {
         position: toast.POSITION.TOP_RIGHT,
         theme: "colored",
