@@ -48,7 +48,6 @@ const ShopListData = () => {
                 results.forEach(resultA => {
                     data[resultA.name] = resultA.items;
                 });
-                console.log('data', data);
                 setLandingData(data);
             });
         } catch (error) {
