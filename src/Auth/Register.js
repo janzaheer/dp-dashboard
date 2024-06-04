@@ -20,14 +20,16 @@ const Register = () => {
     const [username, setUserName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [loading, setLoading] = useState(false)
 
     const navigation = useNavigate()
     const dispatch = useDispatch();
 
     const handleRegister = async (e) => {
         e.preventDefault();
-        console.log(first_name, last_name, phone_number, username, email, password, confirm_password)
+        setLoading(true);
         const registerResp = await dispatch(signUpUser({ first_name, last_name, phone_number, username, email, password, confirm_password }))
+        setLoading(false);
         if (registerResp.payload && registerResp.payload.user) {
             setFirst_Name('')
             setLast_Name('')
@@ -108,7 +110,9 @@ const Register = () => {
                                     <label htmlFor="floatingInputConfirmPassword" className='ms-3'>Confirm Password</label>
                                 </div>
                                 <div className="col-12">
-                                    <button className="register-btn-color mt-2" type="submit">Register Now</button>
+                                    <button className="register-btn-color mt-2" type="submit" disabled={loading}>
+                                        {loading ? 'Registering...' : 'Register Now'}
+                                    </button>
                                 </div>
                                 <div className="d-flex justify-content-center align-items-center">
                                     <div className="me-2">
