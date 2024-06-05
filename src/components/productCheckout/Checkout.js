@@ -77,6 +77,7 @@ const Checkout = () => {
         }
 
     const userList = async () => {
+        window.scrollTo(0, 0);
         try {
             let res = await GetUserData(id, headers)
             setUserData(res)

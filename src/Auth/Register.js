@@ -4,7 +4,7 @@ import './Login.css'
 import { useDispatch } from 'react-redux';
 import { signUpUser } from '../store/authSlice';
 import logo from "../logo/Django_Pets.png";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify'
 import Header from '../common/header/Header';
@@ -114,14 +114,24 @@ const Register = () => {
                                         {loading ? 'Registering...' : 'Register Now'}
                                     </button>
                                 </div>
-                                <div className="d-flex justify-content-center align-items-center">
-                                    <div className="me-2">
-                                        <MyFacebookLogin />
-                                    </div>
-                                    <div>
-                                        <MyGoogleLogin />
-                                    </div>
+                                <div className="d-flex justify-content-center">
+                                    <span>Already have an account?</span>
+                                    <Link to="/login" className="text-success ms-1">
+                                        Login
+                                    </Link>
                                 </div>
+                                    <div className="row g-1 mt-2 d-flex justify-content-center">
+                                        <div className="col-12 col-lg-3">
+                                            <div>
+                                                <MyFacebookLogin />
+                                            </div>
+                                        </div>
+                                        <div className="col-12 col-lg-3">
+                                            <div>
+                                                <MyGoogleLogin />
+                                            </div>
+                                        </div>
+                                    </div>
                             </form>
                         </div>
                     </div>

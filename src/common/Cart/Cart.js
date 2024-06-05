@@ -18,6 +18,7 @@ const Cart = () => {
   const { data: cartProducts, totalItems, totalAmount, deliveryCharge, totalAmountItems } = useSelector(state => state.cart);
   
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(getCartTotal());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, totalItems, cartProducts]);

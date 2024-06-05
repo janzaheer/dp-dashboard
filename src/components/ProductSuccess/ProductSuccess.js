@@ -37,6 +37,7 @@ const ProductSuccess = () => {
   }
 
   const orderListData = async () => {
+    window.scrollTo(0, 0);
     try {
       let response = await OrderDetail(id, headers);
       setOrderDataList(response);
