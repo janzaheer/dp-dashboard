@@ -47,3 +47,9 @@
     background-color: #007171;
     color: white;
 }
+
+@media (max-width: 362px) {
+    .register-btn-color {
+        padding: 7px 75px;
+    }
+}
