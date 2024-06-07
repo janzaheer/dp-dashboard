@@ -148,6 +148,84 @@ const Cart = () => {
                           </th>
                         </tr>
                       </thead>
+                      {cartProducts.length === 0 ? (
+                        <caption>
+                          <h2 className='m-5 text-danger'>No Items are added in Cart</h2>
+                        </caption>
+                      ) : (
+                        <tbody>
+                          {cartProducts.map((cartProduct) => (
+                            <tr key={cartProduct?.id}>
+                              <th scope="row" className="border-0">
+                                <div className="p-2">
+                                  <img src={cartProduct?.images[0]?.image_url} alt='' width={60} className="img-fluid rounded shadow-sm" />
+                                  <div className="ms-3 ml-3 d-inline-block align-middle">
+                                    <h6 className="mb-0">
+                                      <Link to="#" className="text-dark d-inline-block align-middle">
+                                        {cartProduct?.title.substring(0, 15)}...
+                                      </Link>
+                                    </h6>
+                                    {cartProduct?.stock.length > 0 ? (
+                                      <>
+                                        <span className="price-text d-block">{discountPrice(cartProduct?.stock[0]?.discount_price)}</span>
+                                        <span className="text-decoration-line-through text-muted" style={{ fontSize: '12px' }}>
+                                          Rs {price(cartProduct?.price)}
+                                        </span>
+                                      </>
+                                    ) : (
+                                      <span className="price-text d-block">Rs {price(cartProduct?.price)}</span>
+                                    )}
+                                  </div>
+                                </div>
+                              </th>
+                              <td className="border-0 align-middle"><strong>{TotalPrice(cartProduct?.totalPrice)}</strong></td>
+                              <td className="border-0 align-middle"><strong>{cartProduct?.quantity}</strong></td>
+                              <td className="border-0 align-middle">
+                                <strong>
+                                  <div className=''>
+                                    <button className='inc-dec-btn me-4' onClick={() => increase(cartProduct.id)}>
+                                      <AiOutlinePlus />
+                                    </button>
+                                    <button className='inc-dec-btn' onClick={() => decrease(cartProduct.id)}>
+                                      <AiOutlineMinus />
+                                    </button>
+                                  </div>
+                                </strong>
+                              </td>
+                              <td className="border-0 align-middle">
+                                <button className='btn btn-outline-danger' onClick={() => handleRemove(cartProduct.id)}>
+                                  <BsTrash />
+                                </button>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      )}
+                    </table>
+                  </Scrollbars>
+                </div>
+                {/* <div className="table-responsive">
+                  <Scrollbars>
+                    <table className="table">
+                      <thead>
+                        <tr>
+                          <th scope="col" className="border-0 bg-light">
+                            <div className="p-2 px-3 text-uppercase">Product</div>
+                          </th>
+                          <th scope="col" className="border-0 bg-light">
+                            <div className="py-2 text-uppercase">Sub Total</div>
+                          </th>
+                          <th scope="col" className="border-0 bg-light">
+                            <div className="py-2 text-uppercase">Quantity</div>
+                          </th>
+                          <th scope="col" className="border-0 bg-light">
+                            <div className="py-2 text-uppercase">Add/Remove Qty</div>
+                          </th>
+                          <th scope="col" className="border-0 bg-light">
+                            <div className="py-2 text-uppercase">Remove</div>
+                          </th>
+                        </tr>
+                      </thead>
                       <tbody>
                         {cartProducts.length === 0 ? <h2 className='m-5 text-danger'>No Items are add in Cart</h2> : ''}
                         {cartProducts.map((cartProduct) => {
@@ -189,7 +267,7 @@ const Cart = () => {
                       </tbody>
                     </table>
                   </Scrollbars>
-                </div>
+                </div> */}
                 {/* End */}
               </div>
               <button type="button" className='btn btn-danger mb-5 shadow' onClick={() => clear()}> Clear Cart <TbShoppingCartOff /></button>
