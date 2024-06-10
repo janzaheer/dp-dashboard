@@ -55,7 +55,7 @@ const provinceRates = {
   Punjab: {
     upTo0_5g: 160,
     upTo1kg: 180,
-    additionalPerKgUpTo5kg: 120, // Each additional kg from 0.1 to 4.9 kg
+    additionalPerKgUpTo5kg: 150, // Each additional kg from 0.1 to 4.9 kg
     upTo5kg: 400, // For 5 kg
     additionalPer5kgUpTo10kg: 80, // Each additional kg from 5.0 to 9.9 kg
     upTo10kg: 600, // For 10 kg
@@ -65,7 +65,7 @@ const provinceRates = {
   Balochistan: {
     upTo0_5g: 200,
     upTo1kg: 230,
-    additionalPerKgUpTo5kg: 120,
+    additionalPerKgUpTo5kg: 180,
     upTo5kg: 400,
     additionalPer5kgUpTo10kg: 80,
     upTo10kg: 600,
@@ -75,7 +75,7 @@ const provinceRates = {
   Sindh: {
     upTo0_5g: 200,
     upTo1kg: 230,
-    additionalPerKgUpTo5kg: 120,
+    additionalPerKgUpTo5kg: 180,
     upTo5kg: 400,
     additionalPer5kgUpTo10kg: 80,
     upTo10kg: 600,
@@ -85,7 +85,7 @@ const provinceRates = {
   KPK: {
     upTo0_5g: 200,
     upTo1kg: 230,
-    additionalPerKgUpTo5kg: 120,
+    additionalPerKgUpTo5kg: 180,
     upTo5kg: 400,
     additionalPer5kgUpTo10kg: 80,
     upTo10kg: 600,
@@ -125,7 +125,8 @@ const calculateDeliveryCharge = (itemWeight, quantity, province = "Punjab") => {
     initialCharge = rates.upTo1kg;
     additionalCharge = rates.additionalPerKgUpTo5kg;
   } else if (itemWeight <= 4.9) {
-    initialCharge = rates.upTo1kg + Math.ceil(itemWeight - 1) * rates.additionalPerKgUpTo5kg;
+    initialCharge = rates.upTo1kg
+    //  + Math.ceil(itemWeight - 1) * rates.additionalPerKgUpTo5kg;
     additionalCharge = rates.additionalPerKgUpTo5kg;
   } else if (itemWeight <= 9.9) {
     initialCharge = rates.upTo5kg + Math.ceil(itemWeight - 5) * rates.additionalPer5kgUpTo10kg;
