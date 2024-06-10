@@ -38,6 +38,7 @@ const ProductDetail = () => {
     try {
       let res = await SingleProductDetail(id);
       setProduct(res.item);
+      console.log('item-detail',res.item);
       setComments(res.comments);
     } catch (error) {
       console.log(error);
@@ -67,7 +68,6 @@ const ProductDetail = () => {
       theme: "colored",
     });
     navigate(`/cart`);
-    console.log("tem", tempProduct);
   };
 
   const increaseQty = () => {
