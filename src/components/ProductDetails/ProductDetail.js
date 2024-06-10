@@ -68,7 +68,6 @@ const ProductDetail = () => {
       theme: "colored",
     });
     navigate(`/cart`);
-    console.log("tem", tempProduct);
   };
 
   const increaseQty = () => {

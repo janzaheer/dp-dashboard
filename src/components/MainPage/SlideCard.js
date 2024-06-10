@@ -3,10 +3,8 @@ import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import  d  from '../assets/images/DJANGOPETS.png';
-import d2 from '../assets/images/slider.png'
-import d3 from '../assets/images/slider2.png'
-import d4 from '../assets/images/slider3.png'
+import d2 from '../assets/images/s1.png'
+import d4 from '../assets/images/s2.png'
 
 const SlideCard = () => {
 
@@ -15,37 +13,16 @@ const SlideCard = () => {
       id: 1,
       title: "50% Off For Your First Shopping",
       desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis lobortis consequat eu, quam etiam at quis ut convallis.",
-      cover: `${d4}`,
+      cover: `${d2}`,
       price: 20000
     },
     {
       id: 2,
       title: "50% Off For Your First Shopping",
       desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis lobortis consequat eu, quam etiam at quis ut convallis.",
-      cover: `${d2}`,
+      cover: `${d4}`,
       price: 20000
-    },
-    {
-      id: 3,
-      title: "50% Off For Your First Shopping",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis lobortis consequat eu, quam etiam at quis ut convallis.",
-      cover: `${d3}`,
-      price: 2500
-    },
-    {
-      id: 4,
-      title: "50% Off For Your First Shopping",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis lobortis consequat eu, quam etiam at quis ut convallis.",
-      cover: "https://royalpets.pk/wp-content/uploads/2023/10/Last-Banner.jpg",
-      price: 3000
-    },
-    {
-      id: 5,
-      title: "50% Off For Your First Shopping",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quis lobortis consequat eu, quam etiam at quis ut convallis.",
-      cover: `${d}`,
-      price: 3000
-    },
+    }
   ]
 
   const [sd, setSd] = useState([])
