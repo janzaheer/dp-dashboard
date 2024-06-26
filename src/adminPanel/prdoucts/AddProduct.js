@@ -30,6 +30,13 @@ const config = {
   // s3Url: 'https:/your-custom-s3-url.com/', /* optional */
 };
 
+// const config = {
+//   bucketName: 'djangopets-prod',
+//   region: "ap-northeast-1",
+//   accessKeyId: "AKIAQ3EGSZ74UKF3BSM7",
+//   secretAccessKey: "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",
+// };
+
 const AddProduct = ({ productList }) => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");

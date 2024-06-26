@@ -1,5 +1,7 @@
 import axios from "axios";
-import { BASE_URL,USER_LIST_ENDPOINT,ADDRESS_ADD_ENDPOINT,API_VERSION,ADDRESS_REMOVE_ENDPOINT } from "../apiUrls";
+import { USER_LIST_ENDPOINT,ADDRESS_ADD_ENDPOINT,API_VERSION,ADDRESS_REMOVE_ENDPOINT } from "../apiUrls";
+
+let BASE_URL = process.env.REACT_APP_BASE_URL
 
 export async function CreateAddress(payload,headers){
     let addAddressUrl =

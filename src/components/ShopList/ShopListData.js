@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react"
 import "./style.css"
 import { NavLink } from "react-router-dom";
 import { useSelector } from 'react-redux';
-import { BASE_URL, END_POINT, CATEGORY_ITEMS_LIST_ENDPOINT, API_VERSION } from "../../utlis/apiUrls";
+import { END_POINT, CATEGORY_ITEMS_LIST_ENDPOINT, API_VERSION } from "../../utlis/apiUrls";
 import axios from "axios";
 import ScrollToTop from "react-scroll-to-top";
 import CardData from "../card/CardData";
 import { ProductCategory } from "../../utlis/services/product_category_services";
 import { Spinner } from "react-bootstrap";
+
+let BASE_URL = process.env.REACT_APP_BASE_URL
 
 const ShopListData = () => {
     const [categoriesData, setCategoriesData] = useState('')
