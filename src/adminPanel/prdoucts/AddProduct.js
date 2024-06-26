@@ -16,26 +16,26 @@ import { ProductCategory,AddSellerProduct } from "../../utlis/services/product_c
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
-const BN =
-  process.env.NODE_ENV === "development"
-    ? `meditech-products`
-    : `cosemedicos-prod`;
-const config = {
-  // bucketName: 'meditech-products',
-  bucketName: BN,
-  // dirName: 'media', /* optional */
-  region: "ap-northeast-1",
-  accessKeyId: "AKIA2GGOXYXVJBADABN5",
-  secretAccessKey: "bvsMtgOK6qMVwsHo7kWl3sPxMdehAWJAJY5uWrxa",
-  // s3Url: 'https:/your-custom-s3-url.com/', /* optional */
-};
-
+// const BN =
+//   process.env.NODE_ENV === "development"
+//     ? `meditech-products`
+//     : `cosemedicos-prod`;
 // const config = {
-//   bucketName: 'djangopets-prod',
+//   // bucketName: 'meditech-products',
+//   bucketName: BN,
+//   // dirName: 'media', /* optional */
 //   region: "ap-northeast-1",
-//   accessKeyId: "AKIAQ3EGSZ74UKF3BSM7",
-//   secretAccessKey: "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",
+//   accessKeyId: "AKIA2GGOXYXVJBADABN5",
+//   secretAccessKey: "bvsMtgOK6qMVwsHo7kWl3sPxMdehAWJAJY5uWrxa",
+//   // s3Url: 'https:/your-custom-s3-url.com/', /* optional */
 // };
+
+const config = {
+  bucketName: 'djangopets-prod',
+  region: "ap-northeast-1",
+  accessKeyId: "AKIAQ3EGSZ74UKF3BSM7",
+  secretAccessKey: "YPpahxqpK/ubVgMLbGPiQgeFp0Ki2qhzl0GyOek5",
+};
 
 const AddProduct = ({ productList }) => {
   const [title, setTitle] = useState("");
