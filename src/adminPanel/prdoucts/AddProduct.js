@@ -30,11 +30,16 @@ window.Buffer = window.Buffer || require("buffer").Buffer;
 //   // s3Url: 'https:/your-custom-s3-url.com/', /* optional */
 // };
 
+let BN = process.env.REACT_APP_AWS_BUCKET_NAME
+let accessKeyId = process.env.REACT_APP_AWS_ACCESS_KEY_ID
+let secretAccessKey = process.env.REACT_APP_AWS_SCRET_ACCESS_KEY
+let region = process.env.REACT_APP_AWS_REGION
+
 const config = {
-  bucketName: 'djangopets-prod',
-  region: "ap-northeast-1",
-  accessKeyId: "AKIAQ3EGSZ74UKF3BSM7",
-  secretAccessKey: "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",
+  bucketName: BN,
+  region: region,
+  accessKeyId: accessKeyId,
+  secretAccessKey: secretAccessKey,
 };
 
 const AddProduct = ({ productList }) => {
