@@ -16,20 +16,6 @@ import { ProductCategory,AddSellerProduct } from "../../utlis/services/product_c
 
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
-// const BN =
-//   process.env.NODE_ENV === "development"
-//     ? `meditech-products`
-//     : `cosemedicos-prod`;
-// const config = {
-//   // bucketName: 'meditech-products',
-//   bucketName: BN,
-//   // dirName: 'media', /* optional */
-//   region: "ap-northeast-1",
-//   accessKeyId: "AKIA2GGOXYXVJBADABN5",
-//   secretAccessKey: "bvsMtgOK6qMVwsHo7kWl3sPxMdehAWJAJY5uWrxa",
-//   // s3Url: 'https:/your-custom-s3-url.com/', /* optional */
-// };
-
 let BN = process.env.REACT_APP_AWS_BUCKET_NAME
 let accessKeyId = process.env.REACT_APP_AWS_ACCESS_KEY_ID
 let secretAccessKey = process.env.REACT_APP_AWS_SCRET_ACCESS_KEY
