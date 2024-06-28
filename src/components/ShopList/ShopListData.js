@@ -3,7 +3,6 @@ import "./style.css"
 import { NavLink } from "react-router-dom";
 import { useSelector } from 'react-redux';
 import {  END_POINT, CATEGORY_ITEMS_LIST_ENDPOINT, API_VERSION } from "../../utlis/apiUrls";
-
 import axios from "axios";
 import ScrollToTop from "react-scroll-to-top";
 import CardData from "../card/CardData";

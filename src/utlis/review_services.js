@@ -1,6 +1,4 @@
 import axios from "axios";
-// import { BASE_URL } from "./apiUrls";
-
 let BASE_URL = process.env.REACT_APP_BASE_URL
 
 export async function CreateReview(id,payload,headers){
