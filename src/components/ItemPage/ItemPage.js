@@ -18,6 +18,7 @@ import { ProductCategory } from "../../utlis/services/product_category_services"
 import CardData from "../card/CardData";
 import { Spinner } from "react-bootstrap";
 let BASE_URL = process.env.REACT_APP_BASE_URL
+
 const ItemPage = () => {
   const [sortTerm, setSortTerm] = useState("");
   const [products, setProducts] = useState([], []);

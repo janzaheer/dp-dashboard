@@ -7,6 +7,8 @@ import { ToastContainer, toast } from 'react-toastify';
 let BASE_URL = process.env.REACT_APP_BASE_URL
 const SellerLogin = () => {
 
+  let BASE_URL = process.env.REACT_APP_BASE_URL
+
   const [seller_name, setSeller_name] = useState('')
   const [email, setEmail] = useState('')
   const [phone_num, setPhone_num] = useState('')

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { API_VERSION,ORDER_ENDPOINT,ORDER_PLACED_ENDPOINT } from "../apiUrls";
 let BASE_URL = process.env.REACT_APP_BASE_URL
+
 export async function SellerOrderList(headers){
     let finalURL = BASE_URL + API_VERSION() + ORDER_ENDPOINT()
     const resp = await axios.get(finalURL, { headers: headers })

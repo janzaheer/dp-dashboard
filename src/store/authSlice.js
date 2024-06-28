@@ -159,6 +159,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { LOGIN_ENDPOINT,SIGNUP_ENDPOINT,API_VERSION } from "../utlis/apiUrls";
 import axios from "axios";
 let BASE_URL = process.env.REACT_APP_BASE_URL
+
 const initialState = {
     user: null,
     token: '',
