@@ -5,9 +5,9 @@ import axios from "axios";
 import Heart from "react-heart";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import { BASE_URL, FAV_ENDPOINT, API_VERSION } from "../../utlis/apiUrls";
+import { FAV_ENDPOINT, API_VERSION } from "../../utlis/apiUrls";
 import Star from "../ProductDetails/Star";
-
+let BASE_URL = process.env.REACT_APP_BASE_URL
 const CardData = ({ products, handleFavList }) => {
   const [itemFavourite, setItemFavourite] = useState({});
   const userToken = useSelector((state) => state.user.token);

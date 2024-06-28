@@ -3,7 +3,6 @@ import "./style.css";
 import Header from "../../common/header/Header";
 import Footer from "../../common/footer/Footer";
 import {
-  BASE_URL,
   END_POINT,
   SORT_ENDPOINT,
   CATEGORY_ITEMS_LIST_ENDPOINT,
@@ -18,7 +17,7 @@ import ScrollToTop from "react-scroll-to-top";
 import { ProductCategory } from "../../utlis/services/product_category_services";
 import CardData from "../card/CardData";
 import { Spinner } from "react-bootstrap";
-
+let BASE_URL = process.env.REACT_APP_BASE_URL
 const ItemPage = () => {
   const [sortTerm, setSortTerm] = useState("");
   const [products, setProducts] = useState([], []);
