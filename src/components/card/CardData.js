@@ -8,6 +8,7 @@ import { ToastContainer, toast } from "react-toastify";
 import { FAV_ENDPOINT, API_VERSION } from "../../utlis/apiUrls";
 import Star from "../ProductDetails/Star";
 let BASE_URL = process.env.REACT_APP_BASE_URL
+
 const CardData = ({ products, handleFavList }) => {
   const [itemFavourite, setItemFavourite] = useState({});
   const userToken = useSelector((state) => state.user.token);
