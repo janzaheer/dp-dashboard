@@ -17,15 +17,15 @@ import { ProductCategory,AddSellerProduct } from "../../utlis/services/product_c
 window.Buffer = window.Buffer || require("buffer").Buffer;
 
 let BN = process.env.REACT_APP_AWS_BUCKET_NAME
-let accessKeyId = process.env.REACT_APP_AWS_ACCESS_KEY_ID
-let secretAccessKey = process.env.REACT_APP_AWS_SCRET_ACCESS_KEY
-let region = process.env.REACT_APP_AWS_REGION
+let AD = process.env.REACT_APP_AWS_ACCESS_KEY_ID
+let SK = process.env.REACT_APP_AWS_SCRET_ACCESS_KEY
+let R = process.env.REACT_APP_AWS_REGION
 
 const config = {
   bucketName: BN,
-  region: region,
-  accessKeyId: accessKeyId,
-  secretAccessKey: secretAccessKey,
+  region: R,
+  accessKeyId: AD,
+  secretAccessKey: SK,
 };
 
 const AddProduct = ({ productList }) => {
