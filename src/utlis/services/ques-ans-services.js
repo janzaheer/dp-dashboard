@@ -1,6 +1,6 @@
 import axios from "axios";
-import { BASE_URL, API_VERSION } from "../apiUrls";
-
+import { API_VERSION } from "../apiUrls";
+let BASE_URL = process.env.REACT_APP_BASE_URL
 export async function GetPublicQuestionListings(){
     let finalUel = `${BASE_URL}${API_VERSION()}questions/`;
     let resp = await axios.get(finalUel,);

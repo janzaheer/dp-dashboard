@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import axios from "axios";
-import { BASE_URL, SELLER_ENDPOINT } from '../utlis/apiUrls';
+import { SELLER_ENDPOINT } from '../utlis/apiUrls';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
-
+let BASE_URL = process.env.REACT_APP_BASE_URL
 const SellerLogin = () => {
 
   const [seller_name, setSeller_name] = useState('')
