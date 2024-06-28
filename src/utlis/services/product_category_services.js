@@ -1,7 +1,5 @@
 import axios from "axios";
-
 import { API_VERSION,END_POINT,CATEGORY_ENDPOINT,SELLER_ITEMS_ENDPOINT,FAV_ENDPOINT,ADD_PRODUCT_ENDPOINT } from "../apiUrls";
-
 let BASE_URL = process.env.REACT_APP_BASE_URL
 
 export async function ProductCategory(headers) {

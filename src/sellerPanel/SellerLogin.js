@@ -4,7 +4,7 @@ import axios from "axios";
 import { SELLER_ENDPOINT } from '../utlis/apiUrls';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
-
+let BASE_URL = process.env.REACT_APP_BASE_URL
 const SellerLogin = () => {
 
   let BASE_URL = process.env.REACT_APP_BASE_URL
