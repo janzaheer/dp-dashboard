@@ -29,6 +29,7 @@ const config = {
 };
 
 const AddProduct = ({ productList }) => {
+
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
@@ -43,6 +44,10 @@ const AddProduct = ({ productList }) => {
   const [stock_quantity, setStock_quantity] = useState("");
   const [discount_percentage, setdDiscount_percentage] = useState("");
   const [weight, setWeight] = useState("");
+  const [loadingImage1, setLoadingImage1] = useState(false);
+  const [loadingImage2, setLoadingImage2] = useState(false);
+  const [loadingImage3, setLoadingImage3] = useState(false);
+  const [loadingImage4, setLoadingImage4 ] = useState(false);
 
   const [showAdd, setShowAdd] = useState(false);
 
@@ -79,7 +84,6 @@ const AddProduct = ({ productList }) => {
     }
 
     try {
-  
       const payload = {
         title,
         description,
@@ -137,70 +141,6 @@ const AddProduct = ({ productList }) => {
         console.error(error);
       }
     }  
-
-    // await axios
-    //   .post(
-    //     FInal,
-    //     {
-    //       title: title,
-    //       description: description,
-    //       images: imageData,
-    //       category_id: categoriesDataSelect,
-    //       price: price,
-    //       weight: weight,
-    //       dimensions: 0.0,
-    //       brand: brand,
-    //       store: store,
-    //       stock_quantity: stock_quantity,
-    //       discount_percentage: discount_percentage,
-    //       specification: null, // str
-    //     },
-    //     {
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //         Authorization: `Token ${userToken}`,
-    //       },
-    //     }
-    //   )
-    //   .then((resp) => {
-    //     console.log(resp.ok);
-
-    //     setShowAdd(false);
-    //     toast.success("Product Add Successfully", {
-    //       position: toast.POSITION.TOP_RIGHT,
-    //       theme: "colored",
-    //     });
-    //     setTitle("");
-    //     setDescription("");
-    //     setSelectImage("");
-    //     setBrand("");
-    //     setPrice("");
-    //     setStore("");
-    //     setCategoriesDataSelect("");
-    //     setStock_quantity("");
-    //     setdDiscount_percentage("");
-    //     setWeight("");
-    //     productList();
-    //   })
-    //   .catch((resp) => {
-    //     setShowAdd(true);
-    //     if (resp.response) {
-    //       console.log(resp.response);
-    //       // console.log(resp.response.data);
-    //       // setField_error(resp.response.data)
-    //       toast.error("please required these fields", {
-    //         position: toast.POSITION.TOP_RIGHT,
-    //         theme: "colored",
-    //       });
-    //     } else if (resp.request) {
-    //       toast.warning("network error", {
-    //         position: toast.POSITION.TOP_RIGHT,
-    //         theme: "colored",
-    //       });
-    //     } else {
-    //       console.log(resp);
-    //     }
-    //   });
   };
 
   const categoriesDataSelectFun = (e) => {
@@ -217,51 +157,71 @@ const AddProduct = ({ productList }) => {
   };
 
   // 1st image function
-  const uploadImage = async (e) => {
-    e.preventDefault();
-    // let image_urls = []
-    const myFiles = e.target.files[0];
-    await uploadFile(myFiles, config)
-      .then((data) => {
-        setSelectImage(data.location);
-      })
-      .catch((err) => console.error(err));
-  };
+const uploadImage = async (e) => {
+  e.preventDefault();
+  setLoadingImage1(true); // Set loading state
+  const myFiles = e.target.files[0];
+  await uploadFile(myFiles, config)
+    .then((data) => {
+      setSelectImage(data.location);
+      setLoadingImage1(false); // Clear loading state
+    })
+    .catch((err) => {
+      console.error(err);
+      setLoadingImage1(false); // Clear loading state
+    });
+};
+
 
   // 2nd image function
   const uploadImage2 = async (e) => {
     e.preventDefault();
     // let image_urls = []
+    setLoadingImage2(true);
     const myFiles = e.target.files[0];
     await uploadFile(myFiles, config)
       .then((data) => {
         setSelectImage2(data.location);
+        setLoadingImage2(false)
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err)
+        setSelectImage2(false)
+      });
   };
 
   // 3rd image function
   const uploadImage3 = async (e) => {
     e.preventDefault();
     // let image_urls = []
+    setLoadingImage3(true)
     const myFiles = e.target.files[0];
     await uploadFile(myFiles, config)
       .then((data) => {
         setSelectImage3(data.location);
+        setLoadingImage3(false)
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error(err)
+        setLoadingImage3(false)
+      });
   };
 
   // 4th image function
   const uploadImage4 = async (e) => {
     e.preventDefault();
     // let image_urls = []
+    setLoadingImage4(true)
     const myFiles = e.target.files[0];
     await uploadFile(myFiles, config)
       .then((data) => {
         setSelectImage4(data.location);
+        setLoadingImage4(false)
       })
-      .catch((err) => console.error(err));
+      .catch((err) =>{
+         console.error(err)
+          setLoadingImage4(false)
+        });
   };
 
   return (
@@ -308,6 +268,7 @@ const AddProduct = ({ productList }) => {
                   onChange={uploadImage}
                   placeholder="Please upload your image here"
                 />
+                {loadingImage1 && <div>Loading...</div>} 
                 {/* {field_error.images ? <span>{field_error?.images[0]}</span> : '' } */}
               </Form.Group>
 
@@ -318,6 +279,7 @@ const AddProduct = ({ productList }) => {
                   onChange={uploadImage2}
                   placeholder="Please upload your image here"
                 />
+                { loadingImage2 && <div>Loading...</div> }
               </Form.Group>
             </Row>
             <Row className="mb-3">
@@ -328,6 +290,7 @@ const AddProduct = ({ productList }) => {
                   onChange={uploadImage3}
                   placeholder="Please upload your image here"
                 />
+                { loadingImage3 && <div>Loading...</div> }
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridUploadImage4">
@@ -337,6 +300,7 @@ const AddProduct = ({ productList }) => {
                   onChange={uploadImage4}
                   placeholder="Please upload your image here"
                 />
+                { loadingImage4 && <div>Loading...</div> }
               </Form.Group>
             </Row>
             <Form.Group
