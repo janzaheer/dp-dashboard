@@ -48,8 +48,10 @@ const AddProduct = ({ productList }) => {
   const [loadingImage2, setLoadingImage2] = useState(false);
   const [loadingImage3, setLoadingImage3] = useState(false);
   const [loadingImage4, setLoadingImage4 ] = useState(false);
+  const [loader, setLoader] = useState(false);
 
   const [showAdd, setShowAdd] = useState(false);
+  const [showError, setShowError] = useState('');
 
   const userToken = useSelector((state) => state.user.token);
   // Add Product model functions
@@ -69,9 +71,17 @@ const AddProduct = ({ productList }) => {
     };
   }
 
+  const handleFieldChange = (setter, fname) => (e) =>{
+    setter(e.target.value)
+    setShowError((pe)=>({
+      ...pe,
+      [fname]:'',
+    }))
+  }
+
   const addProducts = async (e) => {
     e.preventDefault();
-    // let FInal = BASE_URL + API_VERSION() + END_POINT() + ADD_PRODUCT_ENDPOINT();
+    setLoader(true);
     let imageData = [selectImage];
     if (selectImage2) {
       imageData.push(selectImage2);
@@ -82,7 +92,6 @@ const AddProduct = ({ productList }) => {
     if (selectImage4) {
       imageData.push(selectImage4);
     }
-
     try {
       const payload = {
         title,
@@ -127,24 +136,31 @@ const AddProduct = ({ productList }) => {
       setShowAdd(true);
   
       if (error.response) {
-        console.error(error.response);
+        console.error('error-1',error.response);
         toast.error("Please fill in required fields", {
           position: toast.POSITION.TOP_RIGHT,
           theme: "colored",
         });
-      } else if (error.request) {
+        setShowError(error.response.data)
+      } else if ('error-2',error.request) {
         toast.warning("Network error", {
           position: toast.POSITION.TOP_RIGHT,
           theme: "colored",
         });
       } else {
-        console.error(error);
+        console.error('error-3',error);
       }
-    }  
+    } finally {
+      setLoader(false);
+    }
   };
 
   const categoriesDataSelectFun = (e) => {
     setCategoriesDataSelect(e.target.value);
+    setShowError((prevErrors) => ({
+      ...prevErrors,
+      categoriesDataSelect: "",
+    }));
   };
 
   const categoryData = async () => {
@@ -245,8 +261,9 @@ const uploadImage = async (e) => {
                   name="title"
                   placeholder="Enter Title"
                   value={title}
-                  onChange={(e) => setTitle(e.target.value)}
+                  onChange={handleFieldChange(setTitle, "title")}
                 />
+                { showError.title &&  <div className="text-danger">Title is Required</div>}
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridPrice">
@@ -256,19 +273,22 @@ const uploadImage = async (e) => {
                   name="price"
                   placeholder="Price"
                   value={price}
-                  onChange={(e) => setPrice(e.target.value)}
+                  onChange={handleFieldChange(setPrice, "price")}
                 />
+                { showError.price && <div className="text-danger">Price is Required</div> }
               </Form.Group>
             </Row>
             <Row className="mb-3">
               <Form.Group as={Col} controlId="formGridUploadImage1">
-                <Form.Label>Upload Image 1st</Form.Label>
+                <Form.Label>Upload Image 1st *</Form.Label>
                 <Form.Control
                   type="file"
                   onChange={uploadImage}
                   placeholder="Please upload your image here"
                 />
-                {loadingImage1 && <div>Loading...</div>} 
+                {loadingImage1 && <div className="spinner-border text-success" role="status">
+                    <span className="visually-hidden">Loading....</span>
+                  </div> } 
                 {/* {field_error.images ? <span>{field_error?.images[0]}</span> : '' } */}
               </Form.Group>
 
@@ -279,7 +299,9 @@ const uploadImage = async (e) => {
                   onChange={uploadImage2}
                   placeholder="Please upload your image here"
                 />
-                { loadingImage2 && <div>Loading...</div> }
+                { loadingImage2 && <div className="spinner-border text-success" role="status">
+                    <span className="visually-hidden">Loading....</span>
+                  </div> }
               </Form.Group>
             </Row>
             <Row className="mb-3">
@@ -290,7 +312,9 @@ const uploadImage = async (e) => {
                   onChange={uploadImage3}
                   placeholder="Please upload your image here"
                 />
-                { loadingImage3 && <div>Loading...</div> }
+                { loadingImage3 && <div className="spinner-border text-success" role="status">
+                    <span className="visually-hidden">Loading....</span>
+                  </div> }
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridUploadImage4">
@@ -300,7 +324,9 @@ const uploadImage = async (e) => {
                   onChange={uploadImage4}
                   placeholder="Please upload your image here"
                 />
-                { loadingImage4 && <div>Loading...</div> }
+                { loadingImage4 && <div className="spinner-border text-success" role="status">
+                    <span className="visually-hidden">Loading....</span>
+                  </div> }
               </Form.Group>
             </Row>
             <Form.Group
@@ -313,8 +339,9 @@ const uploadImage = async (e) => {
                 name="description"
                 rows={3}
                 value={description}
-                onChange={(e) => setDescription(e.target.value)}
+                onChange={handleFieldChange(setDescription,"description")}
               />
+              { showError.description && <div className="text-danger">Description is Required</div> }
             </Form.Group>
 
             <Row className="mb-3">
@@ -325,28 +352,13 @@ const uploadImage = async (e) => {
                   name="brand"
                   placeholder="Brand"
                   value={brand}
-                  onChange={(e) => setBrand(e.target.value)}
+                  onChange={handleFieldChange(setBrand,"brand")}
                 />
+                { showError.brand && <div className="text-danger">Brand is Required</div> }
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridState">
                 <Form.Label>Categories</Form.Label>
-                {/* <Form.Select
-                  defaultValue="Choose..."
-                  onChange={categoriesDataSelectFun}
-                  name="categoriesDataSelect"
-                  value={categoriesDataSelect}
-                >
-                  <option>Choose...</option>
-                  {categoriesData &&
-                    categoriesData.map((catee) => {
-                      return (
-                        <option key={catee.id} value={catee?.id}>
-                          {catee?.name}
-                        </option>
-                      );
-                    })}
-                </Form.Select> */}
                 <Form.Select
                   onChange={categoriesDataSelectFun}
                   name="categoriesDataSelect"
@@ -362,6 +374,7 @@ const uploadImage = async (e) => {
                       );
                     })}
                 </Form.Select>
+                {showError.categoriesDataSelect && showError.category_id && <div className="text-danger">{showError.category_id}</div>}
               </Form.Group>
 
               <Form.Group as={Col} controlId="formGridStore">
@@ -371,8 +384,9 @@ const uploadImage = async (e) => {
                   name="Store"
                   placeholder="Store"
                   value={store}
-                  onChange={(e) => setStore(e.target.value)}
+                  onChange={handleFieldChange(setStore, "store")}
                 />
+                { showError.store && <div className="text-danger"> Store is Required </div> }
               </Form.Group>
             </Row>
             <Row className="mb-3">
@@ -381,20 +395,22 @@ const uploadImage = async (e) => {
                 <Form.Control
                   type="number"
                   name="stock_quantity"
-                  placeholder="Stock_quantity 5"
+                  placeholder="Quantity 5"
                   value={stock_quantity}
-                  onChange={(e) => setStock_quantity(e.target.value)}
+                  onChange={handleFieldChange(setStock_quantity, "stock_quantity")}
                 />
+                  { showError.stock_quantity && <div className="text-danger"> Quantity is Required </div> }
               </Form.Group>
               <Form.Group as={Col} controlId="formGridStock_quantity">
                 <Form.Label>Discount</Form.Label>
                 <Form.Control
                   type="number"
                   name="discount_percentage"
-                  placeholder="discount_percentage 5"
+                  placeholder="discount 5"
                   value={discount_percentage}
-                  onChange={(e) => setdDiscount_percentage(e.target.value)}
+                  onChange={handleFieldChange(setdDiscount_percentage, "discount_percentage")}
                 />
+                { showError.discount_percentage && <div className="text-danger"> Discount is Required </div> }
               </Form.Group>
               <Form.Group as={Col} controlId="formGridWeight">
                 <Form.Label>Weight</Form.Label>
@@ -403,8 +419,9 @@ const uploadImage = async (e) => {
                   name="weight"
                   placeholder="Weight"
                   value={weight}
-                  onChange={(e) => setWeight(e.target.value)}
+                  onChange={handleFieldChange(setWeight, "weight")}
                 />
+                { showError.weight && <div className="text-danger"> Weight is Required </div> }
               </Form.Group>
             </Row>
 
@@ -412,8 +429,11 @@ const uploadImage = async (e) => {
               variant="success"
               // onClick={handleCloseAdd}
               type="submit"
+              disabled={loader}
             >
-              Save Product
+              { loader ? <div className="spinner-border text-light" role="status">
+                    <span className="visually-hidden">Loading....</span>
+                  </div> : 'Save Product' }
             </Button>
           </Form>
         </Modal.Body>
