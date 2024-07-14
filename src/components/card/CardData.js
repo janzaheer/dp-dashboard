@@ -130,7 +130,7 @@ const CardData = ({ products, handleFavList }) => {
                 key={product?.id}
                 className="col-6 col-sm-6 col-md-4 col-lg-3 col-xl-2"
               >
-                <div className="bg-white border productShadow">
+                <div className="bg-white border productShadow" style={{ minHeight: "290px" }}>
                   <div className="">
                     <div className="text-center mb-1 itemImage">
                       <NavLink
@@ -156,7 +156,7 @@ const CardData = ({ products, handleFavList }) => {
                       <div className="about">
                         <div className="mx-1 d-flex justify-content-between align-items-center">
                           <p className="text-muted mb-0" style={{ fontWeight: 'bold' }}>
-                            {product?.title.substring(0, 15)}
+                            {product?.title.substring(0, 45)}
                           </p>
                         </div>
                         <div className="px-1 d-flex justify-content-between align-items-center">

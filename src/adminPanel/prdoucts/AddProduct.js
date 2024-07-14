@@ -427,7 +427,6 @@ const uploadImage = async (e) => {
 
             <Button
               variant="success"
-              // onClick={handleCloseAdd}
               type="submit"
               disabled={loader}
             >

@@ -72,7 +72,7 @@ const Head = () => {
               <ul className="dropdown-menu text-small shadow me-5">
                 <li>
                   <span className="dropdown-item">
-                    <FaUserTie /> {user?.user?.first_name} {user?.user?.last_name}
+                    <FaUserTie /> {user?.user?.username ? (<>{user?.user?.username}</>) : (<>{user?.user?.first_name} {user?.user?.last_name} </>)} 
                   </span>
                 </li>
                 <li><hr className="dropdown-divider" /></li>
