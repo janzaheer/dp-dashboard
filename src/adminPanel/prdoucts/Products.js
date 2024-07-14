@@ -46,6 +46,7 @@ const Products = () => {
       setLoading(true);
       let resp = await SellerProductsList(headers);
       setProducts(resp);
+      console.log('products',resp);
     } catch (error) {
       console.log("admin-product", error);
     } finally {
